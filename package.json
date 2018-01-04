@@ -1,0 +1,22 @@
+{
+  "name": "music-electron",
+  "version": "0.1.0",
+  "main":"main.js",
+  "private": true,
+  "homepage":".",
+  "dependencies": {
+    "electron": "^1.7.10",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-scripts": "1.0.17"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "electron-start": "electron ."
+  },
+  "proxy": "http://neteasecloudmusicapi.eibook.cn",
+  "DEV":true
+}
