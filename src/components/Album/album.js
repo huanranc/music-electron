@@ -38,7 +38,7 @@ class Ablum extends Component {
           <div className="card">
             <div className="card-image">
               <LazyLoad>
-                <img title={newSong.name} alt="example" width="100%" src={newSong.picUrl} />
+                <img title={newSong.name} alt="example" width="100%"  height="100%" src={newSong.picUrl} />
               </LazyLoad>
             </div>
             <div  className="card-body">

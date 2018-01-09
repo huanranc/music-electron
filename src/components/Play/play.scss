@@ -1,12 +1,85 @@
 .play {
   position: fixed;
-  z-index: 9999;
+  z-index: 99999;
   display: flex;
   justify-content: center;
   align-items: center;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 60px;
+  height: 70px;
   background: rgba(0, 0, 0, 0.825);
+  .singer-icon {
+    position: relative;
+    margin: 0 30px;
+    width: 70px;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+  }
+}
+
+.play-control {
+  height: 2.5rem;
+  margin: 0 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.play-control a {
+  position: relative;
+  margin: 0 .5rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.icon-text {
+  color: #fff;
+  font-size: 1.75rem;
+}
+
+.play-progress {
+  width: 50%;
+  border-radius: 15px;
+  background: #595a5a;
+  height: 2px;
+  line-height: 20px;
+  margin: 0 15px;
+  cursor: pointer;
+}
+
+.progress-nav {
+  position: relative;
+  height: 100%;
+  background: #2ebd59;
+}
+
+.progress-nav::after {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background: #fff;
+}
+
+.volume-progress {
+  margin: 0 30px;
+  width: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.volume-progress  .play-progress {
+  width: 100%;
+}
+
+.volume-progress .progress-nav {
+  position: relative;
+  height: 100%;
+  background: #fff;
 }

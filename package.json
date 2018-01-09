@@ -25,7 +25,7 @@
     "eject": "react-scripts eject",
     "electron-start": "electron ."
   },
-  "proxy": "http://neteasecloudmusicapi.eibook.cn",
+  "proxy": "http://localhost:3000/",
   "DEV": true,
   "devDependencies": {
     "node-sass": "^4.7.2",

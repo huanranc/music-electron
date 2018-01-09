@@ -16,6 +16,7 @@ import Album from './components/Album/album';
 import SongList from './components/Album/songList';
 import Header from './components/Discover/header';
 import Play from './containers/Player';
+import Song from './components/Song/song';
 import {Provider} from "react-redux";
 import store from "./redux/store";
 import './commpon/css/normalize.css';
@@ -37,6 +38,7 @@ const App = () => {
             <Route path="/playlists/:id" component={PlaySongList} />
             <Route path="/album" component={Album} />
             <Route path="/albums/:id" component={SongList} />
+            <Route path="/songs/:id" component={Song} />
             <Redirect from="/" to="/discover" />
             <Route component={Discover}  />
           </Switch>

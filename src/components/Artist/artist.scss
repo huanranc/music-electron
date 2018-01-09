@@ -1,0 +1,62 @@
+.artists-body{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  h2 {
+    display: flex;
+    align-self: flex-start;
+    margin-left: 1rem;
+  }
+  .artists-list {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .artists-item {
+    width: 100%;
+    height: 4.375rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    box-sizing: border-box;
+    padding: 0 14px;
+    border-top: 1px solid #f1f1f1;
+    border-bottom: 1px solid #f1f1f1;
+    .artists-image {
+      width: 3.75rem;
+      height: 3.75rem;
+      box-sizing: border-box;
+      border-radius: 50%;
+      img {
+        width: 3.75rem;
+        height: 3.75rem;
+        border-radius: 50%;
+        box-shadow: 5px 8px 15px #dadada;
+      }
+    }
+    .artists-text {
+      margin-left: 28px;
+      height: 4.375rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+      .artists-name {
+        color: #3b3c3e;
+        font-size: 1rem;
+        margin: .25rem 0;
+        font-weight: bold;
+      }
+      .albumSize {
+        color: #939393;
+        font-size: .85rem;
+        margin: .25rem 0;
+      }
+    }
+  }
+}

@@ -66,10 +66,8 @@ class SongList extends Component {
 		return (e) => {
       console.log(this.props.setSongs);
       console.log(this.props.changeCurrentSong);
-      console.log(song.id);
       console.log(song);
-      this.props.setSongs([song]);
-      this.props.changeCurrentSong(song);
+      this.props.setSongs(song);
 		};
 	}
 
@@ -113,13 +111,15 @@ class SongList extends Component {
           />
           <div className="ablum-title">
             <h2>{alias.length==0?album.name:`${album.name}（${alias}）`}</h2>
-            <p>
-              <span className="artist">
-                <Link to={`/artists/${artist.id}`}>
-                  {artist.name}
-                </Link>
-              </span>
-            </p>
+                <span className="artist">
+                  <Link to={`/artists/${artist.id}`}>
+                    {artist.name}
+                  </Link>
+                </span>
+          
+                <a className="left"><i className="icon-play"></i></a>
+                <a className="play-contron">Save</a>
+             
           </div>
         </div>
         <div className="list">
