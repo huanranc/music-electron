@@ -64,9 +64,7 @@ class SongList extends Component {
 
   selectSong(song) {
 		return (e) => {
-      console.log(this.props.setSongs);
-      console.log(this.props.changeCurrentSong);
-      console.log(song);
+      console.log([song]);
       this.props.setSongs(song);
 		};
 	}
@@ -118,7 +116,7 @@ class SongList extends Component {
                 </span>
           
                 <a className="left"><i className="icon-play"></i></a>
-                <a className="play-contron">Save</a>
+                <a className="play-contron">收藏</a>
              
           </div>
         </div>

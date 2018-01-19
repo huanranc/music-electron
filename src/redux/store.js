@@ -3,4 +3,4 @@ import reducer from "./reducers"
 
  //创建store
 const store = createStore(reducer);
-export default store
+export default store;

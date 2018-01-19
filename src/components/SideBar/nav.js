@@ -8,11 +8,11 @@ class Nav extends Component {
     return(
     <nav className="nav">
       <ul className="nav-bar">
-        <li><NavLink to="/discover">dicover</NavLink></li>
-        <li><NavLink to="/artist">artist</NavLink></li>
-        <li><NavLink to="/list">list</NavLink></li>
-        <li><NavLink to="/playlist">playlist</NavLink></li>
-        <li><NavLink to="/album">album</NavLink></li>
+        <li><NavLink to="/discover">发现</NavLink></li>
+        <li><NavLink to="/artist">歌手</NavLink></li>
+        <li><NavLink to="/list">排行榜</NavLink></li>
+        <li><NavLink to="/playlist">榜单</NavLink></li>
+        <li><NavLink to="/album">专辑</NavLink></li>
       </ul>
     </nav>
     )

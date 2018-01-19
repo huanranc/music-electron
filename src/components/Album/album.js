@@ -54,7 +54,7 @@ class Ablum extends Component {
     ;
       return (
         <div className="content-layout">
-          <h2>The new disc shelves</h2>
+          <h2>新碟上架</h2>
           <ul className="card-row">
           {songList}
           </ul>

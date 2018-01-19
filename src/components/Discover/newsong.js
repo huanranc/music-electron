@@ -21,11 +21,17 @@ class NewSong extends Component {
         result:json.result
       }));
   };
+
+    selectSong(song) {
+		return (e) => {
+      this.props.setSongs(song);
+		};
+	}
   render() {
     const {result} = this.state;
     const resultList=result.length ?
     result.map((newSong,index) => {
-       return <li key={index} className="newsong-list">
+       return <li key={index} className="newsong-list" onClick={this.selectSong(newSong)}>
           <div className="newsong-body">
             <div className="newsong-image">
               <img alt="example" width="100%" src={newSong.song.album.picUrl} />

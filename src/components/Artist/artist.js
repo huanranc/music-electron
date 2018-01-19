@@ -43,7 +43,7 @@ class Artist extends Component {
     :'对不起，加载失败'
     return(
       <div className="artists-body">
-        <h2>Artist</h2>
+        <h2>歌手</h2>
         <ul className="artists-list">{artistsList}</ul>
       </div>
     )

@@ -52,7 +52,7 @@ class PlayList extends Component {
     ;
       return (
         <div className="content-layout">
-          <h2>The new disc shelves</h2>
+          <h2>推荐歌单</h2>
           <ul className="card-row">
           {resultList}
           </ul>

@@ -13,7 +13,7 @@ import PlaySongList from './components/PlayList/songList';
 import Artist from './components/Artist/artist';
 import List from './components/List/list';
 import Album from './components/Album/album';
-import SongList from './components/Album/songList';
+import SongList from './containers/SongList';
 import Header from './components/Discover/header';
 import Play from './containers/Player';
 import Song from './components/Song/song';

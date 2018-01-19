@@ -21,19 +21,6 @@ class Play extends Component {
     this.handleProgress = this.handleProgress.bind(this);
   }
 
-  componentDidMount() {
-    var myFetchOptions ={
-      method:'GET'
-    };
-    fetch("/song/detail?ids=472361096",myFetchOptions)
-    .then(response => response.json())
-    .then(json => 
-      this.setState({
-        song:json.privileges,
-        songs:json.songs
-      }));
-  };
-
   controlAudio() {
     let audio=this.refs.audioplay;
     this.setState({
@@ -78,12 +65,20 @@ class Play extends Component {
   }
 
   render(){
+    var myFetchOptions ={
+      method:'GET'
+    };
+    fetch("/song/detail?ids="+this.props.playSongs.id,myFetchOptions)
+    .then(response => response.json())
+    .then(json => 
+      this.setState({
+        song:json.privileges,
+        songs:json.songs
+      }));
     const {songs,song} = this.state;
-    console.log(songs)
-    song.length>0?console.log(songs[0].id):''
     return(
       <div className="play">
-        <audio id="audio" preload="true" src='http://music.163.com/song/media/outer/url?id=472361096.mp3' ref="audioplay" onTimeUpdate={ this.controlAudio.bind(this)}>
+        <audio id="audio" preload="true" src={`http://music.163.com/song/media/outer/url?id=${this.props.playSongs.id}.mp3`} ref="audioplay" onTimeUpdate={ this.controlAudio.bind(this)}>
           您的浏览器不支持 audio 与元素。
         </audio>
         <Link className="singer-icon" to={song.length>0?`/songs/${songs[0].id}`:'no'}>
