@@ -13,7 +13,7 @@ let mainWindow
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 1012, height: 630})
+  mainWindow = new BrowserWindow({width: 1012, height: 630, frame: false})
 
   // and load the index.html of the app.
   const pkg = require('./package.json') // 引用package.json 

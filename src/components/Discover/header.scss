@@ -1,11 +1,4 @@
-.search-box input {
-  border: 0;
-  height: 40px;
-  background-color: transparent;
-}
-.search-box input:focus{
-  outline: 0;
-}
+
 .person {
   display: flex;
   justify-content: center;
@@ -20,4 +13,13 @@
 
 .header-title .icon-person {
   font-size: 2rem;
+}
+
+.header {
+  -webkit-app-region: drag;
+}
+
+.header-back {
+  -webkit-app-region: no-drag;
+  cursor: pointer;
 }

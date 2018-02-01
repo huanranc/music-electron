@@ -11,10 +11,6 @@ class Header extends React.Component {
 				<span className="header-back" onClick={this.handleClick}>
           <i className="icon-back"></i>
         </span>
-        <div className="search-box">
-          <input type="text" placeholder="Searching"/>
-          <i className="icon-search"></i>
-        </div>
 				<div className="header-title">
           <div className="person">
             <span className="person-name">未登录</span>
