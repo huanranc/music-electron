@@ -19,7 +19,7 @@ function createWindow () {
   const pkg = require('./package.json') // 引用package.json 
   //判断是否是开发模式 
   if(pkg.DEV) { 
-    mainWindow.loadURL("http://localhost:3001/")
+    mainWindow.loadURL("http://localhost:3000/")
   } else { 
     mainWindow.loadURL(url.format({
       pathname:path.join(__dirname, './build/index.html'), 
