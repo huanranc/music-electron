@@ -62,10 +62,10 @@ class SongList extends Component {
     alert(id);
   }
 
-  selectSong(song) {
+  selectSong(song,songs) {
 		return (e) => {
-      console.log([song]);
-      this.props.setSongs(song);
+      this.props.changeCurrentSong(song);
+      this.props.setSongs([songs]);
 		};
 	}
 
@@ -74,7 +74,7 @@ class SongList extends Component {
     const {newSong,alias,album,artist} = this.state;
     const songslist=newSong.length ?
     newSong.map((songs,index) => {
-       return <li key={songs.id} onClick={this.selectSong(songs)}>
+       return <li key={songs.id}>
        <span className="song-number">{
         index<9?`0${index+1}`:index+1
       } </span>
@@ -90,7 +90,7 @@ class SongList extends Component {
               <span className="alias">（{alias}）</span>
             </span>
             }
-            <a onClick={this.handleSong.bind(this,this.Song(songs.id))}>play</a>
+            <a onClick={this.selectSong(songs,newSong)}>play</a>
           </span>
           <span className="song-art-name">
             <Link to={`artists/${album.artist.id}`}>

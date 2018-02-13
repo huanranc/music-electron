@@ -1,23 +1,22 @@
 import {connect} from "react-redux"
-import {showPlayer, changeSong} from "../redux/actions"
+import { changeSong, setSongs} from "../redux/action"
 import Player from "../components/Play/play";
 
-//映射Redux全局的state到组件的props上
+//映射state到play上
 const mapStateToProps = (state) => ({
-	showStatus: state.showStatus,
 	currentSong: state.song,
-	playSongs: state.songs
+	currentSongList: state.songList
 });
 
-//映射dispatch到props上
+//更新state
 const mapDispatchToProps = (dispatch) => ({
-	showMusicPlayer: (status) => {
-		dispatch(showPlayer(status));
-	},
 	changeCurrentSong: (song) => {
 		dispatch(changeSong(song));
 	}
 });
 
-//将ui组件包装成容器组件
-export default connect(mapStateToProps, mapDispatchToProps)(Player)
+//注入dispatch和state到player组件里
+export default connect(
+	mapStateToProps, 
+	mapDispatchToProps
+)(Player)

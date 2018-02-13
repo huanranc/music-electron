@@ -1,12 +1,9 @@
 import {connect} from "react-redux";
-import {showPlayer, changeSong, setSongs} from "../redux/actions";
+import { changeSong, setSongs} from "../redux/action";
 import SongList from "../components/Album/songList";
 
-//映射dispatch到props上
+//更新state
 const mapDispatchToProps = (dispatch) => ({
-	showMusicPlayer: (status) => {
-		dispatch(showPlayer(status));
-	},
 	changeCurrentSong: (song) => {
 		dispatch(changeSong(song));
 	},
@@ -15,4 +12,4 @@ const mapDispatchToProps = (dispatch) => ({
 	}
 });
 
-export default connect(null, mapDispatchToProps)(SongList)
+export default connect(null,mapDispatchToProps)(SongList)

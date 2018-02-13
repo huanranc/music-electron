@@ -1,112 +1,84 @@
-import React, { Component } from 'react';
-import {
-  Link
-} from 'react-router-dom';
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+import Progress from './progress';
 import './play.scss';
 
+// 1.播放、暂停
+// 2.上一曲、下一曲
+// 3.进度条控制
+// 4.列表点击可以播放
+// 5.有个列表加入进去
+
 class Play extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
+    //当前播放
+    this.currentSong={
+      id: 0,
+      url:'',
+      isautoplay:false
+    }
+    //播放模式
+    this.Modes=["单曲","随机","列表"]
+
     this.state = {
       isPlay: false,
       currentTime: 0,
       duration:0,
       progress:0,
-      volume: 80 + '%',
-      songs:'',
-      song:[]
-    }
-    this.handlePlayerClick = this.handlePlayerClick.bind(this);
-    this.timeStart = this.timeStart.bind(this);
-    this.handleProgress = this.handleProgress.bind(this);
-  }
-
-  controlAudio() {
-    let audio=this.refs.audioplay;
-    this.setState({
-      duration:audio.duration,
-      currentTime:audio.currentTime,
-      progress:this.state.currentTime / this.state.duration * 100 + '%'
-    });
-    console.log(this.state.duration)
-  }
-
-  timeStart(time) {
-    let durationTime=parseInt(time);
-    let minute = parseInt(durationTime/60);
-    let second = durationTime%60+'';
-    let symbol = ':';
-    if(minute == 0){
-        minute = '00';
-    }else if(minute < 10 ){
-        minute = '0'+minute;
-    }
-    if(second.length == 1){
-      second = '0'+second;
-    }
-    return minute+symbol+second
-  }
-
-  handlePlayerClick() {
-    this.setState(prevState=>({
-      isPlay:!prevState.isPlay,
-      //duration:this.audioplay.duration
-    }));
-    if(!this.state.isPlay) {
-      this.refs.audioplay.play();
-      }else {
-        this.refs.audioplay.pause();
+      currentMode:0,
       }
   }
-  
-  handleProgress(e){
-    let settedProgress = (e.screenX - this.refs.propgressBar.getBoundingClientRect().left) / this.refs.propgressBar.clientWidth;
-    this.onProgress&&this.onProgress(settedProgress);
-  }
 
-  render(){
-    var myFetchOptions ={
-      method:'GET'
-    };
-    fetch("/song/detail?ids="+this.props.playSongs.id,myFetchOptions)
-    .then(response => response.json())
-    .then(json => 
-      this.setState({
-        song:json.privileges,
-        songs:json.songs
-      }));
-    const {songs,song} = this.state;
-    return(
+  componentDidUpdate(){
+    //点击页面立即播放
+    if(this.currentSong.isautoplay===true){
+      this.audioDOM.play();
+      this.currentSong.isautoplay=false;
+      this.setState({isPlay:true});
+    }
+  }
+      //播放或者暂停
+      playState=()=>{
+        if(this.audioDOM.paused){
+          this.audioDOM.play();
+          this.setState({isPlay:true});
+        }
+        else {
+          this.audioDOM.pause();
+          this.setState({isPlay:false});
+        }
+      }
+      
+
+  render() {
+    //点击播放。同时收入当前播放列表
+    if(this.props.currentSong){
+      if(this.currentSong.id!==this.props.currentSong.id){
+        this.currentSong=this.props.currentSong;
+        this.currentSong.src=`http://music.163.com/song/media/outer/url?id=${this.currentSong.id}.mp3`;
+        this.currentSong.isautoplay=true;
+        console.log(this.props.currentSong);
+        console.log(this.props.currentSongList);
+      }
+    }
+ 
+    return (
       <div className="play">
-        <audio id="audio" preload="true" src={`http://music.163.com/song/media/outer/url?id=${this.props.playSongs.id}.mp3`} ref="audioplay" onTimeUpdate={ this.controlAudio.bind(this)}>
-          您的浏览器不支持 audio 与元素。
-        </audio>
-        <Link className="singer-icon" to={song.length>0?`/songs/${songs[0].id}`:'no'}>
-          {
-          songs.length>0?<img width="100%" src={songs[0].al.picUrl} />:<i className="icon-text icon-artist"></i>
-          }
-        </Link>
         <div className="play-control">
           <a href="javascript:void(0)" className="prev-btn"><span className="icon-text icon-back "></span></a>
-          {
-            this.state.isPlay ?
-              <a className="stop-btn" onClick={this.handlePlayerClick} ><span className="icon-text icon-stop"></span></a>
-              :
-              <a className="play-btn" onClick={this.handlePlayerClick} ><span className="icon-text icon-play"></span></a>
+           {
+          this.state.isPlay ?
+          <a onClick={this.playState} href="javascript:void(0)" className="stop-btn"><span className="icon-text icon-stop"></span></a>
+          :
+          <a onClick={this.playState} href="javascript:void(0)" className="play-btn"><span className="icon-text icon-play"></span></a>
           }
           <a href="javascript:void(0)" className="next-btn"><span className="icon-text icon-forward"></span></a>
         </div>
-        <span style={{ fontSize: 12, color: '#fff' }}>{this.timeStart(this.state.currentTime)}</span>
-        <div className="play-progress" onClick={this.handleProgress} ref="propgressBar" onClick={this.timer}>
-          <div className="progress-nav" style={{ width: this.state.progress }}></div>
-        </div>
-        <span style={{ fontSize: 12, color: '#fff' }}>{this.timeStart(this.state.duration)}</span>
-        <div className="volume-progress">
-
-          <div className="play-progress">
-            <div className="progress-nav" style={{ width: this.state.volume }}></div>
-          </div>
-        </div>
+        <Progress  progress={this.state.progress}/>
+        <audio src={this.currentSong.src} ref={(audio) => { this.audioDOM = audio; }}>
+          您的浏览器不支持 audio 与元素。
+        </audio>
       </div>
     );
   }

@@ -1,6 +1,6 @@
-import {createStore} from "redux"
-import reducer from "./reducers"
+import {createStore} from 'redux';
+import musicReducer from './reducer';
 
- //创建store
-const store = createStore(reducer);
+let store=createStore(musicReducer);
+
 export default store;

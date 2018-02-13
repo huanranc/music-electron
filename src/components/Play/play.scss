@@ -53,16 +53,15 @@
 .progress-nav {
   position: relative;
   height: 100%;
-  background: #2ebd59;
+  background: #6666ff;
 }
 
-.progress-nav::after {
-  position: absolute;
-  top: -4px;
-  right: -4px;
-  content: '';
+.progress-btn {
+  position: relative;
+  display: inline-block;
   width: 10px;
   height: 10px;
+  top: -10px;
   border-radius: 100%;
   background: #fff;
 }

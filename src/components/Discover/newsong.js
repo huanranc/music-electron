@@ -4,8 +4,8 @@ import {
 } from 'react-router-dom';
 
 class NewSong extends Component {
-  constructor() {
-    super(...arguments);
+  constructor(props) {
+    super(props);
     this.state={
       result:[]
     }
@@ -22,16 +22,17 @@ class NewSong extends Component {
       }));
   };
 
-    selectSong(song) {
+  selectSong(song,songs) {
 		return (e) => {
-      this.props.setSongs(song);
+      this.props.changeCurrentSong(song);
+      this.props.setSongs([songs]);
 		};
 	}
   render() {
     const {result} = this.state;
     const resultList=result.length ?
     result.map((newSong,index) => {
-       return <li key={index} className="newsong-list" onClick={this.selectSong(newSong)}>
+       return <li key={index} className="newsong-list" onClick={this.selectSong(newSong,result)}>
           <div className="newsong-body">
             <div className="newsong-image">
               <img alt="example" width="100%" src={newSong.song.album.picUrl} />
