@@ -28,10 +28,20 @@ class Lyric extends Component {
   }
   render(){
     const {lrc} = this.state;
-    console.log(lrc)
+    let lyric=lrc.lyric
+    console.log(this.props.id)
+    let lyrics=lyric!==undefined?lyric.split(/[\n\r]/).map((line, i) => {
+      let match = line.match(/^\[\d*:\d*\.\d*]/);
+    return line.replace(/^\[.*?\]/, '')
+      })
+    :''
     return(
-      <div className="sing">
-        {lrc.lyric}
+      <div className="lyc">
+        <ul className="lyc-list">
+							{lyric!==undefined?lyrics.map((line, i) => <li key={`${i}`}>
+					            {line}
+					        </li>):''}
+						</ul>
       </div>
     )
   }

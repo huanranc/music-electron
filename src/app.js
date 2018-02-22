@@ -15,7 +15,7 @@ import List from './components/List/list';
 import Album from './components/Album/album';
 import SongList from './containers/SongList';
 import Header from './components/Discover/header';
-import Play from './containers/Player';
+import CurrentPlay from './components/Play/currentplay';
 import Song from './components/Song/song';
 import {Provider} from "react-redux";
 import store from "./redux/store";
@@ -42,7 +42,7 @@ const App = () => {
             <Redirect from="/" to="/discover" />
             <Route component={Discover}  />
           </Switch>
-          <Play />
+          <CurrentPlay />
         </div>
       </div>
     </Router>

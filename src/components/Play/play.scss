@@ -1,24 +1,3 @@
-.play {
-  position: fixed;
-  z-index: 99999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 70px;
-  background: rgba(0, 0, 0, 0.825);
-  .singer-icon {
-    position: relative;
-    margin: 0 30px;
-    width: 70px;
-    cursor: pointer;
-    text-align: center;
-    color: #fff;
-  }
-}
-
 .play-control {
   height: 2.5rem;
   margin: 0 2rem;
@@ -26,6 +5,19 @@
   justify-content: center;
   align-items: center;
   flex-direction: row;
+}
+
+.progress-song {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  .song-txt {
+    font-size: 12px;
+    color: #fff;
+    margin-bottom: 10px;
+  }
 }
 
 .play-control a {
@@ -41,7 +33,7 @@
 }
 
 .play-progress {
-  width: 50%;
+  width: 100%;
   border-radius: 15px;
   background: #595a5a;
   height: 2px;
@@ -65,20 +57,40 @@
   border-radius: 100%;
   background: #fff;
 }
+// .volume-progress {
+//   margin: 0 30px;
+//   width: 15%;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+// .volume-progress  .play-progress {
+//   width: 100%;
+// }
 
-.volume-progress {
-  margin: 0 30px;
-  width: 15%;
+// .volume-progress .progress-nav {
+//   position: relative;
+//   height: 100%;
+//   background: #fff;
+// }
+
+.play {
+  position: fixed;
+  z-index: 99999;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-}
-.volume-progress  .play-progress {
+  bottom: 0;
+  left: 0;
   width: 100%;
-}
-
-.volume-progress .progress-nav {
-  position: relative;
-  height: 100%;
-  background: #fff;
+  height: 70px;
+  background: rgba(0, 0, 0, 0.825);
+  .singer-icon {
+    position: relative;
+    margin: 0;
+    width: 70px;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+  }
 }
