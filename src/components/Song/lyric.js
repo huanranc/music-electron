@@ -12,7 +12,7 @@ class Lyric extends Component {
       lrc:''
       }
   }
-  componentDidMount(){
+  render(){
     if(this.props.currentSong.id!==undefined){
       if(this.currentSong.id!==this.props.currentSong.id){
         this.currentSong.id=this.props.currentSong.id;
@@ -27,9 +27,7 @@ class Lyric extends Component {
           })}
         );
       }
-    }
-  }
-  render(){
+}
     const {lrc} = this.state;
     let lyric=lrc.lyric
     const seconds=this.props.currentTime
