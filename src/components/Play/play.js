@@ -65,7 +65,7 @@ class Play extends Component {
 
 //下一曲
 next=()=>{
-  console.log(this.props.currentSongList[0].length)
+  // console.log(this.props.currentSongList[0].length)
   if(this.props.currentSongList[0].length>0&&this.props.currentSongList[0].length!==1) {
     let currentIndex=this.currentIndex
       if(this.state.currentMode === 2) {
@@ -93,7 +93,7 @@ next=()=>{
 
 //上一曲
 previous=()=>{
-   console.log(this.state.currentMode)
+  //  console.log(this.state.currentMode)
    if(this.props.currentSongList[0].length>0&&this.props.currentSongList[0].length!==1) {
      let currentIndex=this.currentIndex
        if(this.state.currentMode === 2) {
@@ -128,6 +128,8 @@ controlAudio=()=> {
       currentTime: this.audioDOM.currentTime,
       progress: this.state.currentTime / this.state.duration * 100
     });
+    let getcreenttime=this.audioDOM.currentTime
+    this.props.setCurrentTime(getcreenttime)
 }
 
 controlEnd=()=>{
@@ -187,22 +189,21 @@ changeTime(time) {
 }
 
   render() {
-    var myFetchOptions = {
-
-      method: 'GET'
-
-    };
-    fetch(`/song/detail?ids=${this.props.currentSong.id}`, myFetchOptions)
-    .then(response => response.json())
-    .then(json => this.setState({songs: json.songs}));
     //点击播放。同时收入当前播放列表
-    // console.log(this.props.currentSong);
-    // console.log(this.props.currentSongList);
+    console.log(this.props.currentSong);
+    console.log(this.props.currentSongList);
     if(this.props.currentSong.id!==undefined){
       if(this.currentSong.id!==this.props.currentSong.id){
         this.currentSong.id=this.props.currentSong.id;
-        this.audioDOM.src=`http://music.163.com/song/media/outer/url?id=${this.props.currentSong.id}.mp3`;
+        this.audioDOM.src=`http://music.163.com/song/media/outer/url?id=${this.currentSong.id}.mp3`;
         this.currentSong.isautoplay=true;
+        var myFetchOptions = {
+          method: 'GET'
+        };
+        fetch(`/song/detail?ids=${this.currentSong.id}`, myFetchOptions)
+        .then(response => response.json())
+        .then(json => this.setState({songs: json.songs}));
+        console.log(this.currentSong.id)
       }
     }
     const {songs} = this.state; 
@@ -210,7 +211,7 @@ changeTime(time) {
       <div className="play">
         <Link className = "singer-icon" to = {
           songs.length > 0
-            ? `/songs/${songs[0].id}`
+            ? `/songs`
             : 'no'
         } > {
 
@@ -231,7 +232,7 @@ changeTime(time) {
           <a onClick={this.next} href="javascript:void(0)" className="next-btn"><span className="icon-text icon-forward"></span></a>
         </div>
         <div className="progress-song">
-          <span className="song-txt">{songs.length > 0?songs[0].name:''}</span>
+          <span className="song-txt">{this.props.currentSong.name}</span>
           <Progress  progress={this.state.progress}/>
         </div>
         <span style={{ fontSize: 12, color: '#fff' }} className="play-text">{this.changeTime(this.state.currentTime)+' / '+this.changeTime(this.state.duration)}</span>

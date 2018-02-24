@@ -2,7 +2,6 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  Link,
   Switch,
   Redirect
 } from 'react-router-dom';
@@ -38,7 +37,7 @@ const App = () => {
             <Route path="/playlists/:id" component={PlaySongList} />
             <Route path="/album" component={Album} />
             <Route path="/albums/:id" component={SongList} />
-            <Route path="/songs/:id" component={Song} />
+            <Route path="/songs" component={Song} />
             <Redirect from="/" to="/discover" />
             <Route component={Discover}  />
           </Switch>

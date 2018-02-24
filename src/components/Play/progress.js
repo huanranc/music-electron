@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import {
-  Link
-} from 'react-router-dom';
 
 // 1.接收curretime，更新进度条，从store得到
 // 2.拖拽功能，更新进度条

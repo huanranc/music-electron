@@ -50,10 +50,6 @@ class SongList extends Component {
     return minute+symbol+second
   }
 
-  Song(id){
-    return id;
-  }
-
   handleSong(id,e){
     e.preventDefault();
     this.setState({

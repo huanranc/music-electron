@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import {
-  NavLink
-} from 'react-router-dom';
 import Loading from '../../commpon/Loading/loading';
 import './artist.scss';
 
@@ -40,7 +37,7 @@ class Artist extends Component {
           </div>
         </li>
     })
-    :'对不起，加载失败'
+    :<Loading title="正在加载..." show={this.state.loading}/>
     return(
       <div className="artists-body">
         <h2>歌手</h2>

@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import {
-  Link
-} from 'react-router-dom';
 import Play from '../../containers/Player';
 import List from '../../containers/CurrenList';
 import './currentplay.scss';

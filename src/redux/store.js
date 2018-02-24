@@ -1,6 +1,8 @@
-import {createStore} from 'redux';
+import {createStore,applyMiddleware} from 'redux';
+import thunkMiddleware from 'redux-thunk'; 
 import musicReducer from './reducer';
 
-let store=createStore(musicReducer);
+const middleware = [thunkMiddleware]
+let store=createStore(musicReducer,applyMiddleware(...middleware));
 
 export default store;
