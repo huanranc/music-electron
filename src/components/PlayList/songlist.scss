@@ -139,3 +139,18 @@
   line-height: 1rem;
   background-size:cover;
 }
+
+.intr-art-name {
+  .avatarUrl {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 100%;
+    margin-right: .5rem;
+  }
+}
+
+.bk-intr .intr-playlist-create-time {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

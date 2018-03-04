@@ -3,7 +3,6 @@ import {
   NavLink
 } from 'react-router-dom';
 import Loading from '../../commpon/Loading/loading';
-import index from 'react-lazyload';
 
 class Search extends Component {
   constructor(props) {

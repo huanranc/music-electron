@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { CSSTransition } from "react-transition-group"
+import './playlist.scss'
 
 class PlayList extends Component {
   constructor(props){
@@ -15,10 +16,17 @@ class PlayList extends Component {
       }
     }
   }
+  selectSong(song) {
+		return (e) => {
+      this.props.changeCurrentSong(song);
+		};
+  }
+
   render(){
     let list=this.props.currentSongList
     const playlist=list.length?list[0].map((songs,index)=>{
-       return <li key={index} style={this.props.currentSong.id===songs.id?{color:"#6666ff"}:{color:"#fff"}}>
+       return <li key={index} className="playing-list-sub" style={this.props.currentSong.id===songs.id?{color:"#6666ff"}:{color:"#fff"}}>
+                  <a onClick={this.selectSong(songs)}><i className="icon-play"></i></a>
                   {songs.name}
                     <span onClick={this.removeSong(songs.id,index)} className="icon-删除"></span>
               </li>
@@ -34,7 +42,11 @@ class PlayList extends Component {
 					}}>
       <div style={this.state.showList===true?{display:"block"}:{display:"none"}} className="list-song">
         <span className="list-song-title">播放列表</span>
-        <ul>{playlist}</ul>
+        <div className="playing-list scroll">
+          <div className="inner-playing-list">
+            <ul>{playlist}</ul>
+          </div>
+        </div>
       </div>
       </CSSTransition>
     )

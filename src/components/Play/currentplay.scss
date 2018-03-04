@@ -4,11 +4,12 @@
     right: 0;
     top: 0;
     z-index: 999;
-    width: 280px;
+    width: 320px;
     height: 100%;
     background: #222326;
     color: #fff; 
     font-size: 16px;
+    box-sizing: border-box;
   }
 
   .fade-enter {
@@ -16,12 +17,12 @@
   }
   
   .fade-enter.fade-enter-active {
-    width: 280px;
+    width: 320px;
     transition: width 200ms ease-in;
   }
   
   .fade-exit {
-    width: 280px;
+    width: 320px;
   }
   
   .fade-exit.fade-exit-active {

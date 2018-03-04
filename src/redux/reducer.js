@@ -9,7 +9,8 @@ const initialState={
   //列表
   songs:[],
   //currttime
-  currentTime:0
+  currentTime:0,
+  showSong:false
 };
 
 //拆分reducer
@@ -35,6 +36,16 @@ function currentTime(state=initialState.currentTime,action) {
   }
 }
 
+//得到当前播放状态
+function showSong(state=initialState.showSong,action) {
+  switch(action.type) {
+    case actionType.SHOW_SONG:
+      return action.showSong
+    default:
+      return state
+  }
+}
+
 //歌曲列表。移除歌曲
 
 function songList(state=initialState.songs,action){
@@ -48,30 +59,13 @@ function songList(state=initialState.songs,action){
   }
 }
 
-// //获取歌词
-// function lyc(state={status: Status.LOADING},action) {
-//   switch(action.type) {
-//     case actionType.FETCH_STARTED: {
-//       return {status: Status.LOADING};
-//     }
-//     case actionType.FETCH_SUCCESS: {
-//       return {...state, status: Status.SUCCESS, ...action.result};
-//     }
-//     case actionType.FETCH_FAILURE: {
-//       return {status: Status.FAILURE};
-//     }
-//     default: {
-//       return state;
-//     }
-//   }
-// }
-
 //合并reducer
 
 const musicReducer=combineReducers({
   song,
   songList,
-  currentTime
+  currentTime,
+  showSong
 })
 
 export default musicReducer;

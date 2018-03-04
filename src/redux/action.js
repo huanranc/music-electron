@@ -30,43 +30,11 @@ export function setCurrentTime(currentTime) {
   }
 }
 
-//设置当前歌曲的
 
-// export const fetchStarted = () => ({
-//   type: actionType.FETCH_STARTED
-// });
-
-// export const fetchSuccess = (result) => ({
-//   type: actionType.FETCH_SUCCESS,
-//   result
-// })
-
-// export const fetchFailure = (error) => ({
-//   type: actionType.FETCH_FAILURE,
-//   error
-// })
-// //获取歌词
-
-// export const  getLyc = (code) => {
-//   return (dispatch) => {
-//     const apiUrl = `/lyric?id=${code}`
-//     let myFetchOptions ={
-//       method:'GET'
-//     };
-//     dispatch(fetchStarted())
-
-//     return fetch(apiUrl,myFetchOptions).then((response) => {
-//       if (response.status !== 200) {
-//         throw new Error('Fail to get response with status ' + response.status);
-//       }
-
-//       response.json().then((responseJson) => {
-//         dispatch(fetchSuccess(responseJson.lrc));
-//       }).catch((error) => {
-//         dispatch(fetchFailure(error));
-//       });
-//     }).catch((error) => {
-//       dispatch(fetchFailure(error));
-//     })
-//   };
-// }
+//设置当前是否播放
+export function setShowSong(showSong) {
+  return {
+    type:actionType.SHOW_SONG,
+    showSong
+  }
+}

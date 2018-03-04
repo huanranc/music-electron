@@ -10,40 +10,54 @@ class Ablum extends Component {
     super(...arguments);
     this.state={
       loading: true,
-      songs:[]
+      albums:[]
     }
   }
   componentDidMount() {
+    const date=[]
     if (!this.props.match.isExact) {
 			this.setState({loading: false});
 		}
     var myFetchOptions ={
       method:'GET'
     };
-    fetch("/top/album?offset=0&limit=32",myFetchOptions)
-    .then(response => response.json())
-    .then(json => 
-      this.setState({
-        songs:json.albums,
-        loading: false
-      }));
-  };
+    fetch("/top/album?offset=0&limit=52",myFetchOptions)
+    .then(response => {
+      if(response.status!==200){
+        throw new Error('未请求成功，状态码为'+response.status)
+      }
+      response.json().then(json => json.albums.map(item=>{
+      let newItem={}
+          newItem.id=item.id
+          newItem.name=item.name
+          newItem.artName=item.artist.name
+          newItem.picUrl=item.picUrl
+          newItem.size=item.size
+          date.push(newItem)
+      return this.setState({
+        albums:[date],
+        loading:false
+          })
+        })
+      ).catch(error=>{this.setState({albums:''})})
+    }).catch(error=>{this.setState({albums:''})});
+  }
 
   render() {
-    const {songs} = this.state;
-    const songList=songs.length ?
-    songs.map((newSong,index) => {
+    const {albums} = this.state;
+    const songList=albums.length ?
+    albums[0].map((newSong,index) => {
        return <li key={index} className="ablum-list">
        <Link to={`/albums/${newSong.id}`}>
           <div className="card">
             <div className="card-image">
-              <LazyLoad>
+              <LazyLoad height={179}>
                 <img title={newSong.name} alt="example" width="100%"  height="100%" src={newSong.picUrl} />
               </LazyLoad>
             </div>
             <div  className="card-body">
               <h3>{newSong.name}</h3>
-              <p>{newSong.artist.name}</p>
+              <p>{newSong.artName}</p>
               <p>{newSong.size} song</p>
             </div>
           </div>

@@ -16,6 +16,7 @@ class Play extends Component {
     this.currentSong={
       id: 0,
       src:'',
+      picUrl:'',
       isautoplay:false
     }
     //当前播放位置
@@ -29,7 +30,6 @@ class Play extends Component {
       duration: 0,
       progress: 0,
       currentMode: 2,
-      songs:''
       }
   }
 
@@ -39,6 +39,7 @@ class Play extends Component {
       this.audioDOM.play();
       this.currentSong.isautoplay=false;
       this.setState({isPlay:true});
+      this.props.setShowSong(true)
     }
   }
   //播放或者暂停
@@ -46,10 +47,12 @@ class Play extends Component {
     if(this.audioDOM.paused){
         this.audioDOM.play();
         this.setState({isPlay:true});
+        this.props.setShowSong(true)
       }
     else {
         this.audioDOM.pause();
         this.setState({isPlay:false});
+        this.props.setShowSong(false)
       }
   }
 
@@ -118,7 +121,7 @@ previous=()=>{
 controlAllAudio=()=>{
   this.setState({
     //获得音乐总秒数
-    duration: this.audioDOM.duration
+    duration: this.props.currentSong.dt
   })
 }
 
@@ -126,13 +129,15 @@ controlAudio=()=> {
     this.setState({
       //获得当前音乐播放的秒数
       currentTime: this.audioDOM.currentTime,
-      progress: this.state.currentTime / this.state.duration * 100
+      progress: this.state.currentTime*100000 / this.state.duration
     });
+    // console.log(this.state.progress)
     let getcreenttime=this.audioDOM.currentTime
     this.props.setCurrentTime(getcreenttime)
 }
 
 controlEnd=()=>{
+  console.log(this.props.currentSongList)
   if(this.props.currentSongList[0].length>1) {
     let currentIndex=this.currentIndex
       if(this.state.currentMode === 2) {
@@ -187,37 +192,34 @@ changeTime(time) {
   let s=(t%60)<10?'0'+(t%60):(t%60);
   return m+':'+s
 }
+//durationTime
+timeDt(time) {
+  let t=Math.floor(time/1000);
+  let m=Math.floor(t/60)<10?'0'+Math.floor(t/60):Math.floor(t/60);
+  let s=(t%60)<10?'0'+(t%60):(t%60);
+  return m+':'+s
+}
 
   render() {
     //点击播放。同时收入当前播放列表
-    console.log(this.props.currentSong);
-    console.log(this.props.currentSongList);
+    // console.log(this.props.currentSong);
+    // console.log(this.props.currentSongList);
     if(this.props.currentSong.id!==undefined){
       if(this.currentSong.id!==this.props.currentSong.id){
         this.currentSong.id=this.props.currentSong.id;
+        this.currentSong.picUrl=this.props.currentSong.picUrl
         this.audioDOM.src=`http://music.163.com/song/media/outer/url?id=${this.currentSong.id}.mp3`;
         this.currentSong.isautoplay=true;
-        var myFetchOptions = {
-          method: 'GET'
-        };
-        fetch(`/song/detail?ids=${this.currentSong.id}`, myFetchOptions)
-        .then(response => response.json())
-        .then(json => this.setState({songs: json.songs}));
-        console.log(this.currentSong.id)
       }
     }
-    const {songs} = this.state; 
     return (
       <div className="play">
         <Link className = "singer-icon" to = {
-          songs.length > 0
-            ? `/songs`
-            : 'no'
+          this.props.currentSong.id!==undefined?`/songs`
+            : ''
         } > {
-
-          songs.length > 0
-            ? <img width="100%" src={songs[0].al.picUrl}/>
-            : <i className="icon-text icon-artist"></i>
+            this.props.currentSong.id!==undefined? <img width="100%" src={this.currentSong.picUrl}/>
+            :<i className="icon-text icon-artist"></i>
 
         }
         </Link>
@@ -235,7 +237,7 @@ changeTime(time) {
           <span className="song-txt">{this.props.currentSong.name}</span>
           <Progress  progress={this.state.progress}/>
         </div>
-        <span style={{ fontSize: 12, color: '#fff' }} className="play-text">{this.changeTime(this.state.currentTime)+' / '+this.changeTime(this.state.duration)}</span>
+        <span style={{ fontSize: 12, color: '#fff' }} className="play-text">{this.changeTime(this.state.currentTime)+' / '+this.timeDt(this.state.duration)}</span>
         <div className="play-control">
           <a href="javascript:void(0)" onClick={this.changeModes}><span className={`icon-${this.Modes[this.state.currentMode]} icon-text`}></span></a>
           <a href="javascript:void(0)" onClick={this.showCureentList}><span className="icon-list icon-text"></span></a>

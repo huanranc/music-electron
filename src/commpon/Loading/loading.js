@@ -9,7 +9,7 @@ class Loading extends React.Component {
         return (
             <div className="loading-container" style={displayStyle}>
                 <div className="loading-wrapper">
-                    <img src={Img} width="300px" height="300px"  alt="loading"/>
+                    <img src={Img} width="250px" height="250px"  alt="loading"/>
                     <div className="loading-title">{this.props.title}</div>
                 </div>
             </div>

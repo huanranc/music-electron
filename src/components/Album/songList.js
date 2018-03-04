@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   Link
 } from 'react-router-dom';
+import SongDetails from './songDetail';
 import Loading from '../../commpon/Loading/loading';
 import './songlist.scss';
 
@@ -9,53 +10,45 @@ class SongList extends Component {
   constructor(props) {
     super(props);
     this.state={
-      newSong:[],
-      album:[],
-      artist:[],
-      alias:[],
-      songId:'',
-      loading: true,
+      songs:[],
+      loading: true
       }
   }
   componentDidMount() {
+    const date=[]
     var myFetchOptions ={
       method:'GET'
     };
     fetch("/album?id="+this.props.match.params.id ,myFetchOptions)
-    .then(response => response.json())
-    .then(json => {
-      this.setState({
-        newSong:json.songs,
-        album:json.album,
-        artist:json.album.artist,
-        alias:json.album.alias,
-        loading: false
-      })}
-  );
+    .then(response => {
+      if(response.status!==200){
+        throw new Error('未请求成功，状态码为'+response.status)
+      }
+      response.json().then(json => json.songs.map(item=>{
+        let newItem = {};
+            newItem.id = item.id
+            newItem.name = item.name
+            newItem.alia=item.alia
+            newItem.alId = item.al.id
+            newItem.alName = item.al.name
+            newItem.dt = item.dt
+            newItem.picUrl = item.al.picUrl
+            newItem.artId = item.ar[0].id
+            newItem.artName = item.ar[0].name
+            date.push(newItem)
+        return   this.setState({
+              songs:[date]
+              })
+            })
+         ).catch(error=>{this.setState({songs:''})})
+        }).catch(error=>{this.setState({songs:''})});
   }
 
   timeDt(time) {
-    let durationTime=parseInt(time/1000);
-    let minute = parseInt(durationTime/60);
-    let second = durationTime%60+'';
-    let symbol = ':';
-    if(minute == 0){
-        minute = '00';
-    }else if(minute < 10 ){
-        minute = '0'+minute;
-    }
-    if(second.length == 1){
-      second = '0'+second;
-    }
-    return minute+symbol+second
-  }
-
-  handleSong(id,e){
-    e.preventDefault();
-    this.setState({
-      songId:id
-    })
-    alert(id);
+    let t=Math.floor(time/1000);
+    let m=Math.floor(t/60)<10?'0'+Math.floor(t/60):Math.floor(t/60);
+    let s=(t%60)<10?'0'+(t%60):(t%60);
+    return m+':'+s
   }
 
   selectSong(song,songs) {
@@ -63,62 +56,57 @@ class SongList extends Component {
       this.props.changeCurrentSong(song);
       this.props.setSongs([songs]);
 		};
-	}
+  }
+  
+  playAll = () => {
+    if (this.state.songs.length > 0) {
+        this.props.changeCurrentSong(this.state.songs[0][0]);
+        this.props.setSongs(this.state.songs);
+    }
+    // console.log(this.state.songs[0][0])
+}
 
   render() {
-    const list =this.props.match.params.id;
-    const {newSong,alias,album,artist} = this.state;
-    const songslist=newSong.length ?
-    newSong.map((songs,index) => {
-       return <li key={songs.id}>
+    const {songs} = this.state;
+    const songslist=songs.length ?
+    songs[0].map((song,index) => {
+       return <li key={song.id}>
        <span className="song-number">{
         index<9?`0${index+1}`:index+1
       } </span>
 
           <span className="song-name">
           {
-            alias.length==0?
+            song.alia.length!==0?
             <span className="song-name-txt">
-            {songs.name}
-            </span>:
-            <span className="song-name-txt">
-              {songs.name}
-              <span className="alias">（{alias}）</span>
+              {song.name}
+              <span style={{color:'#aeaeae'}}>
+              （{song.alia[0]}）
+              </span>
             </span>
-            }
-            <a onClick={this.selectSong(songs,newSong)}>play</a>
+            :
+            <span className="song-name-txt">
+            {song.name}
+            </span>
+          }
+            <a onClick={this.selectSong(song,songs[0])}><i className="icon-play"></i></a>
           </span>
           <span className="song-art-name">
-            <Link to={`artists/${album.artist.id}`}>
-              {album.artist.name}
+            <Link to={`artists/${song.artId}`}>
+              {song.artName}
             </Link>
           </span>
-          <span className="song-al-name">{songs.al.name}</span>
-          <span className="song-dt">{this.timeDt(songs.dt)}</span>
+          <span className="song-al-name">{song.alName}</span>
+          <span className="song-dt">{this.timeDt(song.dt)}</span>
         </li>
     }):<Loading title="正在加载..." show={this.state.loading}/>;
     return(
       <div className="new-ablum">
-        <div className="ablum-theme">
-          <img  className="ablum-img" alt="ablum-img" src={
-            album.blurPicUrl}
-          />
-          <div className="ablum-title">
-            <h2>{alias.length==0?album.name:`${album.name}（${alias}）`}</h2>
-                <span className="artist">
-                  <Link to={`/artists/${artist.id}`}>
-                    {artist.name}
-                  </Link>
-                </span>
-          
-                <a className="left"><i className="icon-play"></i></a>
-                <a className="play-contron">收藏</a>
-             
-          </div>
-        </div>
+        <SongDetails id={this.props.match.params.id}/>
         <div className="list">
         <div className="song-list">
               <ul className="songlist">
+              <li><a className="bk-play-control" onClick={this.playAll}><i className="icon-play"></i>播放全部</a></li>
               <li> 
                 <span className="song-name title">歌曲</span>
                 <span className="song-art-name title">歌手</span>

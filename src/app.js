@@ -8,7 +8,7 @@ import {
 import SideBar from './components/SideBar/sidebar';
 import Discover from './components/Discover/discover';
 import Playlist from './components/PlayList/playlist';
-import PlaySongList from './components/PlayList/songList';
+import PlaySongList from './containers/PlaySongList';
 import Artist from './components/Artist/artist';
 import List from './components/List/list';
 import Album from './components/Album/album';
@@ -27,25 +27,25 @@ const App = () => {
     <Router>
       <div className="wrap">
         <SideBar/>
-        <div className="wrap-body">
-          <Header />
-          <Switch>
-            <Route path="/discover" component={Discover} />
-            <Route path="/artist" component={Artist} />
-            <Route path="/list" component={List} />
-            <Route path="/playlist" component={Playlist} />
-            <Route path="/playlists/:id" component={PlaySongList} />
-            <Route path="/album" component={Album} />
-            <Route path="/albums/:id" component={SongList} />
-            <Route path="/songs" component={Song} />
-            <Redirect from="/" to="/discover" />
-            <Route component={Discover}  />
-          </Switch>
-          <CurrentPlay />
+        <div className="wrap-body scroll">
+            <Header />
+            <Switch>
+              <Route path="/discover" component={Discover} />
+              <Route path="/artist" component={Artist} />
+              <Route path="/list" component={List} />
+              <Route path="/playlist" component={Playlist} />
+              <Route path="/playlists/:id" component={PlaySongList} />
+              <Route path="/album" component={Album} />
+              <Route path="/albums/:id" component={SongList} />
+              <Route path="/songs" component={Song} />
+              <Redirect from="/" to="/discover" />
+              <Route component={Discover}  />
+            </Switch>
+            <CurrentPlay />
         </div>
       </div>
     </Router>
-    </Provider>
+  </Provider>
   );
 };
 export default App;

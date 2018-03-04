@@ -9,7 +9,5 @@ export const SET_AUDIO_CRRENTTIME = 'SET_AUDIO_CRRENTTIME';
 //获取歌词
 export const GET_LYC = 'GET_LYC';
 
-//fetch状态
-export const FETCH_STARTED = 'FETCH_STARTED';
-export const FETCH_SUCCESS = 'FETCH_SUCCESS';
-export const FETCH_FAILURE = 'FETCH_FAILURE';
+//设置是否播放状态
+export const SHOW_SONG='SHOW_SONG';

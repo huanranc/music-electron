@@ -1,127 +1,90 @@
-.new-ablum {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
+//专辑bk信息
+$bk-info-bg: #f0f0f0;
+$bk-infr-name: #222326;
+$bk-intr-color: #666;
 
-.new-ablum .ablum-theme {
+.bk {
   display: flex;
-  position: relative;
+  width: 100%;
+}
+.bk-info {
+  display: flex;
+  width: 100%;
   padding: 1.875rem 2.5rem;
-  background-color: #f0f0f0;
-}
-
-.ablum-theme img {
-  z-index: 99;
-  position: relative;
-  float: left;
-  max-width: 11rem;
-  max-height: 11rem;
-  width: 100%;
-  height: 100%;
-}
-
-.ablum-theme .ablum-title {
-  float: left;
-  margin-left: 5rem;
-}
-
-.ablum-title h2 {
-  font-weight: bolder;
-  color: #181818;
-}
-
-.ablum-title .artist {
-  margin-bottom: 20px;
-}
-
-.ablum-title .artist a {
-  color: #181818;
-}
-
-.song-list {
-  padding: 0 1.875rem;
-  background-color: #fafafa;
-}
-
-.song-list li {
-  display: flex;
-  flex-direction: row;
-  height: 2.875rem;
-  padding: 0 50px;
-  position: relative;
-  box-sizing: border-box;
-  align-items: center;
-  background-color: #fafafa;
-}
-.song-list li::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 1px;
-  bottom: 0;
-  left: 0;
-  background-color: #e1e1e2;;
-}
-
-.song-list .song-name {
-  width: 50%;
-  padding-left: 30px;
-  text-align: left;
-  color: #191919;
-  font-size: 0.8rem;
-}
-
-.song-list .song-name .alias {
-  color: #646464;
-}
-.song-list .song-al-name,
-.song-list .song-art-name {
-  width: 25%;
-  text-align: center;
-  color: #191919;
-  font-size: 0.8rem;
-}
-
-.song-list .song-art-name a {
-  text-align: center;
-  color: #191919;
-  font-size: 0.8rem;
-}
-
-.song-list .song-dt {
-  width: 15%;
-  text-align: center;
-  color: #191919;
-  font-size: 0.8rem;
-}
-
-.song-list .title {
-  color: #b6b6b6;
-}
-
-.song-name a {
-  position: relative;
-  margin: 0 .5rem;
-}
-
-.ablum-title {
-  .play-contron {
-    width: 4.5rem;
-    border-radius: 10px;
-    padding: 6px 15px;
-    font-size: 1rem;
-    color: #fff;
-    background: #6666ff;
-    cursor: pointer;
+  background-color: $bk-info-bg;
+  .bk-pic {
+    max-width: 11rem;
+    max-height: 11rem;
+    width: 100%;
+    height: 100%;
   }
-  .left {
-    cursor: pointer;
-    .icon-play {
-      font-size: 1.5rem;
-      color: #6666ff;
-      margin-right: 1rem;
-      margin-top: 1rem;
+  .bk-name {
+    padding: 0 1.5rem;
+    .bk-infr-name {
+      color: $bk-infr-name;
+      margin: 0 0 .75rem;
     }
+    .bk-intr {
+      display: flex;
+      font-size: .75rem;
+      line-height: 18px;
+      color: $bk-intr-color;
+      .intr-art-name {
+        padding-right: .75rem;
+        a {
+          color: #6666ff;
+        }
+      }
+    }
+    .intr-control {
+      display: flex;
+      margin: .75rem .75rem 0 0;
+      text-align: center;
+      line-height: 15px;
+    }
+    .bk-collect {
+      display: inline-flex;
+      padding: .25rem 2.25rem;
+      border-radius: 15px;
+      border: 1px solid #6666ff;
+      color: #f0f0f0;
+      justify-content: center;
+      align-items: center;
+      background-color: #6666ff;
+      font-size: .75rem;
+    }
+    .intr-desc {
+      font-size: .75rem;
+      margin: .75rem .75rem 0 0;
+      span {
+        font-weight: bold;
+      }
+      p {
+        line-height: 24px;
+        margin-top: 4px;
+        text-indent: 2em;
+        height: 3.125rem;
+        overflow: hidden;
+        color: $bk-intr-color;
+      }
+      .load {
+        float: right;
+        color: $bk-intr-color;
+        border: 1px solid;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.bk-play-control {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  i {
+    font-size: 1.25rem;
+    color: #6666ff;
+    padding-right: .25rem;
   }
 }

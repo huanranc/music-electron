@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import {
+  Link
+} from 'react-router-dom';
 import './lyric.scss'
 
 class Lyric extends Component {
@@ -29,13 +32,15 @@ class Lyric extends Component {
       }
 }
     const {lrc} = this.state;
-    let lyric=lrc.lyric
+    let lyric= lrc===undefined?'纯音乐':lyric=lrc.lyric
     const seconds=this.props.currentTime
+    //  console.log(this.props.currentSong)
     const secondsFormat = seconds => {
       let min = Math.floor(seconds / 60)
       let sec = seconds % 60 + 100
       return ('0' + min).slice(-2) + ':' + sec.toFixed(2).substring(1)
     }
+    // console.log(secondsFormat(seconds))
     let currentTime = secondsFormat(seconds + 1)
     let index = 0
     let lyrics=lyric!==undefined?lyric.split(/[\n\r]/).map((line, i) => {
@@ -49,17 +54,27 @@ class Lyric extends Component {
     return line.replace(/^\[.*?\]/, '')
       })
     :''
-    return(
-      <div className="lyc">
-        <div className="lyc-main">
-        <ul className="lyc-list" style={{ transform: `translateY(${-42 * (index - 4)}px)`}}>
-              {lyric!==undefined?lyrics.map((line, i) => <li key={`${i}`} style={index === i ? { color: 'red',fontSize:'15px' } : {}}>
-					            {line}
-					        </li>):''}
-						</ul>
-          </div>
-      </div>
-    )
+    return <div className="singles-page">
+            <div className="disk">
+              <div className={"disk-inner" + (this.props.showSong ? " playing" : "")}>
+                <img className="disk-img" alt="专辑图片"  src={this.props.currentSong!==undefined?this.props.currentSong.picUrl:''}/>
+                <span className="msk"></span>
+              </div>
+            </div>
+            <div className="lyrics">
+              <h3 className="lyrics-name">{this.props.currentSong.name}</h3>
+              <p className="lyrics-des">歌手：<Link to={`/artists/${this.props.currentSong.artId}`}>{this.props.currentSong.artName}</Link></p>
+              <p className="lyrics-des">专辑：<Link to={`/albums/${this.props.currentSong.alId}`}>{this.props.currentSong.alName}</Link></p>
+              <div className="lyrics-inner">
+                <ul className="lyrics-list" style={index===0?{}:{ transform: `translateY(${-42 * (index - 4)}px)`}}>
+                  {lyric!==undefined?lyrics.map((line, i) => 
+                    <li key={`${i}`} style={index === i ? { color: '#6666ff' } : {}}>
+                      {line}
+                    </li>):<li>歌词加载中...</li>}
+                </ul>
+              </div>
+            </div>
+    </div>
   }
 }
 
