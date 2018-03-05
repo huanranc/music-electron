@@ -20,6 +20,7 @@ import {Provider} from "react-redux";
 import store from "./redux/store";
 import './commpon/css/normalize.css';
 import './components/Style/global.scss';
+import Search from './components/Search/search';
 
 const App = () => {
   return (
@@ -38,6 +39,7 @@ const App = () => {
               <Route path="/album" component={Album} />
               <Route path="/albums/:id" component={SongList} />
               <Route path="/songs" component={Song} />
+              <Route path="/search" component={Search} />
               <Redirect from="/" to="/discover" />
               <Route component={Discover}  />
             </Switch>

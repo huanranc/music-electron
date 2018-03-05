@@ -13,6 +13,7 @@ class Nav extends Component {
         <li><NavLink to="/list">排行榜</NavLink></li>
         <li><NavLink to="/playlist">歌单</NavLink></li>
         <li><NavLink to="/album">专辑</NavLink></li>
+        <li><NavLink to="/search">搜索</NavLink></li>
       </ul>
     </nav>
     )
