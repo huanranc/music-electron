@@ -65,5 +65,13 @@
   .search-result {
     width: 80%;
     margin: 10px auto;
+    .tab-item {
+      display: none;
+      opacity: 0;
+    }
+    .show {
+      display: block;
+      opacity: 1;
+    }
   }
 }
