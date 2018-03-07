@@ -53,7 +53,7 @@ function songList(state=initialState.songs,action){
     case actionType.SET_SONGS:
       return action.songs
     case actionType.REMOVE_SONG:
-      return state.filter(song=>action.id!==song.id)
+      return state.filter(song=>song.id!==action.id)
       default:
         return state
   }

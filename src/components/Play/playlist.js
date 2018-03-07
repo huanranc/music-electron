@@ -13,6 +13,13 @@ class PlayList extends Component {
   removeSong(id,index) {
     return()=>{
       if(this.props.currentSong.id!==id){
+        this.props.removeSong(id);
+        if(index<this.props.currentIndex) {
+          this.props.changeCurrentIndex(this.props.currentIndex-1)
+        }
+        // console.log(id)
+        // console.log(this.props.currentSong.id)
+        console.log(this.props.currentIndex)
       }
     }
   }
@@ -28,7 +35,7 @@ class PlayList extends Component {
        return <li key={index} className="playing-list-sub" style={this.props.currentSong.id===songs.id?{color:"#6666ff"}:{color:"#fff"}}>
                   <a onClick={this.selectSong(songs)}><i className="icon-play"></i></a>
                   {songs.name}
-                    <span onClick={this.removeSong(songs.id,index)} className="icon-删除"></span>
+                    <i onClick={this.removeSong(songs.id,index)} className="icon-删除"></i>
               </li>
     })
     :""

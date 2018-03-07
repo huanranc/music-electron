@@ -34,7 +34,7 @@ class Lyric extends Component {
     const {lrc} = this.state;
     let lyric= lrc===undefined?'纯音乐':lyric=lrc.lyric
     const seconds=this.props.currentTime
-    //  console.log(this.props.currentSong)
+    console.log(this.props.currentTime)
     const secondsFormat = seconds => {
       let min = Math.floor(seconds / 60)
       let sec = seconds % 60 + 100

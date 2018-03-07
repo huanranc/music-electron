@@ -88,8 +88,9 @@ next=()=>{
        }
   //  console.log(currentIndex)
   //  console.log(this.props.currentSongList[0][currentIndex])
-   this.props.changeCurrentSong(this.props.currentSongList[0][currentIndex])
+  this.props.changeCurrentSong(this.props.currentSongList[0][currentIndex])
    this.currentIndex=currentIndex
+  // console.log(this.currentIndex)
   }
 }
 
@@ -113,8 +114,8 @@ previous=()=>{
           let randomIndex=parseInt(Math.random()*this.props.currentSongList[0].length,10)
           currentIndex=randomIndex
         }
-    this.props.changeCurrentSong(this.props.currentSongList[0][currentIndex])
-    this.currentIndex=currentIndex
+        this.props.changeCurrentSong(this.props.currentSongList[0][currentIndex])
+        this.currentIndex=currentIndex
    }
 }
 
@@ -155,8 +156,8 @@ controlEnd=()=>{
          let randomIndex=parseInt(Math.random()*this.props.currentSongList[0].length,10)
          currentIndex=randomIndex
        }
-   this.props.changeCurrentSong(this.props.currentSongList[0][currentIndex])
-   this.currentIndex=currentIndex
+       this.props.changeCurrentSong(this.props.currentSongList[0][currentIndex])
+       this.currentIndex=currentIndex
   }else {
     //不断播放
        this.audioDOM.play()
