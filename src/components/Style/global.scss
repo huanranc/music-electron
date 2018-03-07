@@ -20,8 +20,11 @@ body {
     box-sizing: border-box;
     background: $sidebar-bg;
     .title {
+      position: fixed;
+      width: 180px;
       margin: 0;
       padding: 12px 20px;
+      box-sizing: border-box;
       background-color: #6666ff;
       text-align: center;
       font-size: 0.9375rem;

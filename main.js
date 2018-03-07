@@ -1,66 +1,67 @@
 const electron = require('electron')
-// Module to control application life.
-const app = electron.app
-// Module to create native browser window.
-const BrowserWindow = electron.BrowserWindow
-
 const path = require('path')
 const url = require('url')
+const { app, BrowserWindow, Menu, dialog, shell } = electron;
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
-let mainWindow
 
-function createWindow () {
-  // Create the browser window.
-  mainWindow = new BrowserWindow({width: 1012, height: 630, frame: false})
+let mainWindow = null;
+// App events
+app.on('ready', () => {
+    mainWindow = openWindow(null, null, false);
+    //Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate(app, win)));
+});
 
-  // and load the index.html of the app.
-  const pkg = require('./package.json') // 引用package.json 
-  //判断是否是开发模式 
-  if(pkg.DEV) { 
-    mainWindow.loadURL("http://localhost:3001/")
-  } else { 
-    mainWindow.loadURL(url.format({
-      pathname:path.join(__dirname, './build/index.html'), 
-      protocol:'file:', 
-      slashes:true 
-    }))
-  }
-
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
-
-  // Emitted when the window is closed.
-  mainWindow.on('closed', function () {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    mainWindow = null
-  })
-}
-
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-app.on('ready', createWindow)
-
-// Quit when all windows are closed.
-app.on('window-all-closed', function () {
-  // On OS X it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== 'darwin') {
+app.on('window-all-closed', () => {
     app.quit()
-  }
-})
+});
 
-app.on('activate', function () {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (mainWindow === null) {
-    createWindow()
-  }
-})
+app.on('activate', () => {
+    mainWindow.show();
+});
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
+
+// Define a function to create window
+function openWindow(filePath, options, isMax) {
+    !filePath && (filePath = path.join(__dirname, './public/index.html'));
+    !options && (options = {});
+    options = Object.assign(
+        {
+            width: 1012,
+            height: 630,
+            minWidth: 1012,
+            minHeight: 630,
+            center: true,
+            show: false,
+            autoHideMenuBar: true
+        },
+        options
+    );
+
+    win = new BrowserWindow(options);
+    isMax && win.maximize();
+
+       //判断是否是开发模式 
+    const pkg = require('./package.json') // 引用package.json 
+
+    if(pkg.DEV) { 
+        win.loadURL("http://localhost:3001/")
+      } else { 
+        win.loadURL(url.format({
+        pathname:path.join(__dirname, './build/index.html'), 
+        protocol:'file:', 
+        slashes:true 
+      }))
+    }
+
+    // win.loadURL(url.format({
+    //       pathname:path.join(__dirname, './build/index.html'), 
+    //       protocol:'file:', 
+    //       slashes:true 
+    //     }))
+    
+    win.on('ready-to-show', () => {
+        win.show()
+    });
+
+    return win;
+}

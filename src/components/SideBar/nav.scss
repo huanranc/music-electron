@@ -1,6 +1,7 @@
 .nav {
-  position: relative;
+  position: fixed;
   margin: 40px;
+  margin-top: 80px;
   box-sizing: border-box;
   .nav-bar::before {
     content: "";
