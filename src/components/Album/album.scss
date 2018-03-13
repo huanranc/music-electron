@@ -2,9 +2,11 @@ img {
   vertical-align: middle;
   border-style: none;
 }
+
 .content-layout {
   padding: 5px;
 }
+
 .contains-body {
   margin-bottom: 80px;
 }
@@ -15,20 +17,23 @@ img {
 }
 
 .card {
-  border:0;
+  border: 0;
   box-shadow: none;
   margin: 10px;
 }
+
 .card:hover {
-  border:0;
+  border: 0;
   box-shadow: none;
 }
+
 .ablum-list {
   margin: 5px;
   margin-bottom: 5px;
-  width: calc( 100%/4 - 2*5px);
+  width: calc(100% / 4 - 2 * 5px);
   float: left;
 }
+
 .card-row {
   width: 100%;
   height: 100%;
@@ -38,11 +43,13 @@ img {
   flex-wrap: wrap;
   flex-direction: row;
 }
-.card-row::before ,.card-row::after {
+
+.card-row::before, .card-row::after {
   display: table;
   content: "";
   clear: both;
 }
+
 .card-image {
   position: relative;
   margin-bottom: .625rem;
@@ -57,6 +64,7 @@ img {
   font-size: .95rem;
   margin: 2px;
 }
+
 .card-body p {
   color: #70747f;
   margin: 0;

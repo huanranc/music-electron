@@ -4,12 +4,13 @@
 
 .discover-list {
   margin: 1rem;
-  width: 48rem; 
+  width: 48rem;
   .top-title {
     color: #4d4e50;
     text-transform: capitalize;
   }
 }
+
 .discover-album {
   display: flex;
   justify-content: center;
@@ -30,7 +31,7 @@
   .img2 {
     margin-top: .5rem;
   }
-  .img2,.img3 {
+  .img2, .img3 {
     width: 16rem;
     height: 15rem;
     box-sizing: border-box;
@@ -49,7 +50,8 @@
   flex-wrap: wrap;
   flex-direction: row;
 }
-.card-row::before ,.card-row::after {
+
+.card-row::before, .card-row::after {
   display: table;
   content: "";
   clear: both;
@@ -61,6 +63,7 @@
   padding-right: 30px;
   color: #5c5c5c;
 }
+
 .more:hover {
   color: #000;
 }
@@ -78,6 +81,7 @@
   font-size: 1rem;
   margin: 0;
 }
+
 .card-body p {
   color: #5c5c5c;
   margin: 0;
@@ -86,7 +90,7 @@
 
 .play-list {
   margin: 5px;
-  width:  calc( 100%/4 - 10px);
+  width: calc(100% / 4 - 10px);
   height: 15rem;
   a {
     text-decoration: none;
@@ -97,6 +101,7 @@
   width: 48rem;
   position: relative;
 }
+
 .recommend .card-image {
   position: relative;
   box-sizing: border-box;
@@ -114,12 +119,14 @@
   color: #fff;
   font-size: .8rem;
   text-align: center;
-  background: rgba(0,0,0,.5);
+  background: rgba(0, 0, 0, .5);
   opacity: 0;
 }
+
 .card-image:hover > .show {
   opacity: 1;
 }
+
 .image::after {
   content: "";
   width: 3rem;
@@ -128,14 +135,14 @@
   top: 4rem;
   left: 4rem;
   background-image: url(../../commpon/images/playlist-no-pixel.png);
-  background-size:cover;
+  background-size: cover;
 }
 
 .card-image:hover::after {
-  background-size:cover;
+  background-size: cover;
 }
 
-.artist,.new-songs {
+.artist, .new-songs {
   float: left;
 }
 
@@ -177,7 +184,7 @@
       bottom: .5rem;
       right: .25rem;
       background-image: url(../../commpon/images/playlist-no-pixel.png);
-      background-size:cover;
+      background-size: cover;
     }
   }
 }
@@ -190,10 +197,12 @@
   content: "";
   clear: both;
 }
+
 .artist {
   width: 60%;
   margin-right: .5rem;
 }
+
 .artist-list {
   width: 50%;
   height: 180px;
@@ -214,7 +223,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background: rgba(0,0,0,.5);
+    background: rgba(0, 0, 0, .5);
     padding: 0;
     opacity: 0;
     cursor: pointer;
