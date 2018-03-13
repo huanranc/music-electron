@@ -5,15 +5,15 @@
     height: 790px;
     font: 1rem "微软雅黑";
     .playing-list-sub {
-      padding:10px;
+      padding: 10px;
       height: 50px;
       line-height: 50px;
       box-sizing: border-box;
       overflow: hidden;
-      text-overflow:ellipsis;
-      white-space: nowrap;  
-      border-top: 1px solid rgba(225,225,225,.2);
-      border-bottom: 1px solid rgba(225,225,225,.2);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      border-top: 1px solid rgba(225, 225, 225, .2);
+      border-bottom: 1px solid rgba(225, 225, 225, .2);
     }
   }
 }
@@ -24,33 +24,39 @@
 }
 
 /*滚动条整体部分*/
-.scroll::-webkit-scrollbar{
+.scroll::-webkit-scrollbar {
   width: 7px;
   height: 7px;
   border-radius: 4px;
   background-color: transparent;
 }
+
 /*滚动条两端的箭头*/
-.scroll::-webkit-scrollbar-button{
+.scroll::-webkit-scrollbar-button {
   display: none;
 }
+
 /*经测试好像并不能控制什么*/
-.scroll::-webkit-scroll-track{
+.scroll::-webkit-scroll-track {
   display: none;
 }
+
 /*滚动条内侧部分 去掉*/
 .scroll::-webkit-scrollbar-track-piece {
   display: none;
 }
+
 /*滚动条中可以拖动的那部分*/
-.scroll::-webkit-scrollbar-thumb{
-  background-color:rgba(0, 0, 0, 0.825);
+.scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.825);
   border-radius: 4px;
 }
+
 /*变角部分*/
 .scroll::-webkit-scrollbar-corner {
   display: none;
 }
-.scroll::-webkit-resizer{
+
+.scroll::-webkit-resizer {
   display: none;
 }

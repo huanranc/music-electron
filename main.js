@@ -1,7 +1,7 @@
 const electron = require('electron')
 const path = require('path')
 const url = require('url')
-const { app, BrowserWindow, Menu, dialog, shell } = electron;
+const {app, BrowserWindow, Menu, dialog, shell} = electron;
 
 
 let mainWindow = null;
@@ -40,25 +40,25 @@ function openWindow(filePath, options, isMax) {
     win = new BrowserWindow(options);
     isMax && win.maximize();
 
-       //判断是否是开发模式 
-    const pkg = require('./package.json') // 引用package.json 
+    //判断是否是开发模式
+    const pkg = require('./package.json') // 引用package.json
 
-    if(pkg.DEV) { 
+    if (pkg.DEV) {
         win.loadURL("http://localhost:3001/")
-      } else { 
+    } else {
         win.loadURL(url.format({
-        pathname:path.join(__dirname, './build/index.html'), 
-        protocol:'file:', 
-        slashes:true 
-      }))
+            pathname: path.join(__dirname, './build/index.html'),
+            protocol: 'file:',
+            slashes: true
+        }))
     }
 
     // win.loadURL(url.format({
-    //       pathname:path.join(__dirname, './build/index.html'), 
-    //       protocol:'file:', 
-    //       slashes:true 
+    //       pathname:path.join(__dirname, './build/index.html'),
+    //       protocol:'file:',
+    //       slashes:true
     //     }))
-    
+
     win.on('ready-to-show', () => {
         win.show()
     });
