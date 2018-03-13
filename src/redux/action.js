@@ -39,14 +39,6 @@ export function setShowSong(showSong) {
   }
 }
 
-// //设置album
-// export function getAlbum(album) {
-//   return {
-//     type:actionType.GET_AlBUM_LIST,
-//     album
-//   }
-// }
-
 // //album
 // export function fetchAlbum(){
 //   return async dispatch => {
@@ -68,7 +60,7 @@ export function setShowSong(showSong) {
 //           newItem.picUrl=item.picUrl
 //           newItem.size=item.size
 //           date.push(newItem)
-//       return dispatch(getAlbum(date))
+//       return dispatch({ type: FactionType.GET_AlBUM_LIST, payload: date })
 //       })
 //       ).catch(error=>{this.setState({albums:''})})
 //     }).catch(error=>{this.setState({albums:''})});

@@ -63,9 +63,10 @@ function songList(state=initialState.songs,action){
 // //ablum
 
 // function albumList(state=initialState.album,action) {
+ // const { payload } = action
 //   switch(action.type) {
 //     case actionType.GET_AlBUM_LIST:
-//       return action.album
+//       return { ...payload }
 //     default:
 //       return state
 //   }
