@@ -124,6 +124,7 @@ controlAllAudio=()=>{
     //获得音乐总秒数
     duration: this.props.currentSong.dt
   })
+  console.log(this.props.currentSong);
 }
 
 controlAudio=()=> {
