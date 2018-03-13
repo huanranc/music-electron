@@ -3,16 +3,19 @@ import {
   Link
 } from 'react-router-dom';
 import './album.scss';
+import {fetchAlbum} from '../../redux/action';
 import Loading from '../../commpon/Loading/loading';
 import LazyLoad from "react-lazyload";
+
 class Ablum extends Component {
-  constructor() {
-    super(...arguments);
+  constructor(props) {
+    super(props);
     this.state={
       loading: true,
       albums:[]
     }
   }
+  
   componentDidMount() {
     const date=[]
     if (!this.props.match.isExact) {
@@ -44,6 +47,7 @@ class Ablum extends Component {
   }
 
   render() {
+    // {console.log(this.props.getFetchAblum)}
     const {albums} = this.state;
     const songList=albums.length ?
     albums[0].map((newSong,index) => {

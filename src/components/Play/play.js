@@ -69,7 +69,7 @@ class Play extends Component {
 //下一曲
 next=()=>{
   // console.log(this.props.currentSongList[0].length)
-  if(this.props.currentSongList[0].length>0&&this.props.currentSongList[0].length!==1) {
+  if(this.props.currentSongList[0]!=undefined&&this.props.currentSongList[0].length>0&&this.props.currentSongList[0].length!==1) {
     let currentIndex=this.currentIndex
       if(this.state.currentMode === 2) {
         //列表循环
@@ -98,7 +98,7 @@ next=()=>{
 //上一曲
 previous=()=>{
   //  console.log(this.state.currentMode)
-   if(this.props.currentSongList[0].length>0&&this.props.currentSongList[0].length!==1) {
+   if(this.props.currentSongList[0]!=undefined&&this.props.currentSongList[0].length>0&&this.props.currentSongList[0].length!==1) {
      let currentIndex=this.currentIndex
        if(this.state.currentMode === 2) {
          //列表循环
