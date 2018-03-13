@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect
-} from 'react-router-dom';
+import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
 import SideBar from './components/SideBar/sidebar';
 import Discover from './components/Discover/discover';
 import Playlist from './components/PlayList/playlist';
@@ -23,32 +18,32 @@ import './components/Style/global.scss';
 import Search from './components/Search/search';
 
 const App = () => {
-  return (
-  <Provider store={store}>
-    <Router>
-      <div className="wrap">
-        <SideBar/>
-        <div className="wrap-body scroll">
-            <Header />
-            <Switch>
-              <Route path="/discover" component={Discover} />
-              <Route path="/artist" component={Artist} />
-              <Route path="/list" component={List} />
-              <Route path="/playlist" component={Playlist} />
-              <Route path="/playlists/:id" component={PlaySongList} />
-              <Route path="/album" component={Album} />
-              <Route path="/albums/:id" component={SongList} />
-              <Route path="/songs" component={Song} />
-              <Route path="/search" component={Search} />
-              <Redirect from="/" to="/discover" />
-              <Route component={Discover}  />
-            </Switch>
-            <CurrentPlay />
-        </div>
-      </div>
-    </Router>
-  </Provider>
-  );
+    return (
+        <Provider store={store}>
+            <Router>
+                <div className="wrap">
+                    <SideBar />
+                    <div className="wrap-body scroll">
+                        <Header />
+                        <Switch>
+                            <Route path="/discover" component={Discover} />
+                            <Route path="/artist" component={Artist} />
+                            <Route path="/list" component={List} />
+                            <Route path="/playlist" component={Playlist} />
+                            <Route path="/playlists/:id" component={PlaySongList} />
+                            <Route path="/album" component={Album} />
+                            <Route path="/albums/:id" component={SongList} />
+                            <Route path="/songs" component={Song} />
+                            <Route path="/search" component={Search} />
+                            <Redirect from="/" to="/discover" />
+                            <Route component={Discover} />
+                        </Switch>
+                        <CurrentPlay />
+                    </div>
+                </div>
+            </Router>
+        </Provider>
+    );
 };
 export default App;
 

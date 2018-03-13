@@ -1,31 +1,31 @@
 
-  .list-song {
-    position: fixed;
-    right: 0;
-    top: 0;
-    z-index: 999;
-    width: 320px;
-    height: 100%;
-    background: #222326;
-    color: #fff; 
-    font-size: 16px;
-    box-sizing: border-box;
-  }
+.list-song {
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 999;
+  width: 320px;
+  height: 100%;
+  background: #222326;
+  color: #fff;
+  font-size: 16px;
+  box-sizing: border-box;
+}
 
-  .fade-enter {
-    width: 0px;
-  }
-  
-  .fade-enter.fade-enter-active {
-    width: 320px;
-    transition: width 200ms ease-in;
-  }
-  
-  .fade-exit {
-    width: 320px;
-  }
-  
-  .fade-exit.fade-exit-active {
-    width: 0px;
-    transition: width 200ms ease-in;
-  }
+.fade-enter {
+  width: 0px;
+}
+
+.fade-enter.fade-enter-active {
+  width: 320px;
+  transition: width 200ms ease-in;
+}
+
+.fade-exit {
+  width: 320px;
+}
+
+.fade-exit.fade-exit-active {
+  width: 0px;
+  transition: width 200ms ease-in;
+}
