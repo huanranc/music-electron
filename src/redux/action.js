@@ -38,3 +38,41 @@ export function setShowSong(showSong) {
     showSong
   }
 }
+
+// //设置album
+// export function getAlbum(album) {
+//   return {
+//     type:actionType.GET_AlBUM_LIST,
+//     album
+//   }
+// }
+
+// //album
+// export function fetchAlbum(){
+//   return async dispatch => {
+//     const date=[];
+//     var myFetchOptions ={
+//       method:'GET',
+//       header: {'content-type':'application/json; charset=utf-8'}
+//     };
+//     await  fetch("/top/album?offset=0&limit=52",myFetchOptions)
+//     .then(response => {
+//       if(response.status!==200){
+//         throw new Error('未请求成功，状态码为'+response.status)
+//       }
+//       response.json().then(json => json.albums.map(item=>{
+//       let newItem={}
+//           newItem.id=item.id
+//           newItem.name=item.name
+//           newItem.artName=item.artist.name
+//           newItem.picUrl=item.picUrl
+//           newItem.size=item.size
+//           date.push(newItem)
+//       return dispatch(getAlbum(date))
+//       })
+//       ).catch(error=>{this.setState({albums:''})})
+//     }).catch(error=>{this.setState({albums:''})});
+//   }
+// }
+
+
