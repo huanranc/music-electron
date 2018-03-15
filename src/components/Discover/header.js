@@ -4,20 +4,38 @@ import './header.scss';
 
 class Header extends React.Component {
     constructor(props) {
-        super(props);
-        this.state={showLogin:false}
+        super(props)
+        this.state = {
+            show: false,
+            username:'未登录'
+        }
     }
+
+    showList = (status) => {
+        this.setState({
+            show: status
+        })
+    }
+
+    showCureentList = () => {
+        if (this.state.show === false) {
+            this.setState({show:true})
+        } else {
+            this.setState({show:false})
+        }
+    };
+
+    changeStatus = (newusername) => {
+        this.setState({
+            username:newusername
+        })
+    }
+
     handleClick() {
         window.history.back();
     }
-
-    login=()=> {
-        console.log("这是登录")
-        this.setState({
-            showLogin:true
-        })
-    }
     render() {
+        console.log(this.state.username)
         return (
             <div className="header">
 				<span className="header-back" onClick={this.handleClick}>
@@ -25,11 +43,10 @@ class Header extends React.Component {
         </span>
                 <div className="header-title">
                     <div className="person">
-                        <span className="person-name"  onClick={this.login}>未登录</span>
-                        <i className="icon-person"></i>
+                        <span className="person-name"  onClick={this.showCureentList}>{this.state.username}</span>
                     </div>
                 </div>
-                {this.state.showLogin?<Login show={this.state.showLogin}/>:""}
+                <Login showList={this.showList} show={this.state.show} initusername={this.state.username} callbackstatus={this.changeStatus}/>
             </div>
         );
     }
