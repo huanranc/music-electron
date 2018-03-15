@@ -1,29 +1,37 @@
 import React, {Component} from 'react';
 import TabControl from '../Tabs/tabControl';
+import {CSSTransition} from "react-transition-group";
 import './login.scss';
 
 class Login extends Component {
     constructor(props) {
-		super(props);
-		this.state={
-			close:true
-		}
-	}
+        super(props);
+        this.state = {
+            showList: false
+        }
+    }
 	
-	closClick=()=>{
-		console.log("关闭");
-		this.setState({
-			close:this.props.show
-		})
-		console.log(this.props.show);
-		console.log(this.state.close);
-	}
+	showCureentList = () => {
+        if (this.props.show === false) {
+            this.props.showList(true)
+        } else {
+            this.props.showList(false)
+        }
+    };
 
 
     render() {
         return (
-            <div className="login" style={this.state.close?{display:"block"}:{display:"none"}}>
-				<i className="icon-删除 login-dele" onClick={this.closClick}></i>
+			<CSSTransition in={this.props.show} classNames="fade" transitionEnterTimeout={300}
+			transitionLeaveTimeout={300}
+			onEnter={() => {
+				this.setState({showList: true});
+			}}
+			onExited={() => {
+				this.setState({showList: false});
+			}}>
+            	<div  style={this.state.showList === true ? {display: "block"} : {display: "none"}} className="login">
+				<i className="icon-删除 login-dele" onClick={this.showCureentList}></i>
                 <TabControl>
                     <div name="登录">
                         <div>
@@ -55,7 +63,8 @@ class Login extends Component {
 						</div>
                     </div>
                 </TabControl>
-            </div>
+            	</div>
+			</CSSTransition>	
         )
     }
 }

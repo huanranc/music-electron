@@ -4,18 +4,28 @@ import './header.scss';
 
 class Header extends React.Component {
     constructor(props) {
-        super(props);
-        this.state={showLogin:false}
-    }
-    handleClick() {
-        window.history.back();
+        super(props)
+        this.state = {
+            show: false
+        }
     }
 
-    login=()=> {
-        console.log("这是登录")
+    showList = (status) => {
         this.setState({
-            showLogin:true
+            show: status
         })
+    }
+
+    showCureentList = () => {
+        if (this.state.show === false) {
+            this.setState({show:true})
+        } else {
+            this.setState({show:false})
+        }
+    };
+
+    handleClick() {
+        window.history.back();
     }
     render() {
         return (
@@ -25,11 +35,10 @@ class Header extends React.Component {
         </span>
                 <div className="header-title">
                     <div className="person">
-                        <span className="person-name"  onClick={this.login}>未登录</span>
-                        <i className="icon-person"></i>
+                        <span className="person-name"  onClick={this.showCureentList}>未登录</span>
                     </div>
                 </div>
-                {this.state.showLogin?<Login/>:""}
+                <Login showList={this.showList} show={this.state.show}/>
             </div>
         );
     }
