@@ -22,8 +22,7 @@ class Login extends Component {
 
     render() {
         return (
-			<CSSTransition in={this.props.show} classNames="fade" transitionEnterTimeout={300}
-			transitionLeaveTimeout={300}
+			<CSSTransition in={this.props.show} classNames="fade" timeout={300}
 			onEnter={() => {
 				this.setState({showList: true});
 			}}
