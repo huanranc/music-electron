@@ -29,7 +29,7 @@ class Header extends React.Component {
                         <i className="icon-person"></i>
                     </div>
                 </div>
-                {this.state.showLogin?<Login/>:""}
+                {this.state.showLogin?<Login show={this.state.showLogin}/>:""}
             </div>
         );
     }

@@ -6,23 +6,20 @@ class Login extends Component {
     constructor(props) {
 		super(props);
 		this.state={
-			close:true
+			close:this.props.show
 		}
 	}
 	
 	closClick=()=>{
-		console.log("关闭");
-		this.setState({
-			close:this.props.show
-		})
-		console.log(this.props.show);
-		console.log(this.state.close);
+		this.setState(prevState =>({
+			close: !prevState.close
+		}));
 	}
 
 
     render() {
         return (
-            <div className="login" style={this.state.close?{display:"block"}:{display:"none"}}>
+            <div className="login">
 				<i className="icon-删除 login-dele" onClick={this.closClick}></i>
                 <TabControl>
                     <div name="登录">
