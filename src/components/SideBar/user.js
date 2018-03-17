@@ -1,50 +1,60 @@
 import React, {Component} from 'react';
-import './nav.scss';
+import Login from '../../containers/Login'
+import './user.scss';
 
 class User extends Component {
     constructor(props) {
-        super(props);
-        this.id=0;
+        super(props)
         this.state = {
-            userlist:[]
+            show: false,
+            name:'未登录',
+            songlist:[]
         }
     }
 
-    render() {
-        let data='id=' + localStorage.getItem('userid')
-        var myFetchOptions = {
-			method: 'POST',
-			mode:'cors',
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded'
-			  },
-			credentials: 'include',
-			body:data
-		};
-        if(localStorage.getItem('userid')!==this.id) {
-          fetch("/user/list", myFetchOptions)
-        .then(response => {
-            if (response.status !== 200) {
-                throw new Error('未请求成功，状态码为' + response.status)
-            }
-            response.json().then(json => {
-                return this.setState({userlist:json.result})
-            }
-            ).catch(error => {
-                this.setState({userlist: '不存在'})
-            })
-        }).catch(error => {
-        this.setState({userlist: '请求失败'})
-    });
+    showList = (status) => {
+        this.setState({
+            show: status
+        })
+    }
+
+    showCureentList = () => {
+        if (this.state.show === false) {
+            this.setState({show:true})
+        } else {
+            this.setState({show:false})
         }
-        const {userlist} =this.state;
-        const userlit=userlist?
-            <li>{userlist.list_name}</li>
-        :''
+    };
+
+    changeStatus = (newusername) => {
+        this.setState({
+            name:newusername
+        })
+    }
+
+    changeList = (newlist) => {
+        this.setState({
+            songlist:newlist
+        })
+    }
+
+    render() {
+        const userlist=this.state.songlist!==0?
+        this.state.songlist.map((list,index) => {
+             return <li key={index} className="user-list">{list.list_name}</li>
+         }):'';
+        
         return (
-           <nav>
-             {userlit}
-           </nav>
+           <div className="user">
+                <div className="user-login">
+                    <span className="person-name"  onClick={this.showCureentList}>{this.state.name}</span>
+               </div>
+               <span className="user-title">创建歌单 +</span>
+               <ul>
+                    {userlist}
+               </ul>
+               <Login showList={this.showList} show={this.state.show} initusername={this.state.name} callbackstatus={this.changeStatus} initsonglist={this.state.changeList} callback={this.changeList}/>
+           </div>
         )
     };
 }

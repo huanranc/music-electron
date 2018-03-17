@@ -10,8 +10,7 @@ class Login extends Component {
 			showList: false,
 			currenUserId:0,
 			username: this.props.initusername,
-			userid:0,
-			hasLogined:false,
+			userlist: this.props.initsonglist
         }
     }
 	
@@ -52,6 +51,7 @@ class Login extends Component {
 				response.json().then( json => {
 						if(json.status===200) {
 							this.setState({username:username});
+							this.props.callbackstatus(username)
 							     //先判断是否登录
 								 var myFetch = {
 									method: 'GET',
@@ -66,8 +66,33 @@ class Login extends Component {
 										response.json().then(json => {
 											this.setState({currenUserId:json})
 											let loginShow=this.state.currenUserId
-											console.log(loginShow)
-											localStorage.setItem('userid',loginShow)
+											console.log(this.props.setLogin(this.state.currenUserId))
+								let data='id=' + this.state.currenUserId
+								var myFetchOptions = {
+									method: 'POST',
+									mode:'cors',
+									headers: {
+										'Content-Type': 'application/x-www-form-urlencoded'
+									  },
+									credentials: 'include',
+									body:data
+								};
+								fetch("/user/list", myFetchOptions)
+            					.then(response => {
+               					 if (response.status !== 200) {
+                    				throw new Error('未请求成功，状态码为' + response.status)
+                				}
+                				response.json().then(json => {
+														this.setState({userlist:json.result})
+														this.props.callback(this.state.userlist)
+                				}
+                				).catch(error => {
+                    				this.setState({userlist: '不存在'})
+                				})
+           						 }).catch(error => {
+            					this.setState({userlist: '请求失败'})
+								});
+								
 										}
 										).catch(error => {
 											this.setState({currenUserId: ''})
@@ -75,7 +100,6 @@ class Login extends Component {
 									}).catch(error => {
 									this.setState({currenUserId: ''})
 								});
-							this.props.callbackstatus(username)
 							if (this.props.show === false) {
 								this.props.showList(true)
 							} else {
@@ -155,7 +179,11 @@ class Login extends Component {
 	}
 
     render() {
-		const {username} =this.state;
+		const {username,userlist} =this.state;
+        const userlit=userlist!==undefined?
+            userlist.list_name
+		:'';
+		console.log(userlit)
         return (
 			<CSSTransition in={this.props.show} classNames="fade" timeout={300}
 			onEnter={() => {
@@ -177,6 +205,7 @@ class Login extends Component {
 									<input ref="loginPassword" type="password" placeholder="请输入您的密码" />
 									</label>
 								<button>登录</button>
+								<div>{userlit}</div>
 							</form>
 						</div>
                     </div>
