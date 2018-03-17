@@ -1,6 +1,7 @@
 .user {
-  position: absolute;
+  position: fixed;
   box-sizing: border-box;
+  z-index: 999;
   top: 350px;
   left: 0;
   color: #9da0a7;
@@ -17,13 +18,13 @@
     .user-login {
       .person-name {
         cursor: pointer;
-        height: 38px;
-        line-height: 38px;
+        height: 28px;
+        line-height: 28px;
       }
     }
 
     .user-list {
-      height: 38px;
-      line-height: 38px;
+      height: 18px;
+      line-height: 18px;
     }
 }

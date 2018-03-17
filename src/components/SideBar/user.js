@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import Login from '../../containers/Login'
+import Login from '../../containers/Login';
+import CreateList from '../../components/CreateList/createlist';
 import './user.scss';
 
 class User extends Component {
@@ -8,13 +9,20 @@ class User extends Component {
         this.state = {
             show: false,
             name:'未登录',
-            songlist:[]
+            songlist:[],
+            create:false
         }
     }
 
     showList = (status) => {
         this.setState({
             show: status
+        })
+    }
+
+    changeStatus = (newusername) => {
+        this.setState({
+            name:newusername
         })
     }
 
@@ -26,9 +34,17 @@ class User extends Component {
         }
     };
 
-    changeStatus = (newusername) => {
+    showCreate = () => {
+        if(this.state.create === false) {
+            this.setState({create:true})
+        } else {
+            this.setState({create:false})
+        }
+    }
+
+    createList = (status) => {
         this.setState({
-            name:newusername
+            create: status
         })
     }
 
@@ -38,22 +54,31 @@ class User extends Component {
         })
     }
 
+    changeNewList = (newlist) =>{
+        this.setState({
+            songlist:newlist
+        })
+    }
+
+
+
     render() {
         const userlist=this.state.songlist!==0?
         this.state.songlist.map((list,index) => {
              return <li key={index} className="user-list">{list.list_name}</li>
          }):'';
-        
+        //console.log(userlist)
         return (
            <div className="user">
                 <div className="user-login">
                     <span className="person-name"  onClick={this.showCureentList}>{this.state.name}</span>
                </div>
-               <span className="user-title">创建歌单 +</span>
+               <span className="user-title" onClick={this.showCreate}>创建歌单 +</span>
                <ul>
                     {userlist}
                </ul>
                <Login showList={this.showList} show={this.state.show} initusername={this.state.name} callbackstatus={this.changeStatus} initsonglist={this.state.changeList} callback={this.changeList}/>
+               <CreateList createList={this.createList} create={this.state.create}  newsonglist={this.state.changeList}  callbacknew={this.changeList}/>
            </div>
         )
     };
