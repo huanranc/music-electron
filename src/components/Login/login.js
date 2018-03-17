@@ -8,7 +8,10 @@ class Login extends Component {
         super(props);
         this.state = {
 			showList: false,
-			username: this.props.initusername
+			currenUserId:0,
+			username: this.props.initusername,
+			userid:0,
+			hasLogined:false,
         }
     }
 	
@@ -20,12 +23,18 @@ class Login extends Component {
         }
     };
 
+	componentWillMount() {
+		if (localStorage.userid != '') {
+			this.setState({hasLogined: true});
+			this.setState({ userid: localStorage.userid});
+		}
+	}
+
 	loginAll = (e) => {
 		e.preventDefault();
 		let username = this.refs.loginName.value;
 		let password = this.refs.loginPassword.value;
 		let data = 'username=' + username + '&password=' + password; 
-		console.log(`username=${username}&password=${password}`);
 		var myFetchOptions = {
 			method: 'POST',
 			mode:'cors',
@@ -43,6 +52,29 @@ class Login extends Component {
 				response.json().then( json => {
 						if(json.status===200) {
 							this.setState({username:username});
+							     //先判断是否登录
+								 var myFetch = {
+									method: 'GET',
+									credentials: 'include',
+									mode:'cors'
+								};
+								fetch("/check", myFetch)
+									.then(response => {
+										if (response.status !== 200) {
+											throw new Error('未请求成功，状态码为' + response.status)
+										}
+										response.json().then(json => {
+											this.setState({currenUserId:json})
+											let loginShow=this.state.currenUserId
+											console.log(loginShow)
+											localStorage.setItem('userid',loginShow)
+										}
+										).catch(error => {
+											this.setState({currenUserId: ''})
+										})
+									}).catch(error => {
+									this.setState({currenUserId: ''})
+								});
 							this.props.callbackstatus(username)
 							if (this.props.show === false) {
 								this.props.showList(true)
@@ -76,7 +108,7 @@ class Login extends Component {
 		let password = this.refs.regPassword.value;
 		let aginpassword = this.refs.regAginPassword.value;
 		let data = 'username=' + username + '&password=' + password; 
-		console.log(`username=${username}&password=${password}`);
+		// console.log(`username=${username}&password=${password}`);
 		var myFetchOptions = {
 			method: 'POST',
 			mode:'cors',

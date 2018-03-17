@@ -1,8 +1,13 @@
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
 import './nav.scss';
+import User from '../../containers/User';
 
 class Nav extends Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <nav className="nav">
@@ -14,6 +19,7 @@ class Nav extends Component {
                     <li><NavLink to="/album">专辑</NavLink></li>
                     <li><NavLink to="/search">搜索</NavLink></li>
                 </ul>
+                <User/>
             </nav>
         )
     };

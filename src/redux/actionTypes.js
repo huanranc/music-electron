@@ -12,6 +12,9 @@ export const GET_LYC = 'GET_LYC';
 //设置是否播放状态
 export const SHOW_SONG = 'SHOW_SONG';
 
+//设置是否登录状态
+export const LOGIN = 'LOGIN';
+
 // //album
 // export const GET_AlBUM_LIST='GET_AlBUM_LIST'
 
