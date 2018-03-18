@@ -105,7 +105,12 @@ class Login extends Component {
                                 this.props.createList(false)
                                 }
                            }else {
-                               alert("创建失败")
+                               alert("歌单名重复");
+                               if (this.props.create === false) {
+                                this.props.createList(true)
+                                } else {
+                                this.props.createList(false)
+                                }
                            }
                         })
                     })

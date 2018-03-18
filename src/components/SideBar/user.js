@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Login from '../../containers/Login';
+import {Link} from 'react-router-dom';
 import CreateList from '../../components/CreateList/createlist';
 import './user.scss';
 
@@ -10,7 +11,8 @@ class User extends Component {
             show: false,
             name:'未登录',
             songlist:[],
-            create:false
+            create:false,
+            currenUserId:0,
         }
     }
 
@@ -60,12 +62,71 @@ class User extends Component {
         })
     }
 
+    //删除歌单
+    deleList=(id,e) => {
+        // console.log(id);
+        var myFetchOptions = {
+            method: 'DELETE',
+            mode:'cors',
+            headers: {
+                'Content-Type': 'application/json'
+                },
+            credentials: 'include'
+        };
+        fetch('/user/list/del'+id,myFetchOptions)
+            .then(response => {
+                if (response.status !== 200) {
+                    throw new Error('未请求成功，状态码为' + response.status)
+                }
+                response.json().then(json => {
+                    //先判断是否登录
+                    var myFetch = {
+                        method: 'GET',
+                        credentials: 'include',
+                        mode: 'cors'
+                    };
+                    fetch("/check", myFetch).then(response => {
+                        if (response.status !== 200) {
+                            throw new Error('未请求成功，状态码为' + response.status)
+                        }
+                        response.json().then(json => {
+                                this.setState({currenUserId: json.user_id});
+                                let data='id=' + this.state.currenUserId
+									var myFetchOptions = {
+										method: 'POST',
+										mode:'cors',
+										headers: {
+											'Content-Type': 'application/x-www-form-urlencoded'
+											},
+										credentials: 'include',
+										body:data
+                                    };
+                                    fetch("/user/list", myFetchOptions)
+                                            .then(response => {
+                                                if (response.status !== 200) {
+                                                    throw new Error('未请求成功，状态码为' + response.status)
+                                                }
+                                                response.json().then(json => {
+                                                        this.setState({songlist: json.result})
+                                                    })
+                                                    .catch(error => {
+                                                        this.setState({songlist: '不存在'})
+                                                    })
+                                            }).catch(error => {
+                                                this.setState({songlist: '请求失败'})
+									});
+                            })
+                    })
+            })
+    })
+}
+
 
 
     render() {
         const userlist=this.state.songlist!==0?
         this.state.songlist.map((list,index) => {
-             return <li key={index} className="user-list">{list.list_name}</li>
+             return <li key={index} className="user-list"><Link to={`/albums/${list.id}`}>{list.list_name}</Link>{index===0?'':<i className="icon-删除 createlist-dele" onClick={this.deleList.bind(this,list.id)}></i>}</li>
          }):'';
         //console.log(userlist)
         return (
