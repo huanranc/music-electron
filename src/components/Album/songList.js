@@ -2,7 +2,10 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import SongDetails from './songDetail';
 import Loading from '../../commpon/Loading/loading';
+import { Menu, Dropdown, Icon } from 'antd';
 import './songlist.scss';
+import 'antd/dist/antd.css';
+
 
 class SongList extends Component {
     constructor(props) {
@@ -79,6 +82,19 @@ class SongList extends Component {
 
 
     render() {
+        const menu = (
+            <Menu>
+              <Menu.Item>
+                <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">1st menu item</a>
+              </Menu.Item>
+              <Menu.Item>
+                <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">2nd menu item</a>
+              </Menu.Item>
+              <Menu.Item>
+                <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">3rd menu item</a>
+              </Menu.Item>
+            </Menu>
+          );
         const {songs} = this.state;
         const songslist = songs.length ?
             songs[0].map((song, index) => {
@@ -103,6 +119,11 @@ class SongList extends Component {
           }
                         <a onClick={this.selectSong(song, songs[0])}><i className="icon-play"></i></a>
                         <a onClick={this.collectSong(song)}><i className="icon-addMusic"></i></a>
+                        <Dropdown overlay={menu}>
+                            <a className="ant-dropdown-link" href="#">
+                                 Hover me <Icon type="down" />
+                            </a>
+                        </Dropdown>
           </span>
                     <span className="song-art-name">
             <Link to={`artists/${song.artId}`}>
