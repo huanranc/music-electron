@@ -93,9 +93,6 @@ class SongList extends Component {
                           发行时间：{this.timeCreate((song.createTime))}
                         </span>
                         </p>
-                        <div className="intr-control">
-                            <a className="bk-collect">收藏</a>
-                        </div>
                         {song.description !== null ?
                             <div className="intr-desc">
                                 <span>专辑介绍：</span>

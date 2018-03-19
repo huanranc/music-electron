@@ -66,7 +66,7 @@ class User extends Component {
     deleList=(id,e) => {
         // console.log(id);
         var myFetchOptions = {
-            method: 'DELETE',
+            method: 'PATCH',
             mode:'cors',
             headers: {
                 'Content-Type': 'application/json'

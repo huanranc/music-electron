@@ -71,6 +71,13 @@ class SongList extends Component {
         // console.log(this.state.songs[0][0])
     }
 
+    collectSong(song) {
+        return (e) => {
+            console.log(song)
+        }
+    }
+
+
     render() {
         const {songs} = this.state;
         const songslist = songs.length ?
@@ -95,6 +102,7 @@ class SongList extends Component {
             </span>
           }
                         <a onClick={this.selectSong(song, songs[0])}><i className="icon-play"></i></a>
+                        <a onClick={this.collectSong(song)}><i className="icon-addMusic"></i></a>
           </span>
                     <span className="song-art-name">
             <Link to={`artists/${song.artId}`}>
