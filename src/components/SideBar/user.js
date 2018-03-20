@@ -126,7 +126,7 @@ class User extends Component {
     render() {
         const userlist=this.state.songlist!==0?
         this.state.songlist.map((list,index) => {
-             return <li key={index} className="user-list"><Link to={`/albums/${list.id}`}>{list.list_name}</Link>{index===0?'':<i className="icon-删除 createlist-dele" onClick={this.deleList.bind(this,list.id)}></i>}</li>
+             return <li key={index} className="user-list"><Link to={`/userlist/${list.id}`}>{list.list_name}</Link>{index===0?'':<i className="icon-删除 createlist-dele" onClick={this.deleList.bind(this,list.id)}></i>}</li>
          }):'';
         //console.log(userlist)
         return (
