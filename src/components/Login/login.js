@@ -12,7 +12,73 @@ class Login extends Component {
 			username: this.props.initusername,
 			userlist: this.props.initsonglist
         }
-    }
+		}
+		
+		componentDidMount() {
+		 //先判断是否登录
+									 var myFetch = {
+										method: 'GET',
+										credentials: 'include',
+										mode:'cors'
+									};
+									fetch("/check", myFetch)
+										.then(response => {
+											if (response.status !== 200) {
+												throw new Error('未请求成功，状态码为' + response.status)
+											}
+											response.json().then(json => {
+												this.setState({currenUserId:json.user_id})
+												let loginShow=this.state.currenUserId
+												console.log(loginShow)
+									let data='id=' + this.state.currenUserId;
+									var myFetchOptions = {
+										method: 'POST',
+										mode:'cors',
+										headers: {
+											'Content-Type': 'application/x-www-form-urlencoded'
+											},
+										credentials: 'include',
+										body:data
+									};
+									fetch("/user", myFetchOptions)
+												.then(response => {
+														if (response.status !== 200) {
+															throw new Error('未请求成功，状态码为' + response.status)
+													}
+													response.json().then(json => {
+															this.setState({username:json.username});
+															this.props.callbackstatus(this.state.username);
+													}
+													).catch(error => {
+															this.setState({username: ''})
+													})
+													}).catch(error => {
+												this.setState({username: ''})
+									});
+									fetch("/user/list", myFetchOptions)
+												.then(response => {
+														if (response.status !== 200) {
+															throw new Error('未请求成功，状态码为' + response.status)
+													}
+													response.json().then(json => {
+															this.setState({userlist:json.result})
+															this.props.callback(this.state.userlist)
+													}
+													).catch(error => {
+															this.setState({userlist: ''})
+													})
+													}).catch(error => {
+												this.setState({userlist: ''})
+									});
+									
+											}
+											).catch(error => {
+												this.setState({currenUserId: ''})
+											})
+										}).catch(error => {
+										this.setState({currenUserId: ''})
+									});
+		}
 	
 	showCureentList = () => {
         if (this.props.show === false) {
@@ -44,7 +110,7 @@ class Login extends Component {
 					response.json().then( json => {
 							if(json.status===200) {
 								this.setState({username:username});
-								this.props.callbackstatus(username)
+								this.props.callbackstatus(username);
 										 //先判断是否登录
 									 var myFetch = {
 										method: 'GET',

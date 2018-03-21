@@ -16,7 +16,7 @@ import store from "./redux/store";
 import './commpon/css/normalize.css';
 import './components/Style/global.scss';
 import Search from './components/Search/search';
-import UserList from './components/UserList/userlist';
+import UserList from './containers/UserList';
 
 const App = () => {
     return (

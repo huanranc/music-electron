@@ -20,7 +20,7 @@ class SongList extends Component {
     }
 
     componentDidMount() {
-        const date = []
+        const date = [];
         var myFetchOptions = {
             method: 'GET'
         };
