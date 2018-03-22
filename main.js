@@ -27,11 +27,11 @@ function openWindow(filePath, options, isMax) {
     options = Object.assign(
         {
             width: 1024,
-            height: 630,
+            height: 840,
             minwidth: 1024,
-            minheight: 630,
+            minheight: 840,
             maxwidth: 1024,
-            maxheight: 630,
+            maxheight: 840,
             center: true,
             show: false,
             autoHideMenuBar: true

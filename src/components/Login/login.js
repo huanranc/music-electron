@@ -40,7 +40,8 @@ class Login extends Component {
 										credentials: 'include',
 										body:data
 									};
-									fetch("/user", myFetchOptions)
+									if(loginShow!==undefined) {
+										fetch("/user", myFetchOptions)
 												.then(response => {
 														if (response.status !== 200) {
 															throw new Error('未请求成功，状态码为' + response.status)
@@ -69,7 +70,7 @@ class Login extends Component {
 													})
 													}).catch(error => {
 												this.setState({userlist: ''})
-									});
+									});}
 									
 											}
 											).catch(error => {

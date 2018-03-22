@@ -92,9 +92,6 @@ class SongList extends Component {
                                 {this.timeCreate((song.createTime))} 创建
                             </div>
                         </div>
-                        <div className="intr-control">
-                            <a className="bk-collect">收藏</a>
-                        </div>
                         <div className="intr-tag intr-desc">
                             <span>标签：</span>
                             <span>{song.tags.map(item => {

@@ -1,26 +1,22 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import Loading from '../../commpon/Loading/loading';
+import UserList from './userlist';
 
 class SongList extends Component {
     constructor(props) {
         super(props);
         this.state = {
             result: [],
-            songId: '',
-            loading: true,
-            id:this.props.match.params.id
+            songId: ''
         }
     }
 
     componentDidMount() {
-      this.loadlists()
+      this.loadlists();
     }
 
-
     loadlists() {
-      let data='list_id=' + this.state.id;
-      console.log(data)
+      let data='list_id=' +this.props.match.params.id;
       let date=[];
       var myFetchOptions = {
         method: 'POST',
@@ -52,10 +48,14 @@ class SongList extends Component {
                   })
               })
           ).catch(error => {
-                    this.setState({result: ''})
+                    this.setState({
+                        result: ''
+                    })
                 })
             }).catch(error => {
-            this.setState({result: ''})
+            this.setState({
+                result: ''
+            })
         });
     }
 
@@ -109,10 +109,12 @@ class SongList extends Component {
           </span>
                     <span className="song-al-name">{songs.alName}</span>
                     <span className="song-dt">{this.timeDt(songs.dt)}</span>
+                    <span><i className="icon-删除 createlist-dele" onClick={this.showCureentList}></i></span>
                 </li>
-            }) : <Loading title="正在加载..." show={this.state.loading} />;
+            }) : '你还没有添加歌曲哦~';
         return (
             <div className="new-ablum">
+                <UserList id={this.props.match.params.id}/>
                 <div className="list">
                     <div className="song-list">
                         <ul className="songlist">
@@ -123,6 +125,7 @@ class SongList extends Component {
                                 <span className="song-art-name title">歌手</span>
                                 <span className="song-al-name title">专辑名</span>
                                 <span className="song-dt title">时长</span>
+                                <span className="song-control title">操作</span>
                             </li>
                             {songslist}
                         </ul>

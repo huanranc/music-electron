@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Login from '../../containers/Login';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import CreateList from '../../components/CreateList/createlist';
 import './user.scss';
 
@@ -126,13 +126,19 @@ class User extends Component {
     render() {
         const userlist=this.state.songlist!==0?
         this.state.songlist.map((list,index) => {
-             return <li key={index} className="user-list"><Link to={`/userlist/${list.id}`}>{list.list_name}</Link>{index===0?'':<i className="icon-删除 createlist-dele" onClick={this.deleList.bind(this,list.id)}></i>}</li>
+             return <li key={index} className="user-list"><NavLink to={`/userlist/${list.id}`}>{list.list_name}</NavLink>{index===0?'':<i className="icon-删除 createlist-dele" onClick={this.deleList.bind(this,list.id)}></i>}</li>
          }):'';
         //console.log(userlist)
         return (
            <div className="user">
                 <div className="user-login">
                     <span className="person-name"  onClick={this.showCureentList}>{this.state.name}</span>
+                    {
+                        this.state.name !=='未登录'?
+                        <span className="pserson-text"> 编辑</span>
+                        :
+                        ""
+                    }
                </div>
                <span className="user-title" onClick={this.showCreate}>创建歌单 +</span>
                <ul>

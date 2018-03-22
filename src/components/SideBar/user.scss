@@ -1,5 +1,6 @@
 .user {
   position: fixed;
+  width: 100px;
   box-sizing: border-box;
   z-index: 999;
   top: 350px;
@@ -24,7 +25,30 @@
     }
 
     .user-list {
-      height: 18px;
-      line-height: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 38px;
+      line-height: 38px;
+      a {
+        position: relative;
+        color: #9da0a7;
+        &.active {
+          color: #fff;
+          &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -18px;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to left, #6666ff, #fff);
+            box-shadow: 1px 1px 30px;
+          }
+        }
+      }
+      a:focus {
+        text-decoration: none;
+      }
     }
 }
