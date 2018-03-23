@@ -2,6 +2,7 @@
   "name": "music-electron",
   "version": "0.1.0",
   "main": "main.js",
+  "author": "huanranc",
   "private": true,
   "homepage": ".",
   "dependencies": {

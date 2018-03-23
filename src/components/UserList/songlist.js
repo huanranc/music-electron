@@ -34,6 +34,7 @@ class SongList extends Component {
                 }
                 response.json().then(json => json.result.map(item => {
                   let newItem = {};
+                  newItem.Id=item.id
                   newItem.id = item.song_id
                   newItem.name = unescape(item.song_name)
                   newItem.alId = item.al_id
@@ -82,15 +83,29 @@ class SongList extends Component {
         }
     }
 
+    deletSong =(id,e) => {
+        var myFetchOptions = {
+            method: 'PATCH',
+            mode:'cors',
+            headers: {
+                'Content-Type': 'application/json'
+                },
+            credentials: 'include'
+        };
+        fetch('/user/song/del'+id,myFetchOptions)
+            .then(response => {
+                if (response.status !== 200) {
+                    throw new Error('未请求成功，状态码为' + response.status)
+                }
+                this.loadlists();
+            })
+    }
+
 
     render() {
         const {result} = this.state;
         const songslist = result.length ?
             result[0].map((songs, index) => {
-                // let arlist=songs.ar.length?
-                // songs.ar.map((ar,index) => {
-                //   ar.name
-                // }):'...'
                 return <li key={index}
                 >
        <span className="song-number">{
@@ -109,7 +124,7 @@ class SongList extends Component {
           </span>
                     <span className="song-al-name">{songs.alName}</span>
                     <span className="song-dt">{this.timeDt(songs.dt)}</span>
-                    <span><i className="icon-删除 createlist-dele" onClick={this.showCureentList}></i></span>
+                    <span><i className="icon-删除 createlist-dele" onClick={this.deletSong.bind(this,songs.Id)}></i></span>
                 </li>
             }) : '你还没有添加歌曲哦~';
         return (

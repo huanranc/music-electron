@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
 class UserList extends Component {
     constructor(props) {
@@ -112,9 +113,10 @@ class UserList extends Component {
                                 {this.timeCreate((message.add_time))} 创建
                             </div>
                         </div>
-                        <div className="intr-control">
-                                <a className="bk-collect">编辑</a>
-                        </div>
+                       {message.list_name==='我喜欢的音乐'?
+                       '': <div className="intr-control">
+                       <Link to={`/edit/${message.id}`}><a className="bk-collect">编辑</a></Link>
+                   </div>}
                     </div>
                  </div>
         }):'';
