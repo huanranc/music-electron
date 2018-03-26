@@ -226,7 +226,7 @@ class Play extends Component {
                 </Link>
                 <div className="play-control">
                     <a onClick={this.previous} href="javascript:void(0)" className="prev-btn"><span
-                        className="icon-text icon-back "></span></a>
+                        className="icon-text icon-forward "></span></a>
                     {
                         this.state.isPlay ?
                             <a onClick={this.playState} href="javascript:void(0)" className="stop-btn"><span
@@ -236,7 +236,7 @@ class Play extends Component {
                                 className="icon-text icon-play"></span></a>
                     }
                     <a onClick={this.next} href="javascript:void(0)" className="next-btn"><span
-                        className="icon-text icon-forward"></span></a>
+                        className="icon-text icon-next"></span></a>
                 </div>
                 <div className="progress-song">
                     <span className="song-txt">{this.props.currentSong.name}</span>
