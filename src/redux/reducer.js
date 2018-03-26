@@ -11,7 +11,8 @@ const initialState = {
     currentTime: 0,
     showSong: false,
     //album
-    album: []
+    album: [],
+    login: 0
 };
 
 //拆分reducer
@@ -60,6 +61,16 @@ function songList(state = initialState.songs, action) {
     }
 }
 
+//得到当前登录状态
+function Login(state = initialState.login, action) {
+    switch (action.type) {
+        case actionType.LOGIN:
+            return action.login
+        default:
+            return state
+    }
+}
+
 // //ablum
 
 // function albumList(state=initialState.album,action) {
@@ -78,7 +89,8 @@ const musicReducer = combineReducers({
     song,
     songList,
     currentTime,
-    showSong
+    showSong,
+    Login
 })
 
 export default musicReducer;

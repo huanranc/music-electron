@@ -1,0 +1,32 @@
+.createlist {
+  position: relative;
+  top: -250px;
+  left: 350px;
+  width: 300px;
+  height: 100px;
+  border: 1px solid #6666ff;
+  z-index: 2;
+  background-color: #fff;
+  .createlist-dele {
+    float: right;
+    padding: 2px;
+  }
+}
+
+.fade-enter {
+  opacity: 0.01;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-out;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit.fade-exit-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}

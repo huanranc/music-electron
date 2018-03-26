@@ -16,6 +16,8 @@ import store from "./redux/store";
 import './commpon/css/normalize.css';
 import './components/Style/global.scss';
 import Search from './components/Search/search';
+import UserList from './containers/UserList';
+import EditUser from './components/UserList/edituser';
 
 const App = () => {
     return (
@@ -35,6 +37,8 @@ const App = () => {
                             <Route path="/albums/:id" component={SongList} />
                             <Route path="/songs" component={Song} />
                             <Route path="/search" component={Search} />
+                            <Route path="/userlist/:id" component={UserList} />
+                            <Route path="/edit/:id" component={EditUser} />
                             <Redirect from="/" to="/discover" />
                             <Route component={Discover} />
                         </Switch>

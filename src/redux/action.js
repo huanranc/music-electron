@@ -41,6 +41,15 @@ export function setShowSong(showSong) {
     }
 }
 
+
+//设置当前是否登录
+export function setLogin(login) {
+    return {
+        type: actionType.LOGIN,
+        login
+    }
+}
+
 // //album
 // export function fetchAlbum(){
 //   return async dispatch => {

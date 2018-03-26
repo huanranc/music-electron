@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import './album.scss';
-import {fetchAlbum} from '../../redux/action';
 import Loading from '../../commpon/Loading/loading';
 import LazyLoad from "react-lazyload";
 

@@ -110,7 +110,14 @@
 }
 
 .song-list .song-dt {
-  width: 15%;
+  width: 12%;
+  text-align: center;
+  color: #191919;
+  font-size: 0.8rem;
+}
+
+.song-list .song-control {
+  width: 3%;
   text-align: center;
   color: #191919;
   font-size: 0.8rem;

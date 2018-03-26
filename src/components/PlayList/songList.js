@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import SongDetails from './songDetail';
+import { Menu, Dropdown, Icon } from 'antd';
 import Loading from '../../commpon/Loading/loading';
 import './songlist.scss';
 
@@ -11,6 +12,9 @@ class SongList extends Component {
             tracks: [],
             songId: '',
             loading: true,
+            currenUserId:0,
+            songlist:[],
+            collect:''
         }
     }
 
@@ -46,6 +50,52 @@ class SongList extends Component {
             }).catch(error => {
             this.setState({tracks: ''})
         });
+
+        //先判断是否登录
+        var myFetch = {
+            method: 'GET',
+            credentials: 'include',
+            mode:'cors'
+        };
+        var myFetch = {
+            method: 'GET',
+            credentials: 'include',
+            mode:'cors'
+        };
+        fetch("/check", myFetch)
+            .then(response => {
+                if (response.status !== 200) {
+                    throw new Error('未请求成功，状态码为' + response.status)
+                }
+                response.json().then(json => {
+                    this.setState({currenUserId:json.user_id})
+                    let loginShow=this.state.currenUserId
+                    let data='id=' + this.state.currenUserId
+                    var myFetchOptions = {
+                        method: 'POST',
+                        mode:'cors',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                            },
+                        credentials: 'include',
+                        body:data
+                    };
+                    fetch("/user/list", myFetchOptions)
+                                            .then(response => {
+                                                    if (response.status !== 200) {
+                                                        throw new Error('未请求成功，状态码为' + response.status)
+                                                }
+                                                response.json().then(json => {
+                                                        this.setState({songlist:json.result})
+                                                }
+                                                ).catch(error => {
+                                                        this.setState({userlist: '不存在'})
+                                                })
+                                                }).catch(error => {
+                                            this.setState({songlist: '请求失败'})
+                                });
+                })
+            })
     }
 
     // timeDt(time) {
@@ -99,9 +149,72 @@ class SongList extends Component {
     }
 
 
+        //收藏歌曲
+        collectSong(id) {
+            return (e) => {
+                let song_id=this.state.collect.id;
+                let song_name=this.state.collect.name;
+                let list_id=id;
+                let art_id=this.state.collect.artId;
+                let art_name=this.state.collect.artName;
+                let al_name=this.state.collect.alName;
+                let al_id=this.state.collect.alId;
+                let dt=this.state.collect.dt;
+                let picUrl=this.state.collect.picUrl;
+                let data ='user_id=' + this.state.currenUserId +'&song_id='+song_id +'&song_name='+song_name+'&list_id='+list_id+'&art_id='+art_id+ '&art_name='+art_name + '&al_id='+art_id +'&al_name='+art_name +'&dt='+dt+'&picUrl='+picUrl; 
+                console.log(data)
+                var myFetchOptions = {
+                    method: 'POST',
+                    mode:'cors',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                    credentials: 'include',
+                    body:data
+                };
+                fetch("/collection",myFetchOptions)
+                        .then(response => {
+                            if (response.status !== 200) {
+                                throw new Error('未请求成功，状态码为' + response.status)
+                            }
+                            response.json().then(json => {
+                                console.log(json.status)
+                                if(json.status===200) {
+                                    alert('收藏成功')
+                                } else if(json.status===201){
+                                    alert('歌曲已存在')
+                                }
+                            })
+                        })
+                    }
+    
+        }
+        
+    
+        collect(song) {
+            return (e) => {
+               this.setState({
+                   collect:song
+               })
+            };
+        }
+    
+
+
     render() {
         // const list =this.props.match.params.id;
-        const {tracks} = this.state;
+        const {tracks,songlist} = this.state;
+        const lists=this.state.songlist!==0?
+        this.state.songlist.map((list,index) => {
+            return  <Menu.Item key={index}>
+                        <a className="ant-dropdown-link"  onClick={this.collectSong(list.id)}>{list.list_name}</a>
+                    </Menu.Item>
+        }):''
+        const menu = (
+            <Menu>
+                {lists}
+            </Menu>
+          );
         const songslist = tracks.length ?
             tracks[0].map((songs, index) => {
                 // let arlist=songs.ar.length?
@@ -117,6 +230,9 @@ class SongList extends Component {
               {songs.name}
           </span>
                     <a onClick={this.selectSong(songs, tracks[0])}><i className="icon-play"></i></a>
+                    <Dropdown overlay={menu} trigger={['click']}>
+                            <a><i className="icon-addMusic" onClick={this.collect(songs)}></i></a>
+                        </Dropdown>
                     <span className="song-art-name">
             <Link to={`artists/`}>
               {

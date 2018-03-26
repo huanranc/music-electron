@@ -1,4 +1,4 @@
-$sidebar-bg: #222326;
+$sidebar-bg: #1b1b33;
 $color-white: #ffffff;
 $color-border: #e1e1e2;
 
@@ -11,7 +11,7 @@ body {
 
 .wrap {
   width: 100%;
-  min-height: 630px;
+  min-height: 890px;
   height: 100%;
   display: flex;
   flex-direction: row;
@@ -36,7 +36,7 @@ body {
   }
   .wrap-body {
     position: relative;
-    min-height: 630px;
+    min-height: 890px;
     flex: 1;
     background: #fafafa;
     display: flex;
@@ -52,4 +52,9 @@ body {
       border-bottom: 1px solid #e1e1e2;
     }
   }
+}
+
+img {
+  width: 100%;
+  height: 100%;
 }
