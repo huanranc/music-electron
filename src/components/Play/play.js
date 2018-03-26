@@ -22,7 +22,7 @@ class Play extends Component {
         //当前播放位置
         this.currentIndex = 0;
         //播放模式  单曲  随机  循环
-        this.Modes = ["singCircle", "random", "listCycle"];
+        this.Modes = ["singCircle", "random", "refresh"];
 
         this.state = {
             isPlay: false,
@@ -248,7 +248,7 @@ class Play extends Component {
                     <a href="javascript:void(0)" onClick={this.changeModes}><span
                         className={`icon-${this.Modes[this.state.currentMode]} icon-text`}></span></a>
                     <a href="javascript:void(0)" onClick={this.showCureentList}><span
-                        className="icon-list icon-text"></span></a>
+                        className="icon-music_list icon-text"></span></a>
                 </div>
                 <audio preload="true" onCanPlay={this.controlAllAudio} onTimeUpdate={this.controlAudio}
                        onEnded={this.controlEnd} ref={(audio) => {
