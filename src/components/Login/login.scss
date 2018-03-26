@@ -3,19 +3,22 @@
   top: -350px;
   left: 350px;
   width: 300px;
-  height: 400px;
-  border: 1px solid #6666ff;
+  height: 420px;
   z-index: 999999;
-  background-color: #fff;
+  background: #fff;
+  border-radius: .286rem;
+  border: 1px solid #6666ff;
   .login-dele {
     float: right;
     padding: 2px;
+    cursor: pointer;
   }
   .search-tab {
     width: 100%;
     margin: 10px auto;
     border-bottom: 1px solid #c9c8c8;
     .tab-sub {
+      cursor: pointer;
       display: inline-block;
       margin-right: 20px;
       width: auto;
@@ -39,6 +42,7 @@
   .search-result {
     width: 100%;
     margin: 10px auto;
+    padding: 50px 40px 40px;
     .tab-item {
       display: none;
       opacity: 0;
@@ -46,6 +50,74 @@
     .show {
       display: block;
       opacity: 1;
+    }
+    .form-material.floating {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .form-material {
+      position: relative;
+    }
+    .form-material {
+      .form-control {
+        padding-right: 0;
+        padding-left: 0;
+        background-image: linear-gradient(#667afa,#667afa),linear-gradient(#e4eaec,#e4eaec);
+        background-position: center bottom,center calc(100% - 1px);
+        background-size: 0 2px,100% 1px;
+        float: none;
+        border: 0;
+        border-radius: 0;
+        background-repeat: no-repeat;
+        background-color: transparent;
+        &:focus {
+          background-image: linear-gradient(#667afa, #667afa),
+          linear-gradient(#e4eaec, #e4eaec);
+          background-size: 100% 2px,100% 1px;
+          outline: 0;
+          transition-duration: .3s;
+        }
+        &:focus~.floating-label {
+          color: #667afa;
+          font-weight: 500;
+          top: -.8rem;
+          font-size: .8rem;
+        }
+      }
+    }
+    .form-material .form-control~.floating-label {
+      top: .571429rem;
+      font-size: 1rem;
+      color: #a3afb7;
+      font-weight: 300;
+    }
+    .form-material .floating-label {
+      position: absolute;
+      left: 0;
+      pointer-events: none;
+    }
+    .form-control {
+      width: 100%;
+      padding: .429rem 1rem;
+      color: #76838f;
+      box-sizing: border-box;
+      height: 2.573rem;
+      font-size: 1rem;
+      background-clip: padding-box;
+    }
+    .login-btn {
+      width: 100%;
+      text-align: center;
+      background-color: #667afa;
+      border-color: #667afa;
+      color: #fff;
+      padding: .715rem 1.286rem;
+      font: 400 13.3333px Arial;
+      line-height: 1.333333;
+      border-radius: .286rem;
+      border: none;
+      margin-top: 40px;
+      cursor: pointer;
     }
   }
 }

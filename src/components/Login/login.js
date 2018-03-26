@@ -257,29 +257,34 @@ class Login extends Component {
                     <div name="登录">
                         <div>
 							<form onSubmit={this.loginAll}>
-								<label>
-									<input ref="loginName" placeholder="请输入您的账号"/>
-								</label>
-								<label>
-									<input ref="loginPassword" type="password" placeholder="请输入您的密码" />
-									</label>
-								<button>登录</button>
+								<div className="form-material floating">
+									<input className="form-control empty" ref="loginName"/>
+									<label className="floating-label">用户名</label>
+								</div>
+								<div className="form-material floating">
+									<input className="form-control empty" ref="loginPassword" type="password"/>
+									<label className="floating-label">密码</label>
+								</div>
+								<button className="login-btn">登录</button>
 							</form>
 						</div>
-                    </div>
-                    <div name="注册">
+          </div>
+        		 <div name="注册">
                         <div>
 							<form  onSubmit={this.registerAll}>
-								<label>
-									<input ref="regName" placeholder="请输入您的账号" />
-								</label>
-								<label>
-									<input ref="regPassword" type="password" placeholder="请输入您的密码" />
-								</label>
-								<label>
-									<input ref="regAginPassword" type="password" placeholder="请输入您的密码" />
-								</label>
-								<button>注册</button>
+								<div className="form-material floating">
+									<input className="form-control empty" ref="regName" />
+									<label className="floating-label">用户名</label>
+								</div>
+								<div className="form-material floating">
+									<input className="form-control empty" ref="regPassword" type="password"/>
+									<label className="floating-label">密码</label>
+								</div>
+								<div className="form-material floating">
+									<input className="form-control empty" ref="regPassword" type="password"/>
+									<label className="floating-label">重复密码</label>
+								</div>
+								<button className="login-btn">注册</button>
 							</form>
 						</div>
                     </div>

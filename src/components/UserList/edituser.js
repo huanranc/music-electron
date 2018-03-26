@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {withRouter} from "react-router-dom";
+import './edituser.scss';
 
 class EditUser extends Component {
   constructor(props) {
@@ -30,18 +32,32 @@ class EditUser extends Component {
           }
           response.json().then(json => {})
         })
+
+    this.props.history.push(`/userlist/${id}`);
+  }
+
+  cancel=(id,e)=>{
+    this.props.history.push(`/userlist/${id}`);
   }
     render() {
       return (
         <div className="content-layout">
             <div className="discover-list">
+            <div className="edituser">
                 <h3 className="top-title">编辑歌单信息</h3>
-                <label>歌单名称：</label><input ref="listname" type="text" />
-                <button onClick={this.updateEdit.bind(this,this.state.id)}>保存</button><button>取消</button>
+                <div className="form-group">
+                    <label className="form-control-label">歌单名称</label>
+                    <input className="form-control" ref="listname" type="text" />
+                </div>
+                <div className="btn">
+                <button className="edituser-btn" onClick={this.updateEdit.bind(this,this.state.id)}>保存</button>
+                <button className="edituser-btn" onClick={this.cancel.bind(this,this.state.id)}>取消</button>
+                </div>
+            </div>
             </div>
         </div>
     );
     }
 };
 
-export default EditUser;
+export default withRouter(EditUser);

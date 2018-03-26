@@ -1,15 +1,91 @@
 .createlist {
   position: relative;
+  padding: 10px 5px 5px;
   top: -250px;
   left: 350px;
   width: 300px;
-  height: 100px;
+  height: 130px;
   border: 1px solid #6666ff;
+  border-radius: .286rem;
   z-index: 2;
   background-color: #fff;
   .createlist-dele {
     float: right;
-    padding: 2px;
+    cursor: pointer;
+  }
+  .form-material.floating {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .form-material {
+    position: relative;
+  }
+  .form-material {
+    .form-control {
+      padding-right: 0;
+      padding-left: 0;
+      background-image: linear-gradient(#667afa,#667afa),linear-gradient(#e4eaec,#e4eaec);
+      background-position: center bottom,center calc(100% - 1px);
+      background-size: 0 2px,100% 1px;
+      float: none;
+      border: 0;
+      border-radius: 0;
+      background-repeat: no-repeat;
+      background-color: transparent;
+      &:focus {
+        background-image: linear-gradient(#667afa, #667afa),
+        linear-gradient(#e4eaec, #e4eaec);
+        background-size: 100% 2px,100% 1px;
+        outline: 0;
+        transition-duration: .3s;
+      }
+      &:focus~.floating-label {
+        color: #667afa;
+        font-weight: 500;
+        top: -.8rem;
+        font-size: .8rem;
+      }
+    }
+  }
+  .form-material .form-control~.floating-label {
+    top: .571429rem;
+    font-size: 1rem;
+    color: #a3afb7;
+    font-weight: 300;
+  }
+  .form-material .floating-label {
+    position: absolute;
+    left: 0;
+    pointer-events: none;
+  }
+  .form-control {
+    width: 100%;
+    padding: .429rem 1rem;
+    color: #76838f;
+    box-sizing: border-box;
+    height: 2.573rem;
+    font-size: 1rem;
+    background-clip: padding-box;
+  }
+  .btn {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    margin-top: 15px;
+    .create-btn {
+      display: inline-block;
+      text-align: center;
+      background-color: #667afa;
+      border-color: #667afa;
+      color: #fff;
+      padding: .7rem 1.2rem;
+      font: 400 13px Arial;
+      line-height: 1;
+      border-radius: .286rem;
+      border: none;
+      cursor: pointer;
+      margin: 0 10px;
+    }
   }
 }
 

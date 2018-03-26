@@ -147,11 +147,14 @@ class Login extends Component {
         <div  style={this.state.createList === true ? {display: "block"} : {display: "none"}} className="createlist">
 				<i className="icon-删除 createlist-dele" onClick={this.showCureentList}></i>
 					<form>
-								<label>
-									<input ref="createName" placeholder="歌单标题"/>
-								</label>
-								<button onClick={this.createSongList}>新建</button>
-                <button onClick={this.chanclSongList}>取消</button>
+                    <div className="form-material floating">
+							<input className="form-control empty" ref="createName" type="text"/>
+                     <label className="floating-label">歌单标题</label>
+					</div>
+                    <div className="btn">
+                        <button className="create-btn" onClick={this.createSongList}>新建</button>
+                        <button className="create-btn" onClick={this.chanclSongList}>取消</button>
+                    </div>
 					</form>
         </div>
 			</CSSTransition>	

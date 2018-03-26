@@ -15,7 +15,7 @@ import {Provider} from "react-redux";
 import store from "./redux/store";
 import './commpon/css/normalize.css';
 import './components/Style/global.scss';
-import Search from './components/Search/search';
+import Search from './containers/Search';
 import UserList from './containers/UserList';
 import EditUser from './components/UserList/edituser';
 

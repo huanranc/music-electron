@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import TabControl from '../Tabs/tabControl';
 import './search.scss'
 
@@ -38,6 +39,7 @@ class Search extends Component {
                         newItem.alName = item.album.name
                         newItem.artName = item.artists[0].name
                         newItem.artId = item.artists[0].id
+                        newItem.picUrl=item.artists[0].img1v1Url
                         date.push(newItem)
                         return this.setState({
                             result: [date],
@@ -137,29 +139,44 @@ class Search extends Component {
         event.keyCode === 13 ? this.search() : ''
     }
 
+    selectSong(song, songs) {
+        return (e) => {
+            this.props.changeCurrentSong(song);
+            this.props.setSongs([songs]);
+            // console.log(song)
+            // console.log([songs])
+        };
+    }
+
+
     render() {
         const {result, resultPlayList, resultArtists, resultAlbums} = this.state;
         const resultsong = result.length !== 0 ?
             result[0].map((newSong, index) => {
                 return <li key={index}>
-                    <div>
-                        <span>{newSong.name}</span>
-                        <span>{newSong.artName}</span>
-                        <span>{newSong.albName}</span>
-                        <span>{this.timeDt(newSong.dt)}</span>
-                    </div>
+                         <span className="song-number">{
+                            index < 9 ? `0${index + 1}` : index + 1
+                        } </span>
+                        <span className="song-name">{newSong.name}</span>
+                        <span className="ant-dropdown-link" onClick={this.selectSong(newSong, result[0])}><i className="icon-play"></i></span>
+                        <span className="song-art-name">{newSong.artName}</span>
+                        <span className="song-al-name">{newSong.albName}</span>
+                        <span className="song-dt">{this.timeDt(newSong.dt)}</span>
                 </li>
             })
             : ""
         const playlist = resultPlayList.length !== 0 ?
             resultPlayList[0].map((newSong, index) => {
                 return <li key={index}>
-                    <div>
-                        <span>{newSong.name}</span>
-                        <span>{newSong.trackCount}</span>
-                        <span>{newSong.nickname}</span>
-                        <span>{newSong.playCount}</span>
-                    </div>
+                         <Link to={`/playlists/${newSong.id}`}>
+                        <span className="song-number">{
+                            index < 9 ? `0${index + 1}` : index + 1
+                        } </span>
+                        <span className="song-name">{newSong.name}</span>
+                        <span className="song-art-name">{newSong.trackCount}</span>
+                        <span className="song-al-name">{newSong.nickname}</span>
+                        <span className="song-dt">{newSong.playCount}</span>
+                        </Link>
                 </li>
             })
             : ""
@@ -167,21 +184,23 @@ class Search extends Component {
         const artist = resultArtists.length !== 0 ?
             resultArtists[0].map((song, index) => {
                 return <li key={index}>
-                    <div>
+                         <span className="song-number">{
+                            index < 9 ? `0${index + 1}` : index + 1
+                        } </span>
                         {
                             song.alias != null && song.alias.length === 0 ?
-                                <span>
+                                <span className="song-art-name">
             {song.artName}
             </span>
                                 :
-                                <span>
+                                <span className="song-art-name">
               {song.artName}
                                     <span style={{color: '#aeaeae'}}>
               （{song.alias}）
               </span>
             </span>
                         }
-                    </div>
+                   
                 </li>
             })
             : ""
@@ -189,22 +208,25 @@ class Search extends Component {
         const album = resultAlbums.length !== 0 ?
             resultAlbums[0].map((song, index) => {
                 return <li key={index}>
-                    <div>
+                        <Link to={`/albums/${song.id}`}>
+                        <span className="song-number">{
+                            index < 9 ? `0${index + 1}` : index + 1
+                        } </span>
                         {
                             song.alias != null && song.alias.length === 0 ?
-                                <span>
+                                <span className="song-al-name">
             {song.albName}
             </span>
                                 :
-                                <span>
+                                <span className="song-al-name">
               {song.albName}
                                     <span style={{color: '#aeaeae'}}>
               （{song.alias}）
               </span>
             </span>
                         }
-                        <span>{song.artName}</span>
-                    </div>
+                        <span className="song-art-name">{song.artName}</span>
+                        </Link>
                 </li>
             })
             : ""
@@ -216,17 +238,17 @@ class Search extends Component {
                     <button className="button" onClick={this.search}><i className="icon-search"></i></button>
                 </div>
                 <TabControl>
-                    <div name="单曲">
-                        <div>{resultsong}</div>
+                    <div name="单曲" className="song-list search-list">
+                        <ul>{resultsong}</ul>
                     </div>
-                    <div name="歌手">
-                        <div>{artist}</div>
+                    <div name="歌手" className="song-list search-list">
+                        <ul>{artist}</ul>
                     </div>
-                    <div name="专辑">
-                        <div>{album}</div>
+                    <div name="专辑" className="song-list search-list">
+                        <ul>{album}</ul>
                     </div>
-                    <div name="歌单">
-                        <div>{playlist}</div>
+                    <div name="歌单" className="song-list search-list">
+                        <ul>{playlist}</ul>
                     </div>
                 </TabControl>
             </div>

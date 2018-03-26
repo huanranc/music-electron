@@ -1,0 +1,53 @@
+.edituser {
+  .form-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.429rem;
+  }
+  .form-control-label {
+    text-align: right;
+    line-height: 1.5;
+    padding-right: 15px;
+    padding-left: 15px;
+    font-size: 1rem;
+    width: 20%;
+  }
+  .form-control {
+    width: 70%;
+    border: 1px solid #e4eaec;
+    border-radius: .215rem;
+    box-sizing: border-box;
+    height: 2.573rem;
+    font-weight: 100;
+    width: 100%;
+    padding: .429rem 1rem;
+    font-size: 1rem;
+    line-height: 1.571429;
+    &:focus {
+      border-color: #667afa;
+      outline: 0;
+    }
+  }
+  .btn {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    margin-top: 15px;
+    .edituser-btn {
+      display: inline-block;
+      text-align: center;
+      background-color: #667afa;
+      border-color: #667afa;
+      color: #fff;
+      padding: .7rem 1.2rem;
+      font: 400 13px Arial;
+      line-height: 1;
+      border-radius: .286rem;
+      border: none;
+      cursor: pointer;
+      margin: 0 10px;
+    }
+  }
+}

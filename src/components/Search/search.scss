@@ -74,4 +74,25 @@
       opacity: 1;
     }
   }
+
+  .search-list {
+    padding: 0;
+    li {
+      display: flex;
+      flex-direction: row;
+      height: 2.875rem;
+      padding: .25rem;
+      box-sizing: border-box;
+      align-items: center;
+      border-color: transparent;
+      background-color: #fafafa;
+      border-radius: .215rem;
+      &:hover {
+        background-color: #e7e7fd;
+      }
+    }
+  }
+  .song-list li::before {
+    background-color: transparent;
+  }
 }

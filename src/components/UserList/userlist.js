@@ -115,7 +115,7 @@ class UserList extends Component {
                         </div>
                        {message.list_name==='我喜欢的音乐'?
                        '': <div className="intr-control">
-                       <Link to={`/edit/${message.id}`}><a className="bk-collect">编辑</a></Link>
+                       <Link to={`/edit/${message.id}`}><span className="bk-collect">编辑</span></Link>
                    </div>}
                     </div>
                  </div>

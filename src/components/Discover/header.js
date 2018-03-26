@@ -10,7 +10,7 @@ class Header extends React.Component {
         // console.log(this.state.username)
         return (
             <div className="header">
-
+                <i className="icon-back header-back" onClick={this.handleClick}></i>
             </div>
         );
     }
