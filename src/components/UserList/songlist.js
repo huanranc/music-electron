@@ -124,7 +124,7 @@ class SongList extends Component {
           </span>
                     <span className="song-al-name">{songs.alName}</span>
                     <span className="song-dt">{this.timeDt(songs.dt)}</span>
-                    <span><i className="icon-删除 createlist-dele" onClick={this.deletSong.bind(this,songs.Id)}></i></span>
+                    <span><i className="icon-delete createlist-dele" onClick={this.deletSong.bind(this,songs.Id)}></i></span>
                 </li>
             }) : '你还没有添加歌曲哦~';
         return (

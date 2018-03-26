@@ -252,7 +252,7 @@ class Login extends Component {
 				this.setState({showList: false});
 			}}>
             	<div  style={this.state.showList === true ? {display: "block"} : {display: "none"}} className="login">
-				<i className="icon-删除 login-dele" onClick={this.showCureentList}></i>
+				<i className="icon-delete login-dele" onClick={this.showCureentList}></i>
                 <TabControl>
                     <div name="登录">
                         <div>
