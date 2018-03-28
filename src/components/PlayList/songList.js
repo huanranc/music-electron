@@ -231,7 +231,7 @@ class SongList extends Component {
           </span>
                     <a onClick={this.selectSong(songs, tracks[0])}><i className="icon-play"></i></a>
                     <Dropdown overlay={menu} trigger={['click']}>
-                            <a><i className="icon-addMusic" onClick={this.collect(songs)}></i></a>
+                            <a><i className="icon-add" onClick={this.collect(songs)}></i></a>
                         </Dropdown>
                     <span className="song-art-name">
             <Link to={`artists/`}>
