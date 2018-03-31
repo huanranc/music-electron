@@ -1,0 +1,50 @@
+.music-list {
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 15px 15px rgba(0,0,0,.25);
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .572rem;
+    height: 70px;
+    box-sizing: border-box;
+  }
+  .music-list-title {
+    .music-list-name {
+      flex: 33.3%;
+      max-width: 33.3%;
+    }
+    .music-list-artName {
+      flex: 33.3%;
+      max-width: 33.3%;
+    }
+    .music-list-alName {
+      flex: 33.3%;
+      max-width: 33.3%;
+    }
+  }
+  .music-list-songs {
+    height: 70px;
+    box-sizing: border-box;
+    .music-list-name {
+      flex: 33.3%;
+      max-width: 33.3%;
+      img {
+        width: 50px;
+        max-width: 100%;
+        height: 50px;
+        max-height: 100%;
+        margin-right: .5rem;
+      }
+    }
+    .music-list-artName {
+      flex: 33.3%;
+      max-width: 33.3%;
+    }
+    .music-list-alName {
+      flex: 33.3%;
+      max-width: 33.3%;
+    }
+  }
+}

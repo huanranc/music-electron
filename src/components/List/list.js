@@ -1,5 +1,5 @@
 import React from 'react';
-import Charts from './charts';
+import Charts from '../../containers/Chart';
 
 const List = () => {
     return (

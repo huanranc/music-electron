@@ -138,18 +138,15 @@ class Play extends Component {
     }
 
     controlEnd = () => {
-        console.log(this.props.currentSongList)
         if (this.props.currentSongList[0].length > 1) {
             let currentIndex = this.currentIndex
             if (this.state.currentMode === 2) {
-                //列表循环
                 if (currentIndex === this.props.currentSongList[0].length - 1) {
                     currentIndex = 0
                 } else {
                     currentIndex = currentIndex + 1
                 }
             } else if (this.state.currentMode === 0) {
-                //单曲循环
                 this.audioDOM.play();
                 return
             } else {
@@ -158,7 +155,6 @@ class Play extends Component {
             this.props.changeCurrentSong(this.props.currentSongList[0][currentIndex])
             this.currentIndex = currentIndex
         } else {
-            //不断播放
             this.audioDOM.play()
         }
     };

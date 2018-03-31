@@ -1,48 +1,98 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import '../../commpon/icon/font.css';
+import Loading from '../../commpon/Loading/loading';
+import './chart.scss';
 
 class Charts extends Component {
-    constructor() {
-        super(...arguments);
+    constructor(props) {
+        super(props);
         this.state = {
-            result: [],
-            show: 'none'
+            songs: [],
+            loading: true
         }
     }
 
     componentDidMount() {
-        var myFetchOptions = {
-            method: 'GET'
-        };
-        fetch("/personalized?offset=0&limit=8", myFetchOptions)
-            .then(response => response.json())
-            .then(json =>
-                this.setState({result: json.result}));
+        this.soar();
     };
 
-    render() {
-        const {result} = this.state;
-        const resultList = result.length ?
-            result.map((newSong, index) => {
-                return <li key={index} className="play-list">
-                    <Link to={`/playlists/${newSong.id}`}>
-                        <div className="card">
-                            <div className="card-image image">
-                                <img alt="example" width="100%" src={newSong.picUrl} />
-                            </div>
-                            <div className="card-body">
-                                <p>{newSong.name}</p>
-                            </div>
-                        </div>
-                    </Link>
-                </li>
+    soar=()=>{
+        const date = [];
+        let myFetchOptions = {
+            method: 'GET'
+        };
+        fetch("/toplist?idx=3", myFetchOptions)
+        .then(response => {
+            if (response.status !== 200) {
+                throw new Error('未请求成功，状态码为' + response.status)
+            }
+            response.json().then(json => json.playlist.tracks.map(item => {
+                    let newItem = {};
+                    newItem.id = item.id
+                    newItem.name = item.name
+                    newItem.alia = item.alia
+                    newItem.alId = item.al.id
+                    newItem.alName = item.al.name
+                    newItem.dt = item.dt
+                    newItem.picUrl = item.al.picUrl
+                    newItem.artId = item.ar[0].id
+                    newItem.artName = item.ar[0].name
+                    date.push(newItem)
+                    return this.setState({
+                        songs: [date],
+                        loading:false
+                    })
+                })
+            ).catch(error => {
+                this.setState({songs: ''})
             })
-            : '对不起，加载失败'
+        }).catch(error => {
+        this.setState({songs: ''})
+    });
+    }
+
+    selectSong(song, songs) {
+        return (e) => {
+            this.props.changeCurrentSong(song);
+            this.props.setSongs([songs]);
+        };
+    }
+
+    render() {
+        const {songs} = this.state;
+        const songlist=songs.length?
+       songs[0].map((nsong, index) => {
+                return <li key={index} className="music-list-songs" onClick={this.selectSong(nsong, songs[0])}>
+                           <div className="music-list-name">
+                                <img width="100%" src={nsong.picUrl}/>
+                                <span>{nsong.name}</span>
+                           </div>
+                           <div className="music-list-artName">
+                               <span>{nsong.artName}</span>
+                           </div>
+                           <div className="music-list-alName">
+                               <span>{nsong.alName}</span>
+                           </div>
+                        </li>
+            })
+            : <Loading title="正在加载..." show={this.state.loading} />
         ;
         return (
-            <div className="recommend">
-                <ul className="card-row">{resultList}</ul>
+            <div className="music-list">
+                <ul>
+                    <li className="music-list-title">
+                        <div className="music-list-name">
+                            <span>歌曲</span>
+                        </div>
+                        <div className="music-list-artName">
+                            <span>歌手</span>
+                        </div>
+                        <div className="music-list-alName">
+                            <span>专辑</span>
+                        </div> 
+                    </li>
+                    {songlist}
+                </ul>
             </div>
         )
     }

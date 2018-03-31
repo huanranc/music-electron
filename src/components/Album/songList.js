@@ -211,9 +211,9 @@ class SongList extends Component {
             </span>
           }
                         <a className="ant-dropdown-link" onClick={this.selectSong(song, songs[0])}><i className="icon-play"></i></a>
-                        <Dropdown overlay={menu} trigger={['click']}>
+                        {this.state.currenUserId!==undefined?<Dropdown overlay={menu} trigger={['click']}>
                             <a><i className="icon-add" onClick={this.collect(song)}></i></a>
-                        </Dropdown>
+                        </Dropdown>:''}
           </span>
                     <span className="song-art-name">
             <Link to={`artists/${song.artId}`}>
