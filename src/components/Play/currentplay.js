@@ -8,7 +8,7 @@ class CurrentPlay extends Component {
         super(props)
         this.state = {
             show: false,
-            currenSongIndex: 0
+            currentSongIndex: 0
         }
     }
 
@@ -18,11 +18,18 @@ class CurrentPlay extends Component {
         })
     }
 
+    changeIndex = (index) => {
+        this.setState({
+            currentSongIndex: index
+        });
+    }
+
     render() {
+        // console.log(this.state.currentSongIndex)
         return (
             <div className="music-curren-play">
-                <Play changeCurrentIndex={this.changeCurrentIndex} showList={this.showList} show={this.state.show} />
-                <List showList={this.showList} show={this.state.show} />
+                <Play currentIndex={this.state.currentSongIndex}  changeIndex={this.changeIndex} showList={this.showList} show={this.state.show} />
+                <List currentIndex={this.state.currentSongIndex}  changeIndex={this.changeIndex} showList={this.showList} show={this.state.show} />
             </div>
         )
     }

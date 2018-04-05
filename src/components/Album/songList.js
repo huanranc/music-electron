@@ -114,6 +114,8 @@ class SongList extends Component {
             this.props.setSongs([songs]);
             // console.log(song)
             // console.log([songs])
+            // console.log(index)
+            // this.props.setSongIndex(index);  
         };
     }
 
@@ -154,7 +156,7 @@ class SongList extends Component {
                             throw new Error('未请求成功，状态码为' + response.status)
                         }
                         response.json().then(json => {
-                            console.log(json.status)
+                            // console.log(json.status)
                             if(json.status===200) {
                                 alert('收藏成功')
                             } else if(json.status===201){

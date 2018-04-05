@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import UserList from './userlist';
-import List from './list';
 
 class SongList extends Component {
     constructor(props) {
@@ -9,7 +8,7 @@ class SongList extends Component {
         this.state = {
             result: [],
             songId: '',
-            id:this.props.match.params.id
+            id:this.props.id
         }
     }
 
@@ -17,7 +16,10 @@ class SongList extends Component {
       this.loadlists();
     }
     componentWillReceiveProps() {
-        this.loadlists();
+      this.setState({
+        id:this.props.id
+      });
+      this.loadlists();
     }
 
     loadlists() {
@@ -109,7 +111,7 @@ class SongList extends Component {
 
     render() {
         const {result} = this.state;
-        const songslist = result.length>0 ?
+        const songslist = result.length ?
             result[0].map((songs, index) => {
                 return <li key={index}
                 >
@@ -133,25 +135,9 @@ class SongList extends Component {
                 </li>
             }) : '你还没有添加歌曲哦~';
         return (
-            <div className="new-ablum">
-                <UserList id={this.props.match.params.id}/>
-                <div className="list">
-                    <div className="song-list">
-                        <ul className="songlist">
-                            <li><a className="bk-play-control" onClick={this.playAll}><i className="icon-play"></i>播放全部</a>
-                            </li>
-                            <li>
-                                <span className="song-name title">歌曲</span>
-                                <span className="song-art-name title">歌手</span>
-                                <span className="song-al-name title">专辑名</span>
-                                <span className="song-dt title">时长</span>
-                                <span className="song-control title">操作</span>
-                            </li>
-                            <List id={this.props.match.params.id}/>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+              <ul>
+                {songslist}
+              </ul>
         )
     }
 }

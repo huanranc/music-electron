@@ -1,5 +1,5 @@
 import {connect} from "react-redux"
-import {changeSong, setCurrentTime, setShowSong} from "../redux/action"
+import {changeSong, setCurrentTime, setShowSong,setSongIndex} from "../redux/action"
 import Player from "../components/Play/play";
 
 //映射state到play上
@@ -7,7 +7,8 @@ const mapStateToProps = (state) => ({
     currentSong: state.song,
     currentSongList: state.songList,
     currentTime: state.currentTime,
-    showSong: state.showSong
+    showSong: state.showSong,
+    songIndex: state.songIndex
 });
 
 //更新state
@@ -21,6 +22,9 @@ const mapDispatchToProps = (dispatch) => ({
     setShowSong: (showSong) => {
         dispatch(setShowSong(showSong))
     }
+    // setSongIndex:(songIndex) => {
+    //     dispatch(setSongIndex(songIndex))
+    // }
 });
 
 //注入dispatch和state到player组件里

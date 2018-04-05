@@ -14,6 +14,41 @@ class UserList extends Component {
     componentDidMount() {
         this.presondetails();
       }
+
+      componentWillReceiveProps() {
+        // if(this.state.id!==this.props.id) {
+        //     this.presondetails();
+        // }
+        // console.log(this.props.id)
+        // console.log(this.state.id)
+            this.setState({
+                id:this.props.id
+              });
+            let id='list_id='+this.state.id;
+            let myFetch = {
+                method: 'POST',
+                mode:'cors',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                credentials: 'include',
+                body:id
+            };
+            fetch("/user/detail", myFetch)
+        .then(response => {
+                if (response.status !== 200) {
+                    throw new Error('未请求成功，状态码为' + response.status)
+            }
+            response.json().then(json => {
+                    this.setState({result:json.result});
+            }
+            ).catch(error => {
+                    this.setState({result: ''})
+            })
+            }).catch(error => {
+        this.setState({result: ''})
+        });
+      }
   
       presondetails() {
         let myFetch = {
@@ -54,7 +89,7 @@ class UserList extends Component {
                     this.setState({username: ''})
         });
 
-        let id='list_id='+this.state.id;
+        let id='list_id='+this.props.id;
         let myFetch = {
             method: 'POST',
             mode:'cors',

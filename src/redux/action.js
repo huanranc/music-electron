@@ -32,6 +32,15 @@ export function setCurrentTime(currentTime) {
     }
 }
 
+// //设置当前播放的index
+// export function setSongIndex(songIndex) {
+//     return {
+//         type: actionType.SET_SONG_INDX,
+//         songIndex
+//     }
+// }
+
+
 
 //设置当前是否播放
 export function setShowSong(showSong) {

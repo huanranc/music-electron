@@ -10,32 +10,42 @@ class PlayList extends Component {
         }
     }
 
+    playSong(song, index) {
+        return () => {
+            this.props.changeCurrentSong(song);
+            this.props.changeIndex(index);
+        };
+    }
+
     removeSong(id, index) {
         return () => {
             if (this.props.currentSong.id !== id) {
                 this.props.removeSong(id);
+                // console.log(this.props.removeSong)
                 if (index < this.props.currentIndex) {
-                    this.props.changeCurrentIndex(this.props.currentIndex - 1)
+                    this.props.changeIndex(this.props.currentIndex - 1)
                 }
-                // console.log(id)
-                // console.log(this.props.currentSong.id)
-                console.log(this.props.currentIndex)
+                console.log(id)
+                console.log(this.props.currentSong.id)
+                // console.log(this.props.currentIndex)
             }
         }
     }
 
-    selectSong(song) {
-        return (e) => {
-            this.props.changeCurrentSong(song);
-        };
-    }
+    
+
+    // selectSong(song) {
+    //     return (e) => {
+    //         this.props.changeCurrentSong(song);
+    //     };
+    // }
 
     render() {
         let list = this.props.currentSongList
         const playlist = list.length ? list[0].map((songs, index) => {
                 return <li key={index} className="playing-list-sub"
                            style={this.props.currentSong.id === songs.id ? {color: "#6666ff"} : {color: "#fff"}}>
-                    <a onClick={this.selectSong(songs)}><i className="icon-play"></i></a>
+                    <a onClick={this.playSong(songs,index)}><i className="icon-play"></i></a>
                     {songs.name}
                     <i onClick={this.removeSong(songs.id, index)} className="icon-delete"></i>
                 </li>

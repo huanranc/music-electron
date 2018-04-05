@@ -6,6 +6,7 @@ import List from "../components/Play/playlist";
 const mapStateToProps = (state) => ({
     currentSong: state.song,
     currentSongList: state.songList
+    // index:state.index
 });
 
 //更新state

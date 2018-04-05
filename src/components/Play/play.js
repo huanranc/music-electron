@@ -90,7 +90,7 @@ class Play extends Component {
             //  console.log(currentIndex)
             //  console.log(this.props.currentSongList[0][currentIndex])
             this.props.changeCurrentSong(this.props.currentSongList[0][currentIndex]);
-            this.currentIndex = currentIndex
+            this.props.changeIndex(currentIndex);
             // console.log(this.currentIndex)
         }
     };
@@ -115,7 +115,7 @@ class Play extends Component {
                 currentIndex = parseInt(Math.random() * this.props.currentSongList[0].length, 10)
             }
             this.props.changeCurrentSong(this.props.currentSongList[0][currentIndex]);
-            this.currentIndex = currentIndex
+            this.props.changeIndex(currentIndex);
         }
     }
 
@@ -153,7 +153,7 @@ class Play extends Component {
                 currentIndex = parseInt(Math.random() * this.props.currentSongList[0].length, 10)
             }
             this.props.changeCurrentSong(this.props.currentSongList[0][currentIndex])
-            this.currentIndex = currentIndex
+            this.props.changeIndex(currentIndex);
         } else {
             this.audioDOM.play()
         }
@@ -201,7 +201,9 @@ class Play extends Component {
         //点击播放。同时收入当前播放列表
         // console.log(this.props.currentSong);
         // console.log(this.props.currentSongList);
-        if (this.props.currentSong.id !== undefined) {
+        this.currentIndex = this.props.currentIndex;
+        // console.log(this.props.currentIndex)
+        if (this.props.currentSong&&this.props.currentSong.id !== undefined) {
             if (this.currentSong.id !== this.props.currentSong.id) {
                 this.currentSong.id = this.props.currentSong.id;
                 this.currentSong.picUrl = this.props.currentSong.picUrl

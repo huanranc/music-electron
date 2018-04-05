@@ -10,6 +10,7 @@ const initialState = {
     //currttime
     currentTime: 0,
     showSong: false,
+    songIndex:0,
     //album
     album: [],
     login: 0
@@ -37,6 +38,16 @@ function currentTime(state = initialState.currentTime, action) {
             return state
     }
 }
+
+// //得到当前index
+// function songIndex(state = initialState.songIndex, action) {
+//     switch (action.type) {
+//         case actionType.SET_SONG_INDX:
+//             return action.songIndex
+//         default:
+//             return state
+//     }
+// }
 
 //得到当前播放状态
 function showSong(state = initialState.showSong, action) {
@@ -90,6 +101,7 @@ const musicReducer = combineReducers({
     songList,
     currentTime,
     showSong,
+    // songIndex,
     Login
 })
 

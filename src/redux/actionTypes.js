@@ -6,6 +6,9 @@ export const SET_SONGS = 'SET_SONGS';
 export const REMOVE_SONG = 'REMOVE_SONG';
 //设置currenttime
 export const SET_AUDIO_CRRENTTIME = 'SET_AUDIO_CRRENTTIME';
+
+// //设置当前歌曲index
+// export const SET_SONG_INDX = 'SET_SONG_INDX';
 //获取歌词
 export const GET_LYC = 'GET_LYC';
 
