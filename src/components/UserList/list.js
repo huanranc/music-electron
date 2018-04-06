@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import UserList from './userlist';
 
-class SongList extends Component {
+class List extends Component {
     constructor(props) {
         super(props);
         this.state = {
             result: [],
             songId: '',
-            id:this.props.id
+            id:this.props.sid
         }
     }
 
@@ -16,10 +16,51 @@ class SongList extends Component {
       this.loadlists();
     }
     componentWillReceiveProps() {
-      this.setState({
-        id:this.props.id
-      });
-      this.loadlists();
+        this.setState((prevState, props)=>{
+            id:props.sid
+            let data='list_id=' +props.sid;
+            let date=[];
+            var myFetchOptions = {
+              method: 'POST',
+              mode:'cors',
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+                },
+              credentials: 'include',
+              body:data
+            };
+              fetch("/user/song/list", myFetchOptions)
+                  .then(response => {
+                      if (response.status !== 200) {
+                          throw new Error('未请求成功，状态码为' + response.status)
+                      }
+                      response.json().then(json => json.result.map(item => {
+                        let newItem = {};
+                        newItem.Id=item.id
+                        newItem.id = item.song_id
+                        newItem.name = unescape(item.song_name)
+                        newItem.alId = item.al_id
+                        newItem.alName = unescape(item.al_name)
+                        newItem.dt = item.dt
+                        newItem.picUrl = item.picUrl
+                        newItem.artId = item.art_id
+                        newItem.artName = unescape(item.art_name)
+                        date.push(newItem)
+                        return this.setState({
+                            result: [date]
+                        })
+                    })
+                ).catch(error => {
+                          this.setState({
+                              result: ''
+                          })
+                      })
+                  }).catch(error => {
+                  this.setState({
+                      result: ''
+                  })
+              });
+        })
     }
 
     loadlists() {
@@ -111,7 +152,7 @@ class SongList extends Component {
 
     render() {
         const {result} = this.state;
-        const songslist = result.length ?
+        const songslist = result.length>0 ?
             result[0].map((songs, index) => {
                 return <li key={index}
                 >
@@ -135,11 +176,24 @@ class SongList extends Component {
                 </li>
             }) : '你还没有添加歌曲哦~';
         return (
-              <ul>
-                {songslist}
-              </ul>
+            <div className="list">
+            <div className="song-list">
+                <ul className="songlist">
+                    <li><a className="bk-play-control" onClick={this.playAll}><i className="icon-play"></i>播放全部</a>
+                    </li>
+                    <li>
+                        <span className="song-name title">歌曲</span>
+                        <span className="song-art-name title">歌手</span>
+                        <span className="song-al-name title">专辑名</span>
+                        <span className="song-dt title">时长</span>
+                        <span className="song-control title">操作</span>
+                    </li>
+                    {songslist}
+                </ul>
+            </div>
+        </div>
         )
     }
 }
 
-export default SongList;
+export default List;

@@ -16,15 +16,10 @@ class UserList extends Component {
       }
 
       componentWillReceiveProps() {
-        // if(this.state.id!==this.props.id) {
-        //     this.presondetails();
-        // }
-        // console.log(this.props.id)
         // console.log(this.state.id)
-            this.setState({
-                id:this.props.id
-              });
-            let id='list_id='+this.state.id;
+        this.setState((prevState, props)=>{
+            id:props.id
+            let id='list_id='+props.id;
             let myFetch = {
                 method: 'POST',
                 mode:'cors',
@@ -48,6 +43,7 @@ class UserList extends Component {
             }).catch(error => {
         this.setState({result: ''})
         });
+           });
       }
   
       presondetails() {
