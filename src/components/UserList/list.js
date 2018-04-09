@@ -119,8 +119,8 @@ class List extends Component {
         return (e) => {
             this.props.changeCurrentSong(song);
             this.props.setSongs([songs]);
-            console.log(song)
-            console.log([songs])
+            // console.log(song)
+            // console.log([songs])
         };
     }
 

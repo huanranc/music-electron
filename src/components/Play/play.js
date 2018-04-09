@@ -37,10 +37,12 @@ class Play extends Component {
         //点击页面立即播放
         if (this.currentSong.isautoplay === true) {
             this.audioDOM.play();
+            this.currentIndex=this.props.currentSongList[0].indexOf(this.props.currentSong);
             this.currentSong.isautoplay = false;
             this.setState({isPlay: true});
             this.props.setShowSong(true)
         }
+        // console.log(this.currentIndex)
     }
 
     //播放或者暂停
@@ -201,7 +203,7 @@ class Play extends Component {
         //点击播放。同时收入当前播放列表
         // console.log(this.props.currentSong);
         // console.log(this.props.currentSongList);
-        this.currentIndex = this.props.currentIndex;
+        // this.currentIndex = this.props.currentIndex;
         // console.log(this.props.currentIndex)
         if (this.props.currentSong&&this.props.currentSong.id !== undefined) {
             if (this.currentSong.id !== this.props.currentSong.id) {

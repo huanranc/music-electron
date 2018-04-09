@@ -30,8 +30,6 @@ function openWindow(filePath, options, isMax) {
             height: 840,
             minwidth: 1024,
             minheight: 840,
-            maxwidth: 1024,
-            maxheight: 840,
             center: true,
             show: false,
             autoHideMenuBar: true

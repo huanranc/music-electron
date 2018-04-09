@@ -18,6 +18,7 @@ body {
   box-sizing: border-box;
   .wrap-siderbar {
     width: 180px;
+    flex: 0 0 auto;
     box-sizing: border-box;
     background: $sidebar-bg;
     .title {
@@ -35,6 +36,7 @@ body {
     }
   }
   .wrap-body {
+    width: calc(100% - 180px);
     position: relative;
     min-height: 890px;
     flex: 1;
