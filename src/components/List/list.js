@@ -5,7 +5,7 @@ const List = () => {
     return (
         <div className="content-layout">
             <div className="discover-list">
-                <h3 className="top-title">云音乐飙升榜</h3>
+                <h2>云音乐飙升榜</h2>
                 <Charts />
             </div>
         </div>

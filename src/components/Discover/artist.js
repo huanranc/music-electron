@@ -13,7 +13,9 @@ class Artist extends Component {
     componentDidMount() {
         const date = []
         var myFetchOptions = {
-            method: 'GET'
+            method: 'GET',
+            credentials: 'include',
+            mode: 'cors'
         };
         fetch("/top/artists?offset=0&limit=10", myFetchOptions)
             .then(response => {

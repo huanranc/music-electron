@@ -13,7 +13,9 @@ class Artist extends Component {
 
     componentDidMount() {
         var myFetchOptions = {
-            method: 'GET'
+            method: 'GET',
+            credentials: 'include',
+            mode: 'cors'
         };
         fetch("/top/artists", myFetchOptions)
         .then(response => {
@@ -49,7 +51,7 @@ class Artist extends Component {
             })
             : <Loading title="正在加载..." show={this.state.loading} />
         return (
-            <div className="artists-body">
+            <div className="artists-body content-layout">
                 <h2>歌手</h2>
                 <ul className="artists-list">{artistsList}</ul>
             </div>

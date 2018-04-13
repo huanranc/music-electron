@@ -19,7 +19,9 @@ class Charts extends Component {
     soar=()=>{
         const date = [];
         let myFetchOptions = {
-            method: 'GET'
+            method: 'GET',
+            credentials: 'include',
+            mode: 'cors'
         };
         fetch("/toplist?idx=3", myFetchOptions)
         .then(response => {

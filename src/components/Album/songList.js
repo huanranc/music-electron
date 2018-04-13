@@ -22,7 +22,9 @@ class SongList extends Component {
     componentDidMount() {
         const date = [];
         var myFetchOptions = {
-            method: 'GET'
+            method: 'GET',
+            credentials: 'include',
+            mode: 'cors'
         };
         fetch("/album?id=" + this.props.match.params.id, myFetchOptions)
             .then(response => {

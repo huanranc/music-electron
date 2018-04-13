@@ -19,7 +19,9 @@ class Lyric extends Component {
             if (this.currentSong.id !== this.props.currentSong.id) {
                 this.currentSong.id = this.props.currentSong.id;
                 var myFetchOptions = {
-                    method: 'GET'
+                    method: 'GET',
+                    credentials: 'include',
+                    mode: 'cors'
                 };
                 fetch("/lyric?id=" + this.props.currentSong.id, myFetchOptions)
                     .then(response => response.json())

@@ -17,7 +17,9 @@ class PlatListDiscover extends Component {
     componentDidMount() {
         const date = []
         var myFetchOptions = {
-            method: 'GET'
+            method: 'GET',
+            credentials: 'include',
+            mode: 'cors'
         };
         fetch("/personalized?offset=0&limit=8", myFetchOptions)
             .then(response => {

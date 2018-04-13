@@ -13,7 +13,9 @@ class NewSong extends Component {
     componentDidMount() {
         const date = []
         var myFetchOptions = {
-            method: 'GET'
+            method: 'GET',
+            credentials: 'include',
+            mode: 'cors'
         };
         fetch("/personalized/newsong", myFetchOptions)
             .then(response => {

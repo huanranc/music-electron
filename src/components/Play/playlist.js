@@ -47,7 +47,6 @@ class PlayList extends Component {
                            style={this.props.currentSong.id === songs.id ? {color: "#6666ff"} : {color: "#fff"}}>
                     <a onClick={this.playSong(songs,index)}><i className="icon-play"></i></a>
                     {songs.name}
-                    <i onClick={this.removeSong(songs.id, index)} className="icon-delete"></i>
                 </li>
             })
             : ""

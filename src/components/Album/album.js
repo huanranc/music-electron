@@ -19,7 +19,9 @@ class Ablum extends Component {
             this.setState({loading: false});
         }
         var myFetchOptions = {
-            method: 'GET'
+            method: 'GET',
+            credentials: 'include',
+            mode: 'cors'
         };
         fetch("/top/album?offset=0&limit=52", myFetchOptions)
             .then(response => {

@@ -87,7 +87,7 @@ class Login extends Component {
         } else {
             this.props.showList(false)
         }
-    };
+		};
 
 		loginAll = (e) => {
 			e.preventDefault();
