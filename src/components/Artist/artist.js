@@ -16,13 +16,20 @@ class Artist extends Component {
             method: 'GET'
         };
         fetch("/top/artists", myFetchOptions)
-            .then(response => response.json())
-            .then(json => {
+        .then(response => {
+            if (response.status !== 200) {
+                throw new Error('未请求成功，状态码为' + response.status)
+            }
+            response.json().then(json => {
                     this.setState({
                         artists: json.artists
                     })
-                }
-            );
+                }).catch(error => {
+                    this.setState({artists: ''})
+                })
+            }).catch(error => {
+            this.setState({artists: ''})
+        });
     }
 
     render() {

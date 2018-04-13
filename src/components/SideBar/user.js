@@ -121,10 +121,33 @@ class User extends Component {
     })
 }
 
+//退出
+// http://localhost:3000/loginout
+loginout = () =>  {
+    var myFetch = {
+        method: 'GET',
+        credentials: 'include',
+        mode: 'cors'
+    };
+    fetch("/loginout", myFetch)
+    .then(response => {
+        if (response.status !== 200) {
+            throw new Error('未请求成功，状态码为' + response.status)
+        }
+        response.json().then(json =>{
+            this.setState({
+                name:'未登录',
+                currenUserId: json.user_id,
+                songlist:''
+            })
+        })
+    })
+}
+
 
 
     render() {
-        const userlist=this.state.songlist!==0?
+        const userlist=this.state.songlist?
         this.state.songlist.map((list,index) => {
              return <li key={index} className="user-list"><NavLink to={`/userlist/${list.id}`}>{list.list_name}</NavLink>{index===0?'':<i className="icon-delete createlist-dele" onClick={this.deleList.bind(this,list.id)}></i>}</li>
          }):'';
@@ -135,7 +158,7 @@ class User extends Component {
                     <span className="person-name"  onClick={this.showCureentList}>{this.state.name}</span>
                     {
                         this.state.name !=='未登录'?
-                        <span className="pserson-text"> 编辑</span>
+                        <span className="pserson-text user-title" onClick={this.loginout}>&nbsp;&nbsp;退出</span>
                         :
                         ""
                     }
