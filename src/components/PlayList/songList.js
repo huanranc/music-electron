@@ -226,7 +226,7 @@ class SongList extends Component {
        <span className="song-number">{
            index < 9 ? `0${index + 1}` : index + 1
        } </span>
-                    <span className="song-name">
+                    <span className="song-name" title={songs.name}>
               {songs.name}
           </span>
                     <a onClick={this.selectSong(songs, tracks[0])}><i className="icon-play"></i></a>
@@ -240,7 +240,7 @@ class SongList extends Component {
               }
             </Link>
           </span>
-                    <span className="song-al-name">{songs.alName}</span>
+                    <span className="song-al-name" title={songs.alName}>{songs.alName}</span>
                     <span className="song-dt">{this.timeDt(songs.dt)}</span>
                 </li>
             }) : <Loading title="正在加载..." show={this.state.loading} />;

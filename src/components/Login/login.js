@@ -258,11 +258,11 @@ class Login extends Component {
                         <div>
 							<form onSubmit={this.loginAll}>
 								<div className="form-material floating">
-									<input className="form-control empty" ref="loginName"/>
+									<input className={`form-control ${username.length>0?'':'empty'}`} ref="loginName"/>
 									<label className="floating-label">用户名</label>
 								</div>
 								<div className="form-material floating">
-									<input className="form-control empty" ref="loginPassword" type="password"/>
+									<input className={`form-control ${username.length>0?'':'empty'}`} ref="loginPassword" type="password"/>
 									<label className="floating-label">密码</label>
 								</div>
 								<button className="login-btn">登录</button>
@@ -273,15 +273,15 @@ class Login extends Component {
                         <div>
 							<form  onSubmit={this.registerAll}>
 								<div className="form-material floating">
-									<input className="form-control empty" ref="regName" />
+									<input className="form-control" ref="regName" />
 									<label className="floating-label">用户名</label>
 								</div>
 								<div className="form-material floating">
-									<input className="form-control empty" ref="regPassword" type="password"/>
+									<input className="form-control" ref="regPassword" type="password"/>
 									<label className="floating-label">密码</label>
 								</div>
 								<div className="form-material floating">
-									<input className="form-control empty" ref="regPassword" type="password"/>
+									<input className="form-control" ref="regPassword" type="password"/>
 									<label className="floating-label">重复密码</label>
 								</div>
 								<button className="login-btn">注册</button>

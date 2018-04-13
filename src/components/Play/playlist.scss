@@ -1,19 +1,21 @@
 .playing-list {
-  height: 670px;
+  height: 650px;
   overflow-y: scroll;
   .inner-playing-list {
-    height: 790px;
+    height: 920px;
     font: 1rem "微软雅黑";
     .playing-list-sub {
-      padding: 10px;
       height: 50px;
       line-height: 50px;
       box-sizing: border-box;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      border-top: 1px solid rgba(225, 225, 225, .2);
+      // border-top: 1px solid rgba(225, 225, 225, .2);
       border-bottom: 1px solid rgba(225, 225, 225, .2);
+      .playing-list-text {
+        padding: 0 1rem;
+      }
     }
   }
 }
@@ -48,7 +50,7 @@
 
 /*滚动条中可以拖动的那部分*/
 .scroll::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.825);
+  background-color: rgb(0, 0, 0);
   border-radius: 4px;
 }
 

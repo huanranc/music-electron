@@ -43,9 +43,9 @@ class PlayList extends Component {
     render() {
         let list = this.props.currentSongList
         const playlist = list.length ? list[0].map((songs, index) => {
-                return <li key={index} className="playing-list-sub"
+                return <li key={index} className="playing-list-sub" title={songs.name}
                            style={this.props.currentSong.id === songs.id ? {color: "#6666ff"} : {color: "#fff"}}>
-                    <a onClick={this.playSong(songs,index)}><i className="icon-play"></i></a>
+                    <a className="playing-list-text" onClick={this.playSong(songs,index)}><i className="icon-play"></i></a>
                     {songs.name}
                 </li>
             })

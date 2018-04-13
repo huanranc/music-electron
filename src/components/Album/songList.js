@@ -200,7 +200,7 @@ class SongList extends Component {
            index < 9 ? `0${index + 1}` : index + 1
        } </span>
 
-                    <span className="song-name">
+                    <span title={song.name} className="song-name">
           {
               song.alia.length !== 0 ?
                   <span className="song-name-txt">
@@ -224,7 +224,7 @@ class SongList extends Component {
               {song.artName}
             </Link>
           </span>
-                    <span className="song-al-name">{song.alName}</span>
+                    <span className="song-al-name" title={song.alName}>{song.alName}</span>
                     <span className="song-dt">{this.timeDt(song.dt)}</span>
                 </li>
             }) : <Loading title="正在加载..." show={this.state.loading} />;

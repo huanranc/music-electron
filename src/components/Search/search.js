@@ -109,7 +109,7 @@ class Search extends Component {
                 }
                 response.json().then(json => json.result.albums.map(item => {
                         let Albitem = {}
-                        Albitem.albId = item.id
+                        Albitem.id = item.id
                         Albitem.albName = item.name
                         Albitem.artName = item.artists.name
                         Albitem.picUrl = item.picUrl
@@ -167,8 +167,8 @@ class Search extends Component {
             : ""
         const playlist = resultPlayList.length !== 0 ?
             resultPlayList[0].map((newSong, index) => {
-                return <li key={index}>
-                         <Link to={`/playlists/${newSong.id}`}>
+                return <Link to={`/playlists/${newSong.id}`} key={index}>
+                     <li>
                         <span className="song-number">{
                             index < 9 ? `0${index + 1}` : index + 1
                         } </span>
@@ -176,8 +176,8 @@ class Search extends Component {
                         <span className="song-art-name">{newSong.trackCount}</span>
                         <span className="song-al-name">{newSong.nickname}</span>
                         <span className="song-dt">{newSong.playCount}</span>
-                        </Link>
-                </li>
+                    </li>
+                </Link>
             })
             : ""
         ;
