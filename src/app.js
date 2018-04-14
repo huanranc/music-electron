@@ -5,6 +5,7 @@ import Discover from './components/Discover/discover';
 import Playlist from './components/PlayList/playlist';
 import PlaySongList from './containers/PlaySongList';
 import Artist from './components/Artist/artist';
+import ArtistDetail from './containers/Artist';
 import List from './components/List/list';
 import Album from './components/Album/album';
 import SongList from './containers/SongList';
@@ -30,6 +31,7 @@ const App = () => {
                         <Switch>
                             <Route path="/discover" component={Discover} />
                             <Route path="/artist" component={Artist} />
+                            <Route path="/artists/:id" component={ArtistDetail} />
                             <Route path="/list" component={List} />
                             <Route path="/playlist" component={Playlist} />
                             <Route path="/playlists/:id" component={PlaySongList} />

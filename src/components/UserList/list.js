@@ -154,7 +154,7 @@ class List extends Component {
         const {result} = this.state;
         const songslist = result.length>0 ?
             result[0].map((songs, index) => {
-                return <li key={index}
+                return <li key={index} style={this.props.currentSong.id === songs.id ? {color: "#6666ff"} : {}}
                 >
        <span className="song-number">{
            index < 9 ? `0${index + 1}` : index + 1
@@ -164,13 +164,17 @@ class List extends Component {
           </span>
                     <a onClick={this.selectSong(songs, result[0])}><i className="icon-play"></i></a>
                     <span className="song-art-name">
-            <Link to={`artists/`}>
+            <Link to={`/artists/${songs.artId}`}>
               {
                   songs.artName
               }
             </Link>
           </span>
-                    <span className="song-al-name">{songs.alName}</span>
+                    <span className="song-al-name song-art-name">
+                        <Link to={`/albums/${songs.alId}`}>
+                            {songs.alName}
+                        </Link>
+                    </span>
                     <span className="song-dt">{this.timeDt(songs.dt)}</span>
                     <span><i className="icon-delete createlist-dele" onClick={this.deletSong.bind(this,songs.Id)}></i></span>
                 </li>

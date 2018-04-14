@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import Loading from '../../commpon/Loading/loading';
 import './artist.scss';
 
@@ -36,7 +37,6 @@ class Artist extends Component {
 
     render() {
         const {artists} = this.state;
-        console.log(artists)
         const artistsList = artists.length > 0 ?
             artists.map((artist, index) => {
                 return <li key={index} className="artists-item">
@@ -44,7 +44,9 @@ class Artist extends Component {
                         <img alt="example" width="100%" src={artist.picUrl} />
                     </div>
                     <div className="artists-text">
-                        <p className="artists-name">{artist.name}</p>
+                        <Link to={`/artists/${artist.id}`}>
+                            <p className="artists-name">{artist.name}</p>
+                        </Link>
                         <p className="albumSize">{`${artist.albumSize} Albums`}</p>
                     </div>
                 </li>

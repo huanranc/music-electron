@@ -1,0 +1,98 @@
+.artist-detail {
+  width: 100%;
+  .album {
+    a {
+      text-align: left;
+      text-decoration: none;
+      color: #191919;
+      font-size: 0.8rem;
+    }
+  }
+  .search-tab {
+    width: 100%;
+    margin: 10px auto;
+    border-bottom: 1px solid #c9c8c8;
+    .tab-sub {
+      cursor: pointer;
+      display: inline-block;
+      margin-right: 20px;
+      width: auto;
+      padding: 0 20px;
+      height: 24px;
+      line-height: 24px
+    }
+    .active {
+      position: relative;
+    }
+    .active::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(to bottom, #c9c8c8, #6666ff, #fff);
+    }
+  }
+  .search-result {
+
+    margin: 10px auto;
+    .tab-item {
+      display: none;
+      opacity: 0;
+    }
+    .show {
+      display: block;
+      opacity: 1;
+    }
+  }
+  .artist-song,
+  .artist-album {
+    font-size: 1rem;
+  }
+  .artist-album {
+    padding-left: .5rem;
+  }
+  .bk-info .bk-name .intr-desc p {
+    height: 4.9rem;
+  }
+  .search-content {
+    padding: 0 1rem;
+  }
+  .artist-song-list .song{
+    width: 100%;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    line-height: 2.25rem;
+    height: 2.25rem;
+    .song-name {
+      width: 50%;
+      flex: 0 1 50%;
+      padding-left: 1rem;
+      text-align: left;
+      // color: #191919;
+      font-size: 0.8rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .song-alName,
+    .song-dt {
+      width: 25%;
+      flex: 0 1 25%;
+      text-align: center;
+      color: #191919;
+      font-size: 0.8rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .song-alName {
+      padding-left: 1rem;
+    }
+    .song-dt {
+      text-align: right;
+    }
+  }
+}

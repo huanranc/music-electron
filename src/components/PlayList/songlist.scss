@@ -70,6 +70,7 @@
   position: relative;
   box-sizing: border-box;
   align-items: center;
+  color: #191919;
   background-color: #fafafa;
 }
 
@@ -88,7 +89,7 @@
   flex:0 1 50%;
   padding-left: 1rem;
   text-align: left;
-  color: #191919;
+  // color: #191919;
   font-size: 0.8rem;
   overflow: hidden;
   text-overflow:ellipsis;
@@ -128,7 +129,7 @@
 .song-list .song-control {
   width: 3%;
   text-align: center;
-  color: #191919;
+  // color: #191919;
   font-size: 0.8rem;
 }
 

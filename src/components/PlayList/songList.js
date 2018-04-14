@@ -221,7 +221,7 @@ class SongList extends Component {
                 // songs.ar.map((ar,index) => {
                 //   ar.name
                 // }):'...'
-                return <li key={index}
+                return <li key={index} style={this.props.currentSong.id === songs.id ? {color: "#6666ff"} : {}}
                 >
        <span className="song-number">{
            index < 9 ? `0${index + 1}` : index + 1
@@ -234,7 +234,7 @@ class SongList extends Component {
                             <a><i className="icon-add" onClick={this.collect(songs)}></i></a>
                         </Dropdown>:''}
                     <span className="song-art-name">
-            <Link to={`artists/`}>
+            <Link  to={`/artists/${songs.artId}`}>
               {
                   songs.artName
               }

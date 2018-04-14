@@ -23,7 +23,10 @@ class Search extends Component {
         const artists = [];
         const albums = [];
         var myFetchOptions = {
-            method: 'GET'
+            method: 'GET',
+            method: 'GET',
+            credentials: 'include',
+            mode: 'cors'
         };
         fetch(`/search?keywords=${this.refs.input.value}`, myFetchOptions)
             .then(response => {

@@ -195,7 +195,7 @@ class SongList extends Component {
           );
         const songslist = songs.length ?
             songs[0].map((song, index) => {
-                return <li key={song.id}>
+                return <li key={index} style={this.props.currentSong.id === song.id ? {color: "#6666ff"} : {}}> 
        <span className="song-number">{
            index < 9 ? `0${index + 1}` : index + 1
        } </span>
@@ -220,7 +220,7 @@ class SongList extends Component {
                         </Dropdown>:''}
           </span>
                     <span className="song-art-name">
-            <Link to={`artists/${song.artId}`}>
+            <Link to={`/artists/${song.artId}`}>
               {song.artName}
             </Link>
           </span>

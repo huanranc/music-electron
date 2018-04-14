@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import Loading from '../../commpon/Loading/loading';
 
 class Artist extends Component {
@@ -24,6 +25,7 @@ class Artist extends Component {
                 }
                 response.json().then(json => json.artists.map(item => {
                         let newItem = {}
+                        newItem.artId = item.id
                         newItem.artName = item.name
                         newItem.picUrl = item.picUrl
                         newItem.albumSize = item.albumSize
@@ -46,13 +48,15 @@ class Artist extends Component {
         const artistsList = artists.length ?
             artists[0].map((artist, index) => {
                 return <li key={index} className="artist-list">
+                    <Link to={`/artists/${artist.artId}`}>
                     <div className="artist-image">
                         <div className="show">
-                            <p>{artist.name}</p>
+                            <p>{artist.artName}</p>
                             <p className="albumSize">{`Release ${artist.albumSize} Albums`}</p>
                         </div>
                         <img alt="example" width="100%" src={artist.picUrl} />
                     </div>
+                    </Link>
                 </li>
             })
             : <Loading title="正在加载..." show={this.state.loading} />
