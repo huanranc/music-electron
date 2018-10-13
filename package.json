@@ -2,14 +2,10 @@
   "name": "music-electron",
   "version": "0.1.0",
   "private": true,
-<<<<<<< HEAD
   "main": "main.js",
   "homepage": "",
   "dependencies": {
     "node-sass": "^4.9.3",
-=======
-  "dependencies": {
->>>>>>> Initial commit from Create React App
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-scripts": "2.0.4"
@@ -18,16 +14,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-<<<<<<< HEAD
     "eject": "react-scripts eject",
     "electron": "electron ."
   },
   "DEV": true,
   "proxy": "http://localhost:3000",
-=======
-    "eject": "react-scripts eject"
-  },
->>>>>>> Initial commit from Create React App
   "eslintConfig": {
     "extends": "react-app"
   },
