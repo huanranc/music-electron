@@ -21,35 +21,34 @@ import UserList from './containers/UserList';
 import EditUser from './components/UserList/edituser';
 
 const App = () => {
-    return (
-        <Provider store={store}>
-            <Router>
-                <div className="wrap">
-                    <SideBar />
-                    <div className="wrap-body scroll">
-                        <Header />
-                        <Switch>
-                            <Route path="/discover" component={Discover} />
-                            <Route path="/artist" component={Artist} />
-                            <Route path="/artists/:id" component={ArtistDetail} />
-                            <Route path="/list" component={List} />
-                            <Route path="/playlist" component={Playlist} />
-                            <Route path="/playlists/:id" component={PlaySongList} />
-                            <Route path="/album" component={Album} />
-                            <Route path="/albums/:id" component={SongList} />
-                            <Route path="/songs" component={Song} />
-                            <Route path="/search" component={Search} />
-                            <Route path="/userlist/:id" component={UserList} />
-                            <Route path="/edit/:id" component={EditUser} />
-                            <Redirect from="/" to="/discover" />
-                            <Route component={Discover} />
-                        </Switch>
-                        <CurrentPlay />
-                    </div>
-                </div>
-            </Router>
-        </Provider>
-    );
+  return (
+    <Provider store={store}>
+      <Router>
+        <div className="wrap">
+          <SideBar/>
+          <div className="wrap-body scroll">
+            <Header/>
+            <Switch>
+              <Route path="/discover" component={Discover}/>
+              <Route path="/artist" component={Artist}/>
+              <Route path="/artists/:id" component={ArtistDetail}/>
+              <Route path="/list" component={List}/>
+              <Route path="/playlist" component={Playlist}/>
+              <Route path="/playlists/:id" component={PlaySongList}/>
+              <Route path="/album" component={Album}/>
+              <Route path="/albums/:id" component={SongList}/>
+              <Route path="/songs" component={Song}/>
+              <Route path="/search" component={Search}/>
+              <Route path="/userlist/:id" component={UserList}/>
+              <Route path="/edit/:id" component={EditUser}/>
+              <Redirect from="/" to="/discover"/>
+              <Route component={Discover}/>
+            </Switch>
+            <CurrentPlay/>
+          </div>
+        </div>
+      </Router>
+    </Provider>
+  );
 };
 export default App;
-
