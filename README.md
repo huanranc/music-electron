@@ -25,5 +25,3 @@
 ![play](./src/commpon/music-electron/play.jpg)
 ![playing](./src/commpon/music-electron/playing.jpg)
 ![lyric](./src/commpon/music-electron/lyric.jpg)
-
-
