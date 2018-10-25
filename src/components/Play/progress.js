@@ -9,7 +9,7 @@ class Progress extends Component {
   }
 
   render() {
-    let {progress} = this.props;
+    let {progress, currentTime} = this.props;
     return (
       <div
         className="play-progress"

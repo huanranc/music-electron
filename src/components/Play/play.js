@@ -1,89 +1,112 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import Progress from './progress';
-import './play.scss';
+import './audioplay.scss';
 
-// 1.播放、暂停 2.上一曲、下一曲 3.进度条控制 4.列表点击可以播放 5.有个列表加入进去
-
-class Play extends Component {
+class AudioPlay extends Component {
   constructor(props) {
     super(props);
-    //当前播放
+
     this.currentSong = {
       id: 0,
       src: '',
       picUrl: '',
       isautoplay: false
-    };
-    //当前播放位置
-    this.currentIndex = 0;
-    //播放模式  单曲  随机  循环
-    this.Modes = ["singCircle", "random", "refresh"];
+    }
+
+     // 当前播放位置
+     this.currentIndex = 0;
+     // 播放模式  单曲  随机  循环
+     this.Modes = ["singCircle", "random", "refresh"];
 
     this.state = {
       isPlay: false,
-      currentTime: 0,
-      duration: 0,
-      progress: 0,
+      progressWidth: '0%',
+      currentTime: '00:00',
+      duration: '00:00',
       currentMode: 2
     }
   }
 
   componentDidUpdate() {
-    //点击页面立即播放
+    // 点击页面立即播放
     if (this.currentSong.isautoplay === true) {
-      this
-        .audioDOM
-        .play();
-      this.currentIndex = this
-        .props
-        .currentSongList[0]
-        .indexOf(this.props.currentSong);
-      this.currentSong.isautoplay = false;
-      this.setState({isPlay: true});
-      this
-        .props
-        .setShowSong(true)
+      this.audioDOM.play()
+      // 拿到当前播放歌曲在播放列表的index
+      this.currentIndex = this.props.currentSongList[0].indexOf(this.props.currentSong)
+      this.currentSong.isautoplay = false
+      this.setState({
+        isPlay: true
+      })
+
+      // 记录播放状态到全局 =》 添加样式
+      this.props.setShowSong(true)
     }
-    // console.log(this.currentIndex)
   }
 
-  //播放或者暂停
-  playState = () => {
-    if (this.audioDOM.paused) {
-      this
-        .audioDOM
-        .play();
-      this.setState({isPlay: true});
-      this
-        .props
-        .setShowSong(true)
-    } else {
-      this
-        .audioDOM
-        .pause();
-      this.setState({isPlay: false});
-      this
-        .props
-        .setShowSong(false)
+  controlPlay = () => {
+    if(this.audioDOM.src !== '') {
+      if (this.audioDOM.paused) {
+        this.audioDOM.play()
+        this.setState({isPlay: true})
+        this.props.setShowSong(true)
+      } else {
+        this.audioDOM.pause()
+        this.setState({isPlay: false})
+        this.props.setShowSong(false)
+      }
     }
-  };
+  }
 
-  //切换播放模式的按钮
-  changeModes = () => {
-    if (this.state.currentMode < 2) {
-      this.setState({
-        currentMode: this.state.currentMode + 1
-      });
+  controlEnd = () => {
+    if (this.props.currentSongList[0].length > 1) {
+      let currentIndex = this.currentIndex
+      if (this.state.currentMode === 2) {
+        if (currentIndex === this.props.currentSongList[0].length - 1) {
+          currentIndex = 0
+        } else {
+          currentIndex = currentIndex + 1
+        }
+      } else if (this.state.currentMode === 0) {
+        this.audioDOM.play()
+        return
+      } else {
+        currentIndex = parseInt(Math.random() * this.props.currentSongList[0].length, 10)
+      }
+      this.props.changeCurrentSong(this.props.currentSongList[0][currentIndex])
+      this.props.changeIndex(currentIndex);
     } else {
-      this.setState({currentMode: 0});
+      this.audioDOM.play()
     }
-    // console.log(this.state.currentMode)
-  };
+  }
 
-  //下一曲
+  controlTime = () => {
+    const duration = this.props.currentSong.dt || this.audioDOM.duration
+    const time = (this.audioDOM.currentTime * 1000) / duration
+    // console.log(duration)
+    // console.log(this.FortmatTime(this.audioDOM.duration / 1000))
+    this.setState({
+      progressWidth: `${time * 100}%`,
+      currentTime: this.FortmatTime(this.audioDOM.currentTime),
+      duration: this.FortmatTime(duration / 1000)
+    })
+    this.props.setCurrentTime(this.audioDOM.currentTime)
+  }
+
+  controlProgress = (e) => {
+    const left = this.progressBar.getBoundingClientRect().left
+    const distance =  e.clientX - left
+    const proportion = distance / this.progressBar.clientWidth
+    const duration = this.audioDOM.duration
+    const progress = proportion * duration
+    this.audioDOM.currentTime = progress
+    this.setState({
+      progressWidth: `${duration * 100}%`
+    })
+    this.props.setCurrentTime(this.audioDOM.currentTime)
+  }
+
+  // 下一曲
   next = () => {
-    // console.log(this.props.currentSongList[0].length)
     if (this.props.currentSongList[0] !== undefined && this.props.currentSongList[0].length > 0 && this.props.currentSongList[0].length !== 1) {
       let currentIndex = this.currentIndex;
       if (this.state.currentMode === 2) {
@@ -99,23 +122,14 @@ class Play extends Component {
       } else {
         let randomIndex = parseInt(Math.random() * this.props.currentSongList[0].length, 10);
         currentIndex = randomIndex;
-        console.log(randomIndex)
       }
-      //  console.log(currentIndex)
-      // console.log(this.props.currentSongList[0][currentIndex])
-      this
-        .props
-        .changeCurrentSong(this.props.currentSongList[0][currentIndex]);
-      this
-        .props
-        .changeIndex(currentIndex);
-      // console.log(this.currentIndex)
+      this.props.changeCurrentSong(this.props.currentSongList[0][currentIndex]);
+      this.props.changeIndex(currentIndex);
     }
-  };
+  }
 
   //上一曲
   previous = () => {
-    //  console.log(this.state.currentMode)
     if (this.props.currentSongList[0] !== undefined && this.props.currentSongList[0].length > 0 && this.props.currentSongList[0].length !== 1) {
       let currentIndex = this.currentIndex;
       if (this.state.currentMode === 2) {
@@ -131,84 +145,13 @@ class Play extends Component {
       } else {
         currentIndex = parseInt(Math.random() * this.props.currentSongList[0].length, 10)
       }
-      this
-        .props
-        .changeCurrentSong(this.props.currentSongList[0][currentIndex]);
-      this
-        .props
-        .changeIndex(currentIndex);
+      this.props.changeCurrentSong(this.props.currentSongList[0][currentIndex]);
+      this.props.changeIndex(currentIndex);
     }
   }
 
-  controlAllAudio = () => {
-    this.setState({
-      //获得音乐总秒数
-      duration: this.props.currentSong.dt
-    })
-  }
-
-  controlAudio = () => {
-    this.setState({
-      //获得当前音乐播放的秒数
-      currentTime: this.audioDOM.currentTime,
-      progress: this.state.currentTime * 100000 / this.state.duration
-    });
-    // console.log(this.state.progress)
-    let getcreenttime = this.audioDOM.currentTime
-    this
-      .props
-      .setCurrentTime(getcreenttime)
-  }
-
-  controlEnd = () => {
-    if (this.props.currentSongList[0].length > 1) {
-      let currentIndex = this.currentIndex
-      if (this.state.currentMode === 2) {
-        if (currentIndex === this.props.currentSongList[0].length - 1) {
-          currentIndex = 0
-        } else {
-          currentIndex = currentIndex + 1
-        }
-      } else if (this.state.currentMode === 0) {
-        this
-          .audioDOM
-          .play();
-        return
-      } else {
-        currentIndex = parseInt(Math.random() * this.props.currentSongList[0].length, 10)
-      }
-      this
-        .props
-        .changeCurrentSong(this.props.currentSongList[0][currentIndex])
-      this
-        .props
-        .changeIndex(currentIndex);
-    } else {
-      this
-        .audioDOM
-        .play()
-    }
-  };
-
-  //显示播放列表
-  showCureentList = () => {
-    if (this.props.show === false) {
-      this
-        .props
-        .showList(true)
-    } else {
-      this
-        .props
-        .showList(false)
-    }
-  };
-
-  //转换成分钟和秒
-  changeTime(time) {
-    // let durationTime=parseInt(time); let minute = parseInt(durationTime/60); let
-    // second = durationTime%60+''; let symbol = ':'; if(minute == 0){   minute =
-    // '00'; }else if(minute < 10 ){   minute = '0'+minute; } if(second.length ==
-    // 1){   second = '0'+second; } return minute+symbol+second
+  // 格式化时间
+  FortmatTime = (time) => {
     let t = Math.floor(time);
     let m = Math.floor(t / 60) < 10
       ? '0' + Math.floor(t / 60)
@@ -219,89 +162,70 @@ class Play extends Component {
     return m + ':' + s
   }
 
-  //durationTime
-  timeDt(time) {
-    let t = Math.floor(time / 1000);
-    let m = Math.floor(t / 60) < 10
-      ? '0' + Math.floor(t / 60)
-      : Math.floor(t / 60);
-    let s = (t % 60) < 10
-      ? '0' + (t % 60)
-      : (t % 60);
-    return m + ':' + s
+  //显示播放列表
+  showCureentList = () => {
+    if (this.props.show === false) {
+      this.props.showList(true)
+    } else {
+      this.props.showList(false)
+    }
   }
 
   render() {
-    // 点击播放。同时收入当前播放列表 console.log(this.props.currentSong);
-    // console.log(this.props.currentSongList); this.currentIndex =
-    // this.props.currentIndex; console.log(this.props.currentIndex)
-    if (this.props.currentSong && this.props.currentSong.id !== undefined) {
+    if (this.props.currentSong.id !== undefined) {
       if (this.currentSong.id !== this.props.currentSong.id) {
-        this.currentSong.id = this.props.currentSong.id;
+        this.currentSong.id = this.props.currentSong.id
         this.currentSong.picUrl = this.props.currentSong.picUrl
-        this.audioDOM.src = `http://music.163.com/song/media/outer/url?id=${this.currentSong.id}.mp3`;
+        this.audioDOM.src = `http://music.163.com/song/media/outer/url?id=${this.currentSong.id}.mp3`
         this.currentSong.isautoplay = true;
       }
     }
     return (
       <div className="play">
-        <Link
-          className="singer-icon"
-          to={this.props.currentSong.id !== undefined
+        <audio ref={audio => {this.audioDOM = audio}}
+          onTimeUpdate={this.controlTime}
+          onEnded={this.controlEnd}
+        >
+          您的浏览器不支持 audio 与元素,无法播放.
+        </audio>
+        <div className="play-album">
+        <Link to={this.props.currentSong.id !== undefined
           ? `/songs`
           : ''}>
-          {this.props.currentSong.id !== undefined
-            ? <img width="100%" src={this.currentSong.picUrl}/>
-            : <i className="icon-text icon-artist"></i>
-}
+        {
+          this.props.currentSong.id !== undefined
+          ? <img width="100%" src={this.currentSong.picUrl} />
+          : <i className="icon icon-music"></i>
+        }
         </Link>
+        </div>
         <div className="play-control">
-          <a onClick={this.previous} href="javascript:void(0)" className="prev-btn">
-            <span className="icon-text icon-forward "></span>
-          </a>
-          {this.state.isPlay
-            ? <a onClick={this.playState} href="javascript:void(0)" className="stop-btn">
-                <span className="icon-text icon-stop"></span>
-              </a>
-            : <a onClick={this.playState} href="javascript:void(0)" className="play-btn">
-              <span className="icon-text icon-play"></span>
-            </a>
-}
-          <a onClick={this.next} href="javascript:void(0)" className="next-btn">
-            <span className="icon-text icon-next"></span>
-          </a>
+          <i className="icon icon-forward" onClick = {this.previous}></i>
+          {
+            this.state.isPlay 
+            ? <i className="icon icon-stop" onClick = {this.controlPlay}></i>
+            : <i className="icon icon-play" onClick = {this.controlPlay}></i>
+          }
+          <i className="icon icon-next" onClick = {this.next}></i>  
         </div>
-        <div className="progress-song">
-          <span className="song-txt">{this.props.currentSong.name}</span>
-          <Progress progress={this.state.progress}/>
+        <div className="play-status">
+          <div className="play-message">
+            <span>{this.props.currentSong.name}</span>
+            <span>{this.state.currentTime} / {this.state.duration}</span>
+            </div>
+          <div className="play-progress">
+            <div className="progress" ref={el => this.progressBar = el} onClick = {this.controlProgress}>
+              <div className="progress-bar" style={{width: `${this.state.progressWidth}`}}></div>
+            </div>
+          </div>
         </div>
-        <span
-          style={{
-          fontSize: 12,
-          color: '#fff'
-        }}
-          className="play-text">{this.changeTime(this.state.currentTime) + ' / ' + this.timeDt(this.state.duration)}</span>
-        <div className="play-control">
-          <a href="javascript:void(0)" onClick={this.changeModes}>
-            <span className={`icon-${this.Modes[this.state.currentMode]} icon-text`}></span>
-          </a>
-          <a href="javascript:void(0)" onClick={this.showCureentList}>
-            <span className="icon-music_list icon-text"></span>
-          </a>
+        <div className="play-model">
+            <i className={`icon-${this.Modes[this.state.currentMode]} icon`}></i>
+            <i className="icon-music_list icon" onClick={this.showCureentList}></i>
         </div>
-        <audio
-          preload="true"
-          onCanPlay={this.controlAllAudio}
-          onTimeUpdate={this.controlAudio}
-          onEnded={this.controlEnd}
-          ref={(audio) => {
-          this.audioDOM = audio;
-        }}>
-          您的浏览器不支持 audio 与元素。
-        </audio>
       </div>
-    );
+    )
   }
 }
 
-export default Play;
+export default AudioPlay

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Play from '../../containers/Player';
+// import AudioPlay from '../../components/Play/audioplay'
 import List from '../../containers/CurrenList';
 import './currentplay.scss';
 
@@ -24,7 +25,12 @@ class CurrentPlay extends Component {
     // console.log(this.state.currentSongIndex)
     return (
       <div className="music-curren-play">
-        <Play
+        {/* <Play
+          currentIndex={this.state.currentSongIndex}
+          changeIndex={this.changeIndex}
+          showList={this.showList}
+          show={this.state.show}/> */}
+        <Play 
           currentIndex={this.state.currentSongIndex}
           changeIndex={this.changeIndex}
           showList={this.showList}
