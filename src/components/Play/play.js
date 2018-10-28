@@ -20,6 +20,7 @@ class AudioPlay extends Component {
 
     this.state = {
       isPlay: false,
+      bandleWidth: '0%',
       progressWidth: '0%',
       currentTime: '00:00',
       duration: '00:00',
@@ -84,10 +85,18 @@ class AudioPlay extends Component {
     const time = (this.audioDOM.currentTime * 1000) / duration
     // console.log(duration)
     // console.log(this.FortmatTime(this.audioDOM.duration / 1000))
+    const readyState = this.audioDOM.readyState
+    let bandleWidth
+    if (readyState === 4 ) {
+      const buffered = this.audioDOM.buffered.end(0)
+      bandleWidth = Math.round(buffered / this.audioDOM.duration * 100)
+    }
+
     this.setState({
       progressWidth: `${time * 100}%`,
       currentTime: this.FortmatTime(this.audioDOM.currentTime),
-      duration: this.FortmatTime(duration / 1000)
+      duration: this.FortmatTime(duration / 1000),
+      bandleWidth: `${bandleWidth}%`
     })
     this.props.setCurrentTime(this.audioDOM.currentTime)
   }
@@ -128,7 +137,7 @@ class AudioPlay extends Component {
     }
   }
 
-  //上一曲
+  //  上一曲
   previous = () => {
     if (this.props.currentSongList[0] !== undefined && this.props.currentSongList[0].length > 0 && this.props.currentSongList[0].length !== 1) {
       let currentIndex = this.currentIndex;
@@ -162,7 +171,7 @@ class AudioPlay extends Component {
     return m + ':' + s
   }
 
-  //显示播放列表
+  // 显示播放列表
   showCureentList = () => {
     if (this.props.show === false) {
       this.props.showList(true)
@@ -215,6 +224,8 @@ class AudioPlay extends Component {
             </div>
           <div className="play-progress">
             <div className="progress" ref={el => this.progressBar = el} onClick = {this.controlProgress}>
+            <div className="progress-bandle-bar" style={{width: `${this.state.bandleWidth}`}}></div>
+              <div className="progress-handle" style={{left: `${this.state.progressWidth}`}}></div>
               <div className="progress-bar" style={{width: `${this.state.progressWidth}`}}></div>
             </div>
           </div>
