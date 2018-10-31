@@ -101,17 +101,48 @@ class AudioPlay extends Component {
     this.props.setCurrentTime(this.audioDOM.currentTime)
   }
 
+  // 进度条点击
   controlProgress = (e) => {
     const left = this.progressBar.getBoundingClientRect().left
     const distance =  e.clientX - left
     const proportion = distance / this.progressBar.clientWidth
     const duration = this.audioDOM.duration
-    const progress = proportion * duration
+    const progress = duration ? proportion * duration: '0'
     this.audioDOM.currentTime = progress
+    console.log(1,proportion)
     this.setState({
       progressWidth: `${duration * 100}%`
     })
     this.props.setCurrentTime(this.audioDOM.currentTime)
+  }
+
+  // 进度条拖拽
+  progressDown = (e) => {
+    const left = e.clientX - this.handle.offsetLeft
+
+    document.onmousemove = (event) => {
+      event.preventDefault()
+      let distance =  event.clientX - left
+      if (distance < 0) {
+        distance = 0
+      } else if (distance > this.progressBar.clientWidth - this.handle.clientWidth) {
+        distance = this.progressBar.clientWidth - this.handle.clientWidth
+      }
+      const proportion = distance / (this.progressBar.clientWidth - this.handle.clientWidth)
+      const duration = this.audioDOM.duration
+      const progress = duration ? proportion * duration: '0'
+      this.audioDOM.currentTime = progress
+      this.setState({
+        progressWidth: `${proportion * 100}%`
+      })
+      this.props.setCurrentTime(this.audioDOM.currentTime)
+      // 鼠标快速移动
+      window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty()
+    }
+
+    document.onmouseup = function(){
+      document.onmousemove = null;
+    }
   }
 
   // 下一曲
@@ -225,7 +256,7 @@ class AudioPlay extends Component {
           <div className="play-progress">
             <div className="progress" ref={el => this.progressBar = el} onClick = {this.controlProgress}>
             <div className="progress-bandle-bar" style={{width: `${this.state.bandleWidth}`}}></div>
-              <div className="progress-handle" style={{left: `${this.state.progressWidth}`}}></div>
+              <div className="progress-handle" ref={el => this.handle = el} onMouseDown = {this.progressDown} style={{left: `${this.state.progressWidth}`}}></div>
               <div className="progress-bar" style={{width: `${this.state.progressWidth}`}}></div>
             </div>
           </div>
