@@ -261,6 +261,9 @@ class AudioPlay extends Component {
             </div>
           </div>
         </div>
+        <div className="play-sounds">
+          <i className="icon-sounds icon"></i>
+        </div>
         <div className="play-model">
             <i className={`icon-${this.Modes[this.state.currentMode]} icon`}></i>
             <i className="icon-music_list icon" onClick={this.showCureentList}></i>

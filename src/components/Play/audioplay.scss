@@ -56,6 +56,19 @@ $progress: "progress" !default;
     }
   }
 
+  &-sounds {
+    display: flex;
+    .#{$icon} {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      height: 50px;
+      margin: 12px;
+    }
+  }
+
   &-status {
     flex: 6;
     position: relative;
